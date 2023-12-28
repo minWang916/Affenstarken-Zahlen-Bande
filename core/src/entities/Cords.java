@@ -111,6 +111,31 @@ public class Cords {
     //-------------------------------------------------------All cards-------------------------------------------------
 
     //------------------------------------------------------Special----------------------------------------------------
+    public static final float special_1_x = 193;
+    public static final float special_1_y = 514;
+    public static final float special_2_x = 193;
+    public static final float special_2_y = 353;
+
+    public static final float special_3_x = 193;
+    public static final float special_3_y = 195;
+
+    public static final float special_4_x = 725;
+    public static final float special_4_y = 514;
+
+    public static final float special_5_x = 725;
+    public static final float special_5_y = 353;
+
+    public static final float special_6_x = 725;
+    public static final float special_6_y = 195;
+
+    public static float[][] special = {
+            {special_1_x, special_1_y},
+            {special_2_x, special_2_y},
+            {special_3_x, special_3_y},
+            {special_4_x, special_4_y},
+            {special_5_x, special_5_y},
+            {special_6_x, special_6_y}
+    };
 
     //------------------------------------------------------Special----------------------------------------------------
 
