@@ -53,10 +53,10 @@ public class PlayState extends GameState{
 
         Game.batch.begin();
 
-
+        renderer.render();
         PlayStateController.draw();
 
-        renderer.render();
+
 
 
         Game.batch.end();
