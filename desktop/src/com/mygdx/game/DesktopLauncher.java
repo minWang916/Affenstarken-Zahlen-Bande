@@ -13,6 +13,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(60);
 		config.setTitle("Affenstarke Zahlen-Bande PC");
 		config.setWindowedMode(1000,800);
+		config.setWindowIcon("img/monkey_icon.png");
 
 
 		new Lwjgl3Application(new Game(), config);
