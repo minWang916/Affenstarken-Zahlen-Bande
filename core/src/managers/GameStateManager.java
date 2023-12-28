@@ -1,8 +1,11 @@
 package managers;
 
+import com.mygdx.game.Game;
+
 import gamestates.*;
 
 public class GameStateManager {
+
 
     private GameState gameState;
 
@@ -10,6 +13,8 @@ public class GameStateManager {
     public static final int PLAY = 1;
 
     public GameStateManager(){
+
+
         setState(MENU);
     }
 

@@ -7,25 +7,32 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.Game;
 import managers.GameStateManager;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+
+import org.w3c.dom.Text;
 
 public class MenuState extends GameState{
 
 
-    private SpriteBatch sb;
+
     private BitmapFont titleFont;
     private BitmapFont Font;
 
     private Stage stage;
 
+    private TextureAtlas buttonAtlas;
     GlyphLayout layout;
 
-    private Skin skin;
+    private Skin skinButton;
+    private TextButton.TextButtonStyle textButtonStyle;
+    private TextButton button;
 
     private final String title = "Affenstarke Zahlen-Bande";
 
@@ -38,7 +45,7 @@ public class MenuState extends GameState{
 
     public void init(){
 
-        sb = new SpriteBatch();
+
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
                 Gdx.files.internal("font/VCR_OSD_MONO_1.001.ttf")
         );
@@ -60,12 +67,26 @@ public class MenuState extends GameState{
         };
 
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        skin = new Skin();
+        skinButton = new Skin(Gdx.files.internal("glassy_ui/glassy-ui.json"));
+        buttonAtlas = new TextureAtlas("glassy_ui/glassy-ui.atlas");
+        skinButton.addRegions(buttonAtlas);
+        textButtonStyle = new TextButton.TextButtonStyle();
+        textButtonStyle.font = Font;
+
+
+
+
+        button=new TextButton("Finish",textButtonStyle);
+        button.setText("Start");
+        button.setHeight(230);
+        button.setWidth(500);
+        button.setPosition(50,50);
+        stage.addActor(button);
 
     };
     public void update(float var1){
 
-        System.out.println("MENU STATE UPDATING");
+        //System.out.println("MENU STATE UPDATING");
 
         handleInput();
 
@@ -74,21 +95,21 @@ public class MenuState extends GameState{
     }
 
     public void draw(){
-        System.out.println("MENU STATE DRAWING");
-        sb.setProjectionMatrix(Game.cam.combined);
+        //System.out.println("MENU STATE DRAWING");
+        Game.batch.setProjectionMatrix(Game.cam.combined);
 
-        sb.begin();
+        Game.batch.begin();
 
         float width = layout.width;
         float height = layout.height;
-        titleFont.draw(sb,title,(Game.WIDTH - width)/2,(Game.HEIGHT - height*2));
+        titleFont.draw(Game.batch,title,(Game.WIDTH - width)/2,(Game.HEIGHT - height*2));
 
         if(stage != null){
             stage.act(Gdx.graphics.getDeltaTime());
             stage.draw();
         }
 
-        sb.end();
+        Game.batch.end();
     }
 
     public void handleInput(){
@@ -103,7 +124,6 @@ public class MenuState extends GameState{
 
     public void dispose(){
         stage.dispose();
-        sb.dispose();
         Font.dispose();
         titleFont.dispose();
     }
