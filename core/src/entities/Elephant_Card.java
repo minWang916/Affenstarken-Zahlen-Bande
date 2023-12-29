@@ -9,11 +9,14 @@ import com.mygdx.game.Game;
 
 
 public class Elephant_Card {
+    public int id;
+
+    public static int selected = 99;
 
     public int value1;
     public int value2;
 
-    private int turn = 3;
+    public int turn = 3;
 
     public Texture face1;
     public Texture face2;
@@ -21,7 +24,7 @@ public class Elephant_Card {
     public float x;
     public float y;
 
-    public Elephant_Card(int value1, int value2, String path1, String path2, float x, float y){
+    public Elephant_Card(int value1, int value2, String path1, String path2, float x, float y, int id){
         this.value1 = value1;
         this.value2 = value2;
 
@@ -30,6 +33,8 @@ public class Elephant_Card {
 
         this.x = x;
         this.y = y;
+
+        this.id = id;
     }
 
     public void draw(){
@@ -44,7 +49,15 @@ public class Elephant_Card {
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             float X = Gdx.input.getX();
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(x < X && X < x + 68 && y < Y && Y < y + 100){
+            if(this.x < X && X < this.x + 68 && this.y < Y && Y < this.y + 100){
+
+                if(selected == this.id){
+                    selected = 99;
+                }else{
+                    selected = this.id;
+                }
+
+                /*
                 if(turn % 2 == 0){
                     Elephant.move(Elephant.location+value1);
                     turn = turn + 1;
@@ -52,6 +65,8 @@ public class Elephant_Card {
                     Elephant.move(Elephant.location+value2);
                     turn = turn + 1;
                 }
+                */
+
 
 
             }

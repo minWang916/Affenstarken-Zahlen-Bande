@@ -8,8 +8,9 @@ import entities.*;
 
 
 public class PlayStateController {
-    public static Elephant_Card elephant1 = new Elephant_Card(1,3,"img/ele1.png","img/ele3.png",Cords.elephant_1_x, Cords.elephant_1_y);
-    public static Elephant_Card elephant2 = new Elephant_Card(2,4,"img/ele2.png","img/ele4.png", Cords.elephant_2_x, Cords.elephant_2_y);
+    public static Elephant_Card elephant1 = new Elephant_Card(1,3,"img/ele1.png","img/ele3.png",Cords.elephant_1_x, Cords.elephant_1_y,0);
+    public static Elephant_Card elephant2 = new Elephant_Card(2,4,"img/ele2.png","img/ele4.png",Cords.elephant_2_x, Cords.elephant_2_y,1);
+    public static Elephant_Card[] Elephant_cards = {elephant1, elephant2};
 
     public static Texture cordMap = new Texture("img/cordMap.png");
     public static Texture card = new Texture("img/card.png");
@@ -25,6 +26,7 @@ public class PlayStateController {
     public static Texture frame = new Texture("img/frame_v.png");
 
     public static Texture special_frame = new Texture("img/frame_c.png");
+    public static Texture elephant_frame = new Texture("img/frame_v.png");
 
     public static int phase = 0;
 
@@ -88,9 +90,10 @@ public class PlayStateController {
         }else if(phase == PHASE_MONKEY){
             Confirm_button.confirm_click();
         }else if(phase == PHASE_ELEPHANT){
-            elephant1.handleClick();
             elephant2.handleClick();
+            elephant1.handleClick();
             Confirm_button.confirm_click();
+
         }
 
 
@@ -208,6 +211,9 @@ public class PlayStateController {
         //-------- Elephant Card ----------------------
         elephant1.draw();
         elephant2.draw();
+        if(Elephant_Card.selected != 99){
+            Game.batch.draw(elephant_frame, Elephant_cards[Elephant_Card.selected].x - 9, Elephant_cards[Elephant_Card.selected].y - 9);
+        }
         //-------- Elephant Card ----------------------
 
     }

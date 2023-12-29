@@ -1,13 +1,12 @@
 package entities;
 
-import static managers.PlayStateController.currentPlayer;
-import static managers.PlayStateController.currentPlayerIndex;
-import static managers.PlayStateController.phase;
+
 import static managers.PlayStateController.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import entities.*;
 
 public class Confirm_button {
     public static float x = 831;
@@ -29,6 +28,17 @@ public class Confirm_button {
                 }
                 phase = phase + 1;
                 if(phase == 3){
+                    if(Elephant_Card.selected != 99){
+                        if(Elephant_cards[Elephant_Card.selected].turn % 2 == 0){
+                            Elephant.move(Elephant.location + Elephant_cards[Elephant_Card.selected].value1);
+                            Elephant_cards[Elephant_Card.selected].turn = Elephant_cards[Elephant_Card.selected].turn + 1;
+                        }else{
+                            Elephant.move(Elephant.location + Elephant_cards[Elephant_Card.selected].value2);
+                            Elephant_cards[Elephant_Card.selected].turn = Elephant_cards[Elephant_Card.selected].turn + 1;
+                        }
+
+                        Elephant_Card.selected = 99;
+                    }
                     currentPlayer.endTurn();
                     currentPlayerIndex += 1;
                     currentPlayerIndex = currentPlayerIndex % 4;
