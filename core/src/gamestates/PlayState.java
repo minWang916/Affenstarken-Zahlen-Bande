@@ -74,9 +74,7 @@ public class PlayState extends GameState{
             // Handle the click event or perform any other actions
             System.out.println("Mouse Clicked at: (" + X + ", " + Y + ")");
 
-            if(360 < X && X < 427 && 37 < Y && Y < 136){
-                System.out.println("Clicked");
-            }
+
 
         }
 

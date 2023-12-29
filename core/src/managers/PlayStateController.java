@@ -20,12 +20,16 @@ public class PlayStateController {
     public static Texture leaf = new Texture("img/leaf_top_right_yellow.png");
     public static Texture monkey = new Texture("img/monkey_blue.png");
 
+    public static Texture frame = new Texture("img/frame.png");
+
     public static int i = 0;
 
     private static int numOfPlayers = 4;
     private static Player currentPlayer;
     private static int currentPlayerIndex;
     private static Player[] players = new Player[4];
+
+    private static boolean selected = false;
 
     public static void init(){
         String[] playerNames = {"Toby", "Thomas", "Kevin", "Michael"};
@@ -87,8 +91,11 @@ public class PlayStateController {
 
 
         //-------- Player and cards-------------------
-        Game.batch.draw(card,Cords.top_card_4_x,Cords.top_card_4_y);
+        Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
         Game.batch.draw(avatar, Cords.top_avatar_x, Cords.top_avatar_y);
+        if(selected){
+            Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
+        }
         //-------- Player and cards-------------------
 
 
@@ -104,8 +111,21 @@ public class PlayStateController {
 
     public static void handleInput(){
         if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
-            i = i + 1;
+            //i = i + 1;
+            float X = Gdx.input.getX();
+            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
+            if(360 < X && X < 427 && 37 < Y && Y < 136){
+                if(selected == false){
+                    selected = true;
+                }else{
+                    selected = false;
+                }
+            }
         }
+
+
+
+
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
             currentPlayer.endTurn();
