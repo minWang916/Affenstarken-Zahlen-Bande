@@ -28,19 +28,17 @@ public class Player {
         this.batch = batch;
         System.out.println("Player created with the name " + this.name);
 
-        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-                Gdx.files.internal("font/VCR_OSD_MONO_1.001.ttf")
-        );
-
-        FreeTypeFontGenerator.FreeTypeFontParameter param_titleFont = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        param_titleFont.size = 20;
-        font = gen.generateFont(param_titleFont);
-
-        avatar = new Texture("img/P1_avatar.png");
+        init();
     }
 
     public void init(){
-
+        FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
+                Gdx.files.internal("font/VCR_OSD_MONO_1.001.ttf")
+        );
+        FreeTypeFontGenerator.FreeTypeFontParameter param_titleFont = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        param_titleFont.size = 20;
+        font = gen.generateFont(param_titleFont);
+        avatar = new Texture("img/P1_avatar.png");
     }
 
     public void update(){

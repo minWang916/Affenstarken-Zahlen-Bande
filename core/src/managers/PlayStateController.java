@@ -69,7 +69,7 @@ public class PlayStateController {
         //------------------- Turn based-----------------------------------------
         String[] playerNames = {"Toby", "Thomas", "Kevin", "Michael"};
         for(int i = 0; i< 4; i++){
-            players[i] = new Player(playerNames[i], i+1, Game.batch);
+            players[i] = new Player(playerNames[i], i, Game.batch);
         }
         currentPlayerIndex = 0;
         currentPlayer = players[0];
