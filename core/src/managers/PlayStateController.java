@@ -23,7 +23,7 @@ public class PlayStateController {
 
     public static Texture leaf = new Texture("img/leaf_top_right_yellow.png");
 
-    public static Texture frame = new Texture("img/frame.png");
+    public static Texture frame = new Texture("img/frame_v.png");
 
     public static int phase = 0;
 
