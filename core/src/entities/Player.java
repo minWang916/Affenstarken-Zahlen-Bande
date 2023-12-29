@@ -49,10 +49,10 @@ public class Player {
         if (playing == true) {
             font.setColor(Color.GREEN);
         }
-        font.draw(batch, name, Cords.all_player_cord[id-1][0][0] - 10, Cords.all_player_cord[id-1][0][1] + 80);
+        font.draw(batch, name, Cords.all_player_cord[id][0][0] - 10, Cords.all_player_cord[id][0][1] + 80);
         font.setColor(Color.WHITE);
 
-        batch.draw(avatar, Cords.all_player_cord[id-1][0][0], Cords.all_player_cord[id-1][0][1]);
+        batch.draw(avatar, Cords.all_player_cord[id][0][0], Cords.all_player_cord[id][0][1]);
     }
 
     public void startTurn(){

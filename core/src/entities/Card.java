@@ -46,7 +46,7 @@ public class Card {
     }
 
     public void draw(){
-        
+
     }
 
     public void inputHandler(){
