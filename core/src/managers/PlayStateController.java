@@ -25,7 +25,11 @@ public class PlayStateController {
 
     public static Texture frame = new Texture("img/frame_v.png");
 
+    public static Texture special_frame = new Texture("img/frame_c.png");
+
     public static int phase = 0;
+
+    public static int selected_special = 99;
 
     public static int numOfPlayers = 4;
     public static Player currentPlayer;
@@ -46,12 +50,9 @@ public class PlayStateController {
     private static Texture freeMove = new Texture("img/special_5.png");
     private static Texture exchange = new Texture("img/special_6.png");
 
-    public static boolean useable_holdOn = true;
-    public static boolean useable_breakTime = true;
-    public static boolean useable_monkeySwap = true;
-    public static boolean useable_turboElephant = true;
-    public static boolean useable_freeMove = true;
-    public static boolean useable_exchange = true;
+    public static boolean[] useable_special = {true,true,true,true,true,true};
+
+
 
     public static final int PHASE_SPECIAL = 0;
     public static final int PHASE_MONKEY = 1;
@@ -145,11 +146,11 @@ public class PlayStateController {
 
 
         //---- Monkeys and elephant-----------------
-        Game.batch.draw(blue.img, Cords.cord[4][0],Cords.cord[4][1]);
-        Game.batch.draw(orange.img, Cords.cord[1][0],Cords.cord[1][1]);
-        Game.batch.draw(pink.img, Cords.cord[2][0],Cords.cord[2][1]);
-        Game.batch.draw(green.img, Cords.cord[17][0],Cords.cord[17][1]);
-        Game.batch.draw(Elephant.img, Cords.cord[0][0], Cords.cord[0][1]);
+        Game.batch.draw(blue.img, Cords.cord[blue.location][0],Cords.cord[blue.location][1]);
+        Game.batch.draw(orange.img, Cords.cord[orange.location][0],Cords.cord[orange.location][1]);
+        Game.batch.draw(pink.img, Cords.cord[pink.location][0],Cords.cord[pink.location][1]);
+        Game.batch.draw(green.img, Cords.cord[green.location][0],Cords.cord[green.location][1]);
+        Game.batch.draw(Elephant.img, Cords.cord[Elephant.location][0], Cords.cord[Elephant.location][1]);
         //---- Monkeys and elephant-----------------
 
 
@@ -169,28 +170,32 @@ public class PlayStateController {
 
 
         //------------ Special ----------------------
-        if(useable_holdOn){
+        if(useable_special[0]){
             Game.batch.draw(holdOn, Cords.special[0][0], Cords.special[0][1]);
         }
 
-        if(useable_breakTime){
+        if(useable_special[1]){
             Game.batch.draw(breakTime, Cords.special[1][0], Cords.special[1][1]);
         }
 
-        if(useable_exchange){
+        if(useable_special[5]){
             Game.batch.draw(exchange, Cords.special[5][0], Cords.special[5][1]);
         }
 
-        if(useable_turboElephant){
+        if(useable_special[3]){
             Game.batch.draw(turboElephant, Cords.special[3][0], Cords.special[3][1]);
         }
 
-        if(useable_monkeySwap){
+        if(useable_special[2]){
             Game.batch.draw(monkeySwap, Cords.special[2][0], Cords.special[2][1]);
         }
 
-        if(useable_freeMove){
+        if(useable_special[4]){
             Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
+        }
+
+        if(selected_special != 99){
+            Game.batch.draw(special_frame, Cords.special[selected_special][0] - (float)7, Cords.special[selected_special][1] - (float)7);
         }
         //------------ Special ----------------------
 
@@ -198,6 +203,9 @@ public class PlayStateController {
         //-------- Confirm Button ----------------------
         Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
         //-------- Confirm Button ----------------------
+
+
+
     }
 
     public static void dispose(){

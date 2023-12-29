@@ -3,7 +3,7 @@ package entities;
 import static managers.PlayStateController.currentPlayer;
 import static managers.PlayStateController.currentPlayerIndex;
 import static managers.PlayStateController.phase;
-import static managers.PlayStateController.players;
+import static managers.PlayStateController.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -21,6 +21,12 @@ public class Confirm_button {
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
             if(x < X && X < x + 130 && y < Y && Y < y + 42 ){
                 System.out.println("Current phase is: "+phase);
+                if(phase == PHASE_SPECIAL){
+                    if(selected_special != 99){
+                        useable_special[selected_special] = false;
+                    }
+                    selected_special = 99;
+                }
                 phase = phase + 1;
                 if(phase == 3){
                     currentPlayer.endTurn();
