@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 import entities.*;
+import managers.GameInputHandler;
 
 import org.w3c.dom.Text;
 
@@ -24,7 +25,7 @@ public class PlayStateController {
 
     public static Texture frame = new Texture("img/frame.png");
 
-    public static int i = 0;
+    public static int phase = 0;
 
     private static int numOfPlayers = 4;
     private static Player currentPlayer;
@@ -178,10 +179,6 @@ public class PlayStateController {
                 }
             }
         }
-
-
-
-
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
             currentPlayer.endTurn();
