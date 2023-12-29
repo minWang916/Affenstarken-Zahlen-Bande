@@ -31,7 +31,22 @@ public class PlayStateController {
 
     private static boolean selected = false;
 
+    private static Monkey blue;
+    private static Monkey orange;
+    private static Monkey pink;
+    private static Monkey green;
+
     public static void init(){
+
+        //-------------------- Entities------------------------------------------
+        blue = new Monkey("blue");
+        orange = new Monkey("orange");
+        green = new Monkey("green");
+        pink = new Monkey("pink");
+        //-------------------- Entities------------------------------------------
+
+
+        //------------------- Turn based-----------------------------------------
         String[] playerNames = {"Toby", "Thomas", "Kevin", "Michael"};
         for(int i = 0; i< 4; i++){
             players[i] = new Player(playerNames[i], i+1, Game.batch);
@@ -39,6 +54,7 @@ public class PlayStateController {
         currentPlayerIndex = 0;
         currentPlayer = players[0];
         currentPlayer.startTurn();
+        //------------------- Turn based-----------------------------------------
     }
 
     public static void update(){
@@ -87,7 +103,11 @@ public class PlayStateController {
 
 
         //---- Monkeys and elephant-----------------
-        Game.batch.draw(monkey, Cords.cord[i][0],Cords.cord[i][1]);
+        Game.batch.draw(blue.img, Cords.cord[4][0],Cords.cord[4][1]);
+        Game.batch.draw(orange.img, Cords.cord[1][0],Cords.cord[1][1]);
+        Game.batch.draw(pink.img, Cords.cord[2][0],Cords.cord[2][1]);
+        Game.batch.draw(green.img, Cords.cord[17][0],Cords.cord[17][1]);
+        Game.batch.draw(Elephant.img, Cords.cord[0][0], Cords.cord[0][1]);
         //---- Monkeys and elephant-----------------
 
 
