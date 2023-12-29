@@ -138,10 +138,13 @@ public class PlayStateController {
 
         //-------- Player and cards-------------------
         Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
-        Game.batch.draw(avatar_1, Cords.top_avatar_x, Cords.top_avatar_y);
-        Game.batch.draw(avatar_2, Cords.bottom_avatar_x, Cords.bottom_avatar_y);
-        Game.batch.draw(avatar_3, Cords.left_avatar_x, Cords.left_avatar_y);
-        Game.batch.draw(avatar_4, Cords.right_avatar_x, Cords.right_avatar_y);
+        for (int i = 0; i < numOfPlayers; i++) {
+            players[i].draw();
+        }
+        Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
+        if(selected){
+            Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
+        }
         if(selected){
             Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
         }
