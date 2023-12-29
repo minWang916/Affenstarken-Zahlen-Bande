@@ -27,17 +27,17 @@ public class PlayStateController {
 
     public static int phase = 0;
 
-    private static int numOfPlayers = 4;
-    private static Player currentPlayer;
-    private static int currentPlayerIndex;
-    private static Player[] players = new Player[4];
+    public static int numOfPlayers = 4;
+    public static Player currentPlayer;
+    public static int currentPlayerIndex;
+    public static Player[] players = new Player[4];
 
-    private static boolean selected = false;
+    public static boolean selected = false;
 
-    private static Monkey blue;
-    private static Monkey orange;
-    private static Monkey pink;
-    private static Monkey green;
+    public static Monkey blue;
+    public static Monkey orange;
+    public static Monkey pink;
+    public static Monkey green;
 
     private static Texture holdOn = new Texture("img/special_1.png");
     private static Texture breakTime = new Texture("img/special_2.png");
@@ -69,18 +69,9 @@ public class PlayStateController {
     }
 
     public static void handleInput(){
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
-            //i = i + 1;
-            float X = Gdx.input.getX();
-            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(360 < X && X < 427 && 37 < Y && Y < 137){
-                if(selected == false){
-                    selected = true;
-                }else{
-                    selected = false;
-                }
-            }
-        }
+
+        GameInputHandler.bottom_card_1();
+        GameInputHandler.confirm();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
             currentPlayer.endTurn();
