@@ -13,12 +13,14 @@ public class PlayStateController {
 
     public static Texture cordMap = new Texture("img/cordMap.png");
     public static Texture card = new Texture("img/card.png");
-    public static Texture avatar = new Texture("img/P2_avatar.png");
+    public static Texture avatar_1 = new Texture("img/P1_avatar.png");
+    public static Texture avatar_2 = new Texture("img/P2_avatar.png");
+    public static Texture avatar_3 = new Texture("img/P3_avatar.png");
+    public static Texture avatar_4 = new Texture("img/P4_avatar.png");
 
     public static Texture special = new Texture("img/special_1.png");
 
     public static Texture leaf = new Texture("img/leaf_top_right_yellow.png");
-    public static Texture monkey = new Texture("img/monkey_blue.png");
 
     public static Texture frame = new Texture("img/frame.png");
 
@@ -35,6 +37,14 @@ public class PlayStateController {
     private static Monkey orange;
     private static Monkey pink;
     private static Monkey green;
+
+    private static Texture holdOn = new Texture("img/special_1.png");
+    private static Texture breakTime = new Texture("img/special_2.png");
+    private static Texture monkeySwap = new Texture("img/special_3.png");
+    private static Texture turboElephant = new Texture("img/special_4.png");
+    private static Texture freeMove = new Texture("img/special_5.png");
+    private static Texture exchange = new Texture("img/special_6.png");
+
 
     public static void init(){
 
@@ -113,7 +123,10 @@ public class PlayStateController {
 
         //-------- Player and cards-------------------
         Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
-        Game.batch.draw(avatar, Cords.top_avatar_x, Cords.top_avatar_y);
+        Game.batch.draw(avatar_1, Cords.top_avatar_x, Cords.top_avatar_y);
+        Game.batch.draw(avatar_2, Cords.bottom_avatar_x, Cords.bottom_avatar_y);
+        Game.batch.draw(avatar_3, Cords.left_avatar_x, Cords.left_avatar_y);
+        Game.batch.draw(avatar_4, Cords.right_avatar_x, Cords.right_avatar_y);
         if(selected){
             Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
         }
@@ -121,13 +134,35 @@ public class PlayStateController {
 
 
         //------------ Special ----------------------
-        Game.batch.draw(special, Cords.special_4_x, Cords.special_4_y);
+        Game.batch.draw(holdOn, Cords.special[0][0], Cords.special[0][1]);
+        Game.batch.draw(breakTime, Cords.special[1][0], Cords.special[1][1]);
+        Game.batch.draw(monkeySwap, Cords.special[2][0], Cords.special[2][1]);
+        Game.batch.draw(turboElephant, Cords.special[3][0], Cords.special[3][1]);
+        Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
+        Game.batch.draw(exchange, Cords.special[5][0], Cords.special[5][1]);
         //------------ Special ----------------------
     }
 
     public static void dispose(){
 
         cordMap.dispose();
+
+        avatar_1.dispose();
+        avatar_2.dispose();
+        avatar_3.dispose();
+        avatar_4.dispose();
+
+        pink.dispose();
+        blue.dispose();
+        green.dispose();
+        orange.dispose();
+
+        holdOn.dispose();
+        breakTime.dispose();
+        monkeySwap.dispose();
+        turboElephant.dispose();
+        freeMove.dispose();
+        exchange.dispose();
     }
 
     public static void handleInput(){
