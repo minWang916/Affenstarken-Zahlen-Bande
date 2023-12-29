@@ -84,11 +84,11 @@ public class PlayStateController {
         
         if(phase == PHASE_SPECIAL){
             GameInputHandler.special();
-            GameInputHandler.confirm();
+            Confirm_button.confirm_click();
         }else if(phase == PHASE_MONKEY){
-            GameInputHandler.confirm();
+            Confirm_button.confirm_click();
         }else if(phase == PHASE_ELEPHANT){
-            GameInputHandler.confirm();
+            Confirm_button.confirm_click();
         }
 
 
@@ -192,10 +192,12 @@ public class PlayStateController {
         if(useable_freeMove){
             Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
         }
-
-
-
         //------------ Special ----------------------
+
+
+        //-------- Confirm Button ----------------------
+        Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
+        //-------- Confirm Button ----------------------
     }
 
     public static void dispose(){
