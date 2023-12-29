@@ -39,6 +39,7 @@ public class PlayState extends GameState{
     public void update(float var1){
 
         handleInput();
+        PlayStateController.update();
         Game.cam.update();
         renderer.setView(Game.cam);
 
@@ -52,13 +53,8 @@ public class PlayState extends GameState{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Game.batch.begin();
-
         renderer.render();
         PlayStateController.draw();
-
-
-
-
         Game.batch.end();
 
     }

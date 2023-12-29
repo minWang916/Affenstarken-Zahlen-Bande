@@ -16,6 +16,10 @@ public class PlayStateController {
 
     public static Texture leaf = new Texture("img/leaf_top_right_yellow.png");
 
+    public static void update(){
+
+    }
+
     public static void draw(){
         Game.batch.draw(cordMap,Cords.cordMap_x,Cords.cordMap_y);
         Game.batch.draw(card,Cords.top_card_4_x,Cords.top_card_4_y);
