@@ -15,7 +15,6 @@ public class DesktopLauncher {
 		config.setWindowedMode(1000,800);
 		config.setWindowIcon("img/monkey_icon.png");
 
-
 		new Lwjgl3Application(new Game(), config);
 	}
 }

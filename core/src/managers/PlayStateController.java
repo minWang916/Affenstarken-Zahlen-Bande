@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
+import entities.*;
 
 import org.w3c.dom.Text;
 
@@ -21,16 +22,24 @@ public class PlayStateController {
 
     public static int i = 0;
 
+    private static int numOfPlayers = 4;
+    private static Player currentPlayer;
+    private static int currentPlayerIndex;
+    private static Player[] players = new Player[4];
+
     public static void init(){
-
-
+        String[] playerNames = {"Toby", "Thomas", "Kevin", "Michael"};
+        for(int i = 0; i< 4; i++){
+            players[i] = new Player(playerNames[i]);
+        }
+        currentPlayerIndex = 0;
+        currentPlayer = players[0];
     }
 
     public static void update(){
 
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
-            i = i + 1;
-        }
+        handleInput();
+
 
         //---------- Leaves -----------------------
 
@@ -53,8 +62,16 @@ public class PlayStateController {
     }
 
     public static void draw(){
+        //---------- Players -----------------------
 
-        //---------- Leaves -----------------------
+        for (int i = 0; i < numOfPlayers; i++) {
+            players[i].draw();
+        }
+
+        //---------- Players -----------------------
+
+
+        //---------- Leaves ------------------------
         Game.batch.draw(leaf,0,0);
         //---------- Leaves ------------------------
 
@@ -83,5 +100,19 @@ public class PlayStateController {
     public static void dispose(){
 
         cordMap.dispose();
+    }
+
+    public static void handleInput(){
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+            i = i + 1;
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
+            currentPlayer.endTurn();
+            currentPlayerIndex += 1;
+            currentPlayerIndex = currentPlayerIndex % 4;
+            currentPlayer = players[currentPlayerIndex];
+            currentPlayer.startTurn();
+        }
     }
 }
