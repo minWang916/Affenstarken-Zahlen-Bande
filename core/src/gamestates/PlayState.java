@@ -30,6 +30,8 @@ public class PlayState extends GameState{
 
     public void init() {
 
+        PlayStateController.init();
+
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("real/map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
@@ -77,6 +79,7 @@ public class PlayState extends GameState{
     }
 
     public void dispose(){
+
         PlayStateController.dispose();
     }
 
