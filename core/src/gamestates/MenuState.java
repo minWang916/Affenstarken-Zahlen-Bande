@@ -23,7 +23,7 @@ public class MenuState extends GameState{
 
 
     private BitmapFont titleFont;
-    private BitmapFont Font;
+    private BitmapFont font;
 
     private Stage stage;
 
@@ -59,7 +59,7 @@ public class MenuState extends GameState{
 
         FreeTypeFontGenerator.FreeTypeFontParameter param_font = new FreeTypeFontGenerator.FreeTypeFontParameter();
         param_font.size = 20;
-        Font = gen.generateFont(param_font);
+        font = gen.generateFont(param_font);
 
         menuItems = new String[]{
                 "Play",
@@ -71,7 +71,7 @@ public class MenuState extends GameState{
         buttonAtlas = new TextureAtlas("glassy_ui/glassy-ui.atlas");
         skinButton.addRegions(buttonAtlas);
         textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.font = Font;
+        textButtonStyle.font = font;
 
 
 
@@ -124,7 +124,7 @@ public class MenuState extends GameState{
 
     public void dispose(){
         stage.dispose();
-        Font.dispose();
+        font.dispose();
         titleFont.dispose();
     }
 }

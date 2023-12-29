@@ -34,10 +34,11 @@ public class PlayStateController {
     public static void init(){
         String[] playerNames = {"Toby", "Thomas", "Kevin", "Michael"};
         for(int i = 0; i< 4; i++){
-            players[i] = new Player(playerNames[i]);
+            players[i] = new Player(playerNames[i], i+1, Game.batch);
         }
         currentPlayerIndex = 0;
         currentPlayer = players[0];
+        currentPlayer.startTurn();
     }
 
     public static void update(){
