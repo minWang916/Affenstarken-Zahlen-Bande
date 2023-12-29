@@ -68,6 +68,29 @@ public class PlayStateController {
         //------------------- Turn based-----------------------------------------
     }
 
+    public static void handleInput(){
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+            //i = i + 1;
+            float X = Gdx.input.getX();
+            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
+            if(360 < X && X < 427 && 37 < Y && Y < 137){
+                if(selected == false){
+                    selected = true;
+                }else{
+                    selected = false;
+                }
+            }
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
+            currentPlayer.endTurn();
+            currentPlayerIndex += 1;
+            currentPlayerIndex = currentPlayerIndex % 4;
+            currentPlayer = players[currentPlayerIndex];
+            currentPlayer.startTurn();
+        }
+    }
+
     public static void update(){
 
         handleInput();
@@ -166,26 +189,5 @@ public class PlayStateController {
         exchange.dispose();
     }
 
-    public static void handleInput(){
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
-            //i = i + 1;
-            float X = Gdx.input.getX();
-            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(360 < X && X < 427 && 37 < Y && Y < 136){
-                if(selected == false){
-                    selected = true;
-                }else{
-                    selected = false;
-                }
-            }
-        }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
-            currentPlayer.endTurn();
-            currentPlayerIndex += 1;
-            currentPlayerIndex = currentPlayerIndex % 4;
-            currentPlayer = players[currentPlayerIndex];
-            currentPlayer.startTurn();
-        }
-    }
 }
