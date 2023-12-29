@@ -23,6 +23,10 @@ public class PlayStateController {
 
     public static void update(){
 
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+            i = i + 1;
+        }
+
         //---------- Leaves -----------------------
 
         //---------- Leaves ------------------------
