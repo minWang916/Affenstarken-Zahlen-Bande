@@ -46,7 +46,16 @@ public class PlayStateController {
     private static Texture freeMove = new Texture("img/special_5.png");
     private static Texture exchange = new Texture("img/special_6.png");
 
+    public static boolean useable_holdOn = true;
+    public static boolean useable_breakTime = true;
+    public static boolean useable_monkeySwap = true;
+    public static boolean useable_turboElephant = true;
+    public static boolean useable_freeMove = true;
+    public static boolean useable_exchange = true;
 
+    public static final int PHASE_SPECIAL = 0;
+    public static final int PHASE_MONKEY = 1;
+    public static final int PHASE_ELEPHANT = 2;
     public static void init(){
 
         //-------------------- Entities------------------------------------------
@@ -70,16 +79,24 @@ public class PlayStateController {
 
     public static void handleInput(){
 
-        GameInputHandler.bottom_card_1();
-        GameInputHandler.confirm();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.W)){
-            currentPlayer.endTurn();
-            currentPlayerIndex += 1;
-            currentPlayerIndex = currentPlayerIndex % 4;
-            currentPlayer = players[currentPlayerIndex];
-            currentPlayer.startTurn();
+
+        
+        if(phase == PHASE_SPECIAL){
+            GameInputHandler.special();
+            GameInputHandler.confirm();
+        }else if(phase == PHASE_MONKEY){
+            GameInputHandler.confirm();
+        }else if(phase == PHASE_ELEPHANT){
+            GameInputHandler.confirm();
         }
+
+
+
+        GameInputHandler.bottom_card_1();
+
+
+
     }
 
     public static void update(){
@@ -149,12 +166,32 @@ public class PlayStateController {
 
 
         //------------ Special ----------------------
-        Game.batch.draw(holdOn, Cords.special[0][0], Cords.special[0][1]);
-        Game.batch.draw(breakTime, Cords.special[1][0], Cords.special[1][1]);
-        Game.batch.draw(monkeySwap, Cords.special[2][0], Cords.special[2][1]);
-        Game.batch.draw(turboElephant, Cords.special[3][0], Cords.special[3][1]);
-        Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
-        Game.batch.draw(exchange, Cords.special[5][0], Cords.special[5][1]);
+        if(useable_holdOn){
+            Game.batch.draw(holdOn, Cords.special[0][0], Cords.special[0][1]);
+        }
+
+        if(useable_breakTime){
+            Game.batch.draw(breakTime, Cords.special[1][0], Cords.special[1][1]);
+        }
+
+        if(useable_exchange){
+            Game.batch.draw(exchange, Cords.special[5][0], Cords.special[5][1]);
+        }
+
+        if(useable_turboElephant){
+            Game.batch.draw(turboElephant, Cords.special[3][0], Cords.special[3][1]);
+        }
+
+        if(useable_monkeySwap){
+            Game.batch.draw(monkeySwap, Cords.special[2][0], Cords.special[2][1]);
+        }
+
+        if(useable_freeMove){
+            Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
+        }
+
+
+
         //------------ Special ----------------------
     }
 
