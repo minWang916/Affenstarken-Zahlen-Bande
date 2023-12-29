@@ -21,24 +21,7 @@ public class GameInputHandler {
         }
     }
 
-    public static void confirm(){
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-            float X = Gdx.input.getX();
-            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(849 < X && X < 950 && 105 < Y && Y < 136){
-                System.out.println("Current phase is: "+phase);
-                phase = phase + 1;
-                if(phase == 3){
-                    currentPlayer.endTurn();
-                    currentPlayerIndex += 1;
-                    currentPlayerIndex = currentPlayerIndex % 4;
-                    currentPlayer = players[currentPlayerIndex];
-                    currentPlayer.startTurn();
-                    phase = 0;
-                }
-            }
-        }
-    }
+
 
     public static void special(){
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
@@ -48,7 +31,26 @@ public class GameInputHandler {
             if(202 < X && X < 263 && 529 < Y && Y < 583){
                 useable_holdOn = false;
             }
-            
+
+            if(202 < X && X < 263 && 367 < Y && Y < 426){
+                useable_breakTime = false;
+            }
+
+            if(202 < X && X < 263 && 209 < Y && Y < 267){
+                useable_monkeySwap = false;
+            }
+
+            if(739 < X && X < 797 && 529 < Y && Y < 583){
+                useable_turboElephant = false;
+            }
+
+            if(739 < X && X < 797 && 367 < Y && Y < 426){
+                useable_freeMove = false;
+            }
+
+            if(739 < X && X < 797 && 209 < Y && Y < 267){
+                useable_exchange = false;
+            }
         }
     }
 
