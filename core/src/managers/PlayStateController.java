@@ -1,16 +1,15 @@
 package managers;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 import entities.*;
-import managers.GameInputHandler;
 
-import org.w3c.dom.Text;
 
-import entities.*;
+
 public class PlayStateController {
+    public static Elephant_Card elephant1 = new Elephant_Card(1,3,"img/ele1.png","img/ele3.png",Cords.elephant_1_x, Cords.elephant_1_y);
+    public static Elephant_Card elephant2 = new Elephant_Card(2,4,"img/ele2.png","img/ele4.png", Cords.elephant_2_x, Cords.elephant_2_y);
 
     public static Texture cordMap = new Texture("img/cordMap.png");
     public static Texture card = new Texture("img/card.png");
@@ -43,12 +42,12 @@ public class PlayStateController {
     public static Monkey pink;
     public static Monkey green;
 
-    private static Texture holdOn = new Texture("img/special_1.png");
-    private static Texture breakTime = new Texture("img/special_2.png");
-    private static Texture monkeySwap = new Texture("img/special_3.png");
-    private static Texture turboElephant = new Texture("img/special_4.png");
-    private static Texture freeMove = new Texture("img/special_5.png");
-    private static Texture exchange = new Texture("img/special_6.png");
+    private static final Texture holdOn = new Texture("img/special_1.png");
+    private static final Texture breakTime = new Texture("img/special_2.png");
+    private static final Texture monkeySwap = new Texture("img/special_3.png");
+    private static final Texture turboElephant = new Texture("img/special_4.png");
+    private static final Texture freeMove = new Texture("img/special_5.png");
+    private static final Texture exchange = new Texture("img/special_6.png");
 
     public static boolean[] useable_special = {true,true,true,true,true,true};
 
@@ -89,6 +88,8 @@ public class PlayStateController {
         }else if(phase == PHASE_MONKEY){
             Confirm_button.confirm_click();
         }else if(phase == PHASE_ELEPHANT){
+            elephant1.handleClick();
+            elephant2.handleClick();
             Confirm_button.confirm_click();
         }
 
@@ -204,7 +205,10 @@ public class PlayStateController {
         Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
         //-------- Confirm Button ----------------------
 
-
+        //-------- Elephant Card ----------------------
+        elephant1.draw();
+        elephant2.draw();
+        //-------- Elephant Card ----------------------
 
     }
 

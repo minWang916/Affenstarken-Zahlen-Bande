@@ -125,7 +125,7 @@ public class Cords {
 
     //-------------------------------------------------------All cards-------------------------------------------------
 
-    public static float all_player_cord[][][] = {
+    public static float[][][] all_player_cord = {
             top_player,
             right_player,
             bottom_player,
@@ -172,10 +172,7 @@ public class Cords {
     public static final float elephant_2_x = 113;
     public static final float elephant_2_y = 29;
 
-    public  static float elephent_cord[][] ={
-            {elephant_1_x, elephant_1_y},
-            {elephant_2_x, elephant_2_y}
-    };
+
 
     //------------------------------------------------------Elephant---------------------------------------------------
 
