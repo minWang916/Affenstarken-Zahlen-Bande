@@ -32,7 +32,7 @@ public class Cords {
 
     //------------------------------------------------------Bottom-----------------------------------------------------
     public static final float bottom_avatar_x = 255;
-    public static final float bottom_avatar_y = 43;
+    public static final float bottom_avatar_y = 48;
     public static final float bottom_card_1_x = 360;
     public static final float bottom_card_1_y = 37;
     public static final float bottom_card_2_x = 464;
@@ -55,7 +55,7 @@ public class Cords {
     //--------------------------------------------------------Top------------------------------------------------------
 
     public static final float top_avatar_x = 255;
-    public static final float top_avatar_y = 705;
+    public static final float top_avatar_y = 675;
     public static final float top_card_1_x = 360;
     public static final float top_card_1_y = 666;
     public static final float top_card_2_x = 464;
