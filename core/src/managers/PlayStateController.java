@@ -1,5 +1,7 @@
 package managers;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 
@@ -15,17 +17,28 @@ public class PlayStateController {
     public static Texture special = new Texture("img/special_1.png");
 
     public static Texture leaf = new Texture("img/leaf_top_right_yellow.png");
+    public static Texture monkey = new Texture("img/monkey_blue.png");
+
+    public static int i = 0;
 
     public static void update(){
+
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+            i = i + 1;
+        }
 
     }
 
     public static void draw(){
+        Game.batch.draw(leaf,0,0);
         Game.batch.draw(cordMap,Cords.cordMap_x,Cords.cordMap_y);
         Game.batch.draw(card,Cords.top_card_4_x,Cords.top_card_4_y);
         Game.batch.draw(avatar, Cords.top_avatar_x, Cords.top_avatar_y);
         Game.batch.draw(special, Cords.special_4_x, Cords.special_4_y);
-        Game.batch.draw(leaf,0,0);
+
+        Game.batch.draw(monkey, Cords.cord[i][0],Cords.cord[i][1]);
+
+
     }
 
     public static void dispose(){
