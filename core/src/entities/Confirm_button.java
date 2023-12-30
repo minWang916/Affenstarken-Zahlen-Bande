@@ -49,4 +49,8 @@ public class Confirm_button {
             }
         }
     }
+
+    public static void dispose(){
+        btn.dispose();
+    }
 }

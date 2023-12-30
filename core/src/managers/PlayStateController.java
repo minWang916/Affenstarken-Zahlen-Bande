@@ -88,6 +88,8 @@ public class PlayStateController {
             GameInputHandler.special();
             Confirm_button.confirm_click();
         }else if(phase == PHASE_MONKEY){
+            Plus_Button.handleClick();
+            Minus_Button.handleClick();
             Confirm_button.confirm_click();
         }else if(phase == PHASE_ELEPHANT){
             elephant2.handleClick();
@@ -208,6 +210,13 @@ public class PlayStateController {
         Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
         //-------- Confirm Button ----------------------
 
+
+        //-------- Plus and Minus Button ----------------------
+        Plus_Button.draw();
+        Minus_Button.draw();
+        //-------- Plus and Minus Button ----------------------
+
+
         //-------- Elephant Card ----------------------
         elephant1.draw();
         elephant2.draw();
@@ -238,6 +247,10 @@ public class PlayStateController {
         turboElephant.dispose();
         freeMove.dispose();
         exchange.dispose();
+
+        Plus_Button.dispose();
+        Minus_Button.dispose();
+        Confirm_button.dispose();
     }
 
 
