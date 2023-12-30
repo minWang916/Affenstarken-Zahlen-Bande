@@ -38,6 +38,7 @@ public class PlayStateController {
     public static Player[] players = new Player[4];
 
     public static boolean selected = false;
+    public static int selected_plus_or_minus = 99;
 
     public static Monkey blue;
     public static Monkey orange;
@@ -212,17 +213,27 @@ public class PlayStateController {
 
 
         //-------- Plus and Minus Button ----------------------
-        Plus_Button.draw();
-        Minus_Button.draw();
+        if(phase == PHASE_MONKEY){
+            if(selected_plus_or_minus == 99){
+                Plus_Button.draw_dark();
+                Minus_Button.draw_dark();
+            }else if(selected_plus_or_minus == 0){
+                Plus_Button.draw_bright();
+                Minus_Button.draw_dark();
+            }else if(selected_plus_or_minus == 1){
+                Plus_Button.draw_dark();
+                Minus_Button.draw_bright();
+            }
+        }
         //-------- Plus and Minus Button ----------------------
 
 
         //-------- Elephant Card ----------------------
-        elephant1.draw();
-        elephant2.draw();
-        if(Elephant_Card.selected != 99){
-            Game.batch.draw(elephant_frame, Elephant_cards[Elephant_Card.selected].x - 9, Elephant_cards[Elephant_Card.selected].y - 9);
-        }
+            elephant1.draw();
+            elephant2.draw();
+            if(Elephant_Card.selected != 99){
+                Game.batch.draw(elephant_frame, Elephant_cards[Elephant_Card.selected].x - 9, Elephant_cards[Elephant_Card.selected].y - 9);
+            }
         //-------- Elephant Card ----------------------
 
     }

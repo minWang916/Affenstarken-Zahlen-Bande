@@ -45,6 +45,8 @@ public class Confirm_button {
                     currentPlayer = players[currentPlayerIndex];
                     currentPlayer.startTurn();
                     phase = 0;
+                }else if(phase == 2){
+                    selected_plus_or_minus = 99;
                 }
             }
         }
