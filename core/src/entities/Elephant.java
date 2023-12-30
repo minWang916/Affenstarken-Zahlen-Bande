@@ -20,4 +20,8 @@ public class Elephant {
         }
 
     }
+
+    public static void dispose() {
+        img.dispose();
+    }
 }

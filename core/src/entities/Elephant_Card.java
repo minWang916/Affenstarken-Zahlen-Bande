@@ -72,5 +72,10 @@ public class Elephant_Card {
             }
         }
     }
+
+    public void dispose() {
+        face1.dispose();
+        face2.dispose();
+    }
 }
 

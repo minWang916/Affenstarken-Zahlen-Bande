@@ -251,6 +251,7 @@ public class PlayStateController {
         blue.dispose();
         green.dispose();
         orange.dispose();
+        Elephant.dispose();
 
         holdOn.dispose();
         breakTime.dispose();
@@ -262,6 +263,9 @@ public class PlayStateController {
         Plus_Button.dispose();
         Minus_Button.dispose();
         Confirm_button.dispose();
+
+        elephant1.dispose();
+        elephant2.dispose();
     }
 
 
