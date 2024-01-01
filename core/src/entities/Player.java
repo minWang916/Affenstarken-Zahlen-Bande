@@ -1,11 +1,17 @@
 package entities;
 
+import static managers.PlayStateController.PHASE_ELEPHANT;
+import static managers.PlayStateController.PHASE_MONKEY;
+import static managers.PlayStateController.PHASE_SPECIAL;
+import static managers.PlayStateController.phase;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import managers.PlayStateController.*;
 
 import entities.Cords;
 
@@ -47,7 +53,16 @@ public class Player {
 
     public void draw(){
         if (playing == true) {
-            font.setColor(Color.GREEN);
+            if(phase == PHASE_SPECIAL){
+                font.setColor(Color.GREEN);
+            }
+            if(phase == PHASE_MONKEY){
+                font.setColor(Color.YELLOW);
+            }
+            if(phase == PHASE_ELEPHANT){
+                font.setColor(Color.ORANGE);
+            }
+
         }
         font.draw(batch, name, Cords.all_player_cord[id][0][0] - 10, Cords.all_player_cord[id][0][1] + 80);
         font.setColor(Color.WHITE);

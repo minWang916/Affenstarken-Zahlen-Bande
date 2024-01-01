@@ -25,6 +25,8 @@ public class PlayStateController {
 
     public static Texture frame = new Texture("img/frame_v.png");
 
+
+
     public static Texture special_frame = new Texture("img/frame_c.png");
     public static Texture elephant_frame = new Texture("img/frame_v.png");
 
@@ -235,6 +237,8 @@ public class PlayStateController {
                 Game.batch.draw(elephant_frame, Elephant_cards[Elephant_Card.selected].x - 9, Elephant_cards[Elephant_Card.selected].y - 9);
             }
         //-------- Elephant Card ----------------------
+
+
 
     }
 
