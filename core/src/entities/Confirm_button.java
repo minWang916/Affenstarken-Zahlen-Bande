@@ -5,6 +5,7 @@ import static managers.PlayStateController.*;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import entities.*;
 
@@ -14,11 +15,15 @@ public class Confirm_button {
 
     public static Texture btn = new Texture("img/button_confirm.png");
 
+    static Sound btnSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/confirm.mp3"));
+
     public static void confirm_click(){
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
+
             float X = Gdx.input.getX();
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
             if(x < X && X < x + 130 && y < Y && Y < y + 42 ){
+                btnSound.play(0.2f);
                 System.out.println("Current phase is: "+phase);
                 if(phase == PHASE_SPECIAL){
                     if(selected_special != 99){
@@ -54,5 +59,6 @@ public class Confirm_button {
 
     public static void dispose(){
         btn.dispose();
+        btnSound.dispose();
     }
 }

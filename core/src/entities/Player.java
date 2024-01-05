@@ -62,7 +62,6 @@ public class Player {
             if(phase == PHASE_ELEPHANT){
                 font.setColor(Color.ORANGE);
             }
-
         }
         font.draw(batch, name, Cords.all_player_cord[id][0][0] - 10, Cords.all_player_cord[id][0][1] + 80);
         font.setColor(Color.WHITE);
