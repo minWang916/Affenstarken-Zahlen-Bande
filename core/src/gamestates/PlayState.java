@@ -22,7 +22,6 @@ public class PlayState extends GameState{
     private OrthogonalTiledMapRenderer renderer;
 
 
-
     public PlayState (GameStateManager gsm){
         super(gsm);
         init();
@@ -36,6 +35,7 @@ public class PlayState extends GameState{
         map = mapLoader.load("real/map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         Game.cam.position.set(Game.gamePort.getWorldWidth()/2, Game.gamePort.getWorldHeight()/2,0);
+
 
 
 

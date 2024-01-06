@@ -30,7 +30,6 @@ allprojects {
         ashleyVersion = '1.7.4'
         aiVersion = '1.8.2'
         gdxControllersVersion = '2.2.1'
-        shapedrawerVersion = '2.5.0'
     }
 
     repositories {
@@ -152,6 +151,6 @@ project(":core") {
         api "com.badlogicgames.ashley:ashley:$ashleyVersion"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        implementation "space.earlygrey:shapedrawer:$shapedrawerVersion"
+        
     }
 }
