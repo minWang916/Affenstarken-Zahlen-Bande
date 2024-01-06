@@ -30,24 +30,15 @@ public class Confirm_button {
                         useable_special[selected_special] = 1;
                     }
                     selected_special = 99;
+
                 }
 
+                if(phase == PHASE_MONKEY){
+                    selected_plus_or_minus = 99;
 
-                if(useable_special[1] == 1){
-                    useable_special[1] = 2;
-                    selected_special = 99;
-                    currentPlayer.endTurn();
-                    currentPlayerIndex += 1;
-                    currentPlayerIndex = currentPlayerIndex % 4;
-                    currentPlayer = players[currentPlayerIndex];
-                    currentPlayer.startTurn();
-                    phase = 0;
-                    return;
-                }else{
-                    phase = phase + 1;
                 }
 
-                if(phase == 3){
+                if(phase == PHASE_ELEPHANT){
 
                     if(useable_special[3] == 1){
                         int valueLeft = 0;
@@ -90,9 +81,22 @@ public class Confirm_button {
                     currentPlayerIndex = currentPlayerIndex % 4;
                     currentPlayer = players[currentPlayerIndex];
                     currentPlayer.startTurn();
+                    phase = -1;
+                }
+
+
+                if(useable_special[1] == 1){
+                    useable_special[1] = 2;
+                    selected_special = 99;
+                    currentPlayer.endTurn();
+                    currentPlayerIndex += 1;
+                    currentPlayerIndex = currentPlayerIndex % 4;
+                    currentPlayer = players[currentPlayerIndex];
+                    currentPlayer.startTurn();
                     phase = 0;
-                }else if(phase == 2){
-                    selected_plus_or_minus = 99;
+                    return;
+                }else{
+                    phase = (phase + 1) % 3;
                 }
             }
         }

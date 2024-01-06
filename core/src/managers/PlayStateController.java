@@ -46,6 +46,9 @@ public class PlayStateController {
     public static Monkey orange;
     public static Monkey pink;
     public static Monkey green;
+    public static Monkey[] monkeys = new Monkey[4];
+
+    public static Elephant elephant;
 
     private static final Texture holdOn = new Texture("img/special_1.png");
     private static final Texture breakTime = new Texture("img/special_2.png");
@@ -68,6 +71,8 @@ public class PlayStateController {
         orange = new Monkey("orange");
         green = new Monkey("green");
         pink = new Monkey("pink");
+        monkeys = new Monkey[]{blue, orange, green, pink};
+        elephant = new Elephant();
         //-------------------- Entities------------------------------------------
 
 
@@ -105,8 +110,6 @@ public class PlayStateController {
 
         GameInputHandler.bottom_card_1();
 
-
-
     }
 
     public static void update(){
@@ -124,13 +127,13 @@ public class PlayStateController {
         //---- Monkeys and elephant-----------------
 
 
-        //-------- Player and cards-------------------
+        //--- Player (and cards - inside players)----
 
         for (int i = 0; i<4; i++){
             players[i].update();
         }
 
-        //-------- Player and cards-------------------
+        //--- Player (and cards - inside players)----
 
 
         //------------ Special ----------------------
@@ -149,21 +152,27 @@ public class PlayStateController {
 
 
         //---------- Leaves ------------------------
+
         Game.batch.draw(leaf,0,0);
+
         //---------- Leaves ------------------------
 
 
         //---------- Cord map ----------------------
+
         Game.batch.draw(cordMap,Cords.cordMap_x,Cords.cordMap_y);
+
         //---------- Cord map ----------------------
 
 
         //---- Monkeys and elephant-----------------
-        Game.batch.draw(blue.img, Cords.cord[blue.location][0],Cords.cord[blue.location][1]);
-        Game.batch.draw(orange.img, Cords.cord[orange.location][0],Cords.cord[orange.location][1]);
-        Game.batch.draw(pink.img, Cords.cord[pink.location][0],Cords.cord[pink.location][1]);
-        Game.batch.draw(green.img, Cords.cord[green.location][0],Cords.cord[green.location][1]);
-        Game.batch.draw(Elephant.img, Cords.cord[Elephant.location][0], Cords.cord[Elephant.location][1]);
+
+        for (int i=0; i<4; i++) {
+            monkeys[i].draw();
+        }
+
+        elephant.draw();
+
         //---- Monkeys and elephant-----------------
 
 
@@ -171,13 +180,6 @@ public class PlayStateController {
         Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
         for (int i = 0; i < numOfPlayers; i++) {
             players[i].draw();
-        }
-        Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
-        if(selected){
-            Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
-        }
-        if(selected){
-            Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
         }
         //-------- Player and cards-------------------
 
@@ -259,7 +261,7 @@ public class PlayStateController {
         blue.dispose();
         green.dispose();
         orange.dispose();
-        Elephant.dispose();
+        elephant.dispose();
 
         holdOn.dispose();
         breakTime.dispose();

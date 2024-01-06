@@ -1,6 +1,7 @@
 package entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.Game;
 
 public class Monkey {
 
@@ -10,7 +11,7 @@ public class Monkey {
 
     public Texture img;
 
-    public int weight = 3;
+    public int weight = 20;
 
     public Monkey(String color){
         this.location = 0;
@@ -22,6 +23,10 @@ public class Monkey {
 
     public void move(int location){
         this.location = location;
+    }
+
+    public void draw(){
+        Game.batch.draw(img, Cords.cord[location][0],Cords.cord[location][1]);
     }
 
     public void dispose(){
