@@ -4,10 +4,11 @@ package managers;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 import entities.*;
-
+import java.util.ArrayList;
 
 
 public class PlayStateController {
+    public static ArrayList<Card> Cards = new ArrayList<>();
     public static Elephant_Card elephant1 = new Elephant_Card(1,3,"img/ele1.png","img/ele3.png",Cords.elephant_1_x, Cords.elephant_1_y,0);
     public static Elephant_Card elephant2 = new Elephant_Card(2,4,"img/ele2.png","img/ele4.png",Cords.elephant_2_x, Cords.elephant_2_y,1);
     public static Elephant_Card[] Elephant_cards = {elephant1, elephant2};
@@ -202,7 +203,15 @@ public class PlayStateController {
 
 
         //-------- Confirm Button ----------------------
-        Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
+        if(phase != PHASE_MONKEY){
+            Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
+        }else{
+            if(0 < Card.totalSelected && Card.totalSelected <= 2){
+                Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
+            }else{
+                Game.batch.draw(Confirm_button.btnDark, Confirm_button.x, Confirm_button.y);
+            }
+        }
         //-------- Confirm Button ----------------------
 
 

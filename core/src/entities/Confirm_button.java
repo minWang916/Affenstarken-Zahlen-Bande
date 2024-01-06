@@ -13,7 +13,10 @@ public class Confirm_button {
     public static float x = 831;
     public static float y = 47;
 
+
+
     public static Texture btn = new Texture("img/button_confirm.png");
+    public static Texture btnDark = new Texture("img/button_confirm_dark.png");
 
     static Sound btnSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/confirm.mp3"));
 
@@ -23,9 +26,10 @@ public class Confirm_button {
             float X = Gdx.input.getX();
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
             if(x < X && X < x + 130 && y < Y && Y < y + 42 ){
-                btnSound.play(0.2f);
+
 
                 if(phase == PHASE_SPECIAL){
+
                     if(selected_special != 99){
                         useable_special[selected_special] = 1;
                     }
@@ -34,6 +38,9 @@ public class Confirm_button {
                 }
 
                 if(phase == PHASE_MONKEY){
+                    if(Card.totalSelected > 2){
+
+                    }
                     selected_plus_or_minus = 99;
 
                 }
@@ -86,6 +93,7 @@ public class Confirm_button {
 
 
                 if(useable_special[1] == 1){
+                    btnSound.play(0.2f);
                     useable_special[1] = 2;
                     selected_special = 99;
                     currentPlayer.endTurn();
@@ -96,7 +104,20 @@ public class Confirm_button {
                     phase = 0;
                     return;
                 }else{
-                    phase = (phase + 1) % 3;
+                    if(phase != PHASE_MONKEY){
+                        btnSound.play(0.2f);
+                        phase = (phase + 1) % 3;
+                    }else{
+                        if(0 < Card.totalSelected && Card.totalSelected <= 2){
+                            btnSound.play(0.2f);
+                            phase = (phase + 1) % 3;
+                            Card.totalSelected = 0;
+                            for(int i = 0; i < Cards.size(); i++){
+                                Cards.get(i).selected = false;
+                            }
+                        }
+                    }
+
                 }
             }
         }
@@ -105,5 +126,6 @@ public class Confirm_button {
     public static void dispose(){
         btn.dispose();
         btnSound.dispose();
+        btnDark.dispose();
     }
 }

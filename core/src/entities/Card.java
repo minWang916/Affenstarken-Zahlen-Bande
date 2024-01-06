@@ -1,6 +1,9 @@
 package entities;
 
+import static managers.PlayStateController.PHASE_MONKEY;
+import static managers.PlayStateController.currentPlayerIndex;
 import static managers.PlayStateController.selected;
+import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,11 +13,15 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 //import com.badlogic.gdx.graphics.g2d.PolygonSprite;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.Game;
-
+import java.util.ArrayList;
 import entities.Cords;
+import managers.PlayStateController;
 
 public class Card {
+
     private int number;
+
+    public static int totalSelected = 0;
 
     private String color;
 
@@ -26,7 +33,7 @@ public class Card {
     private float[] topCorner = new float[2];
     private float[] bottomCorner = new float[2];
 
-    private boolean selected = false;
+    public boolean selected = false;
 
     private Texture frame;
 
@@ -42,6 +49,8 @@ public class Card {
         this.card_id = card_id;
 
         System.out.println("Card created with player id: " + this.player_id + " and card id: " + card_id);
+
+        PlayStateController.Cards.add(this);
 
         init();
     }
@@ -81,11 +90,13 @@ public class Card {
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
             float X = Gdx.input.getX();
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(bottomCorner[0] < X && X < topCorner[0] && bottomCorner[1] < Y && Y < topCorner[1]){
+            if(bottomCorner[0] < X && X < topCorner[0] && bottomCorner[1] < Y && Y < topCorner[1] && PlayStateController.phase == PHASE_MONKEY && currentPlayerIndex == this.player_id){
                 if(selected == false){
                     selected = true;
+                    totalSelected = totalSelected + 1;
                 }else{
                     selected = false;
+                    totalSelected = totalSelected - 1;
                 }
             }
         }
