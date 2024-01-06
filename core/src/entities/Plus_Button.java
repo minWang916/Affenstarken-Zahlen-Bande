@@ -1,6 +1,6 @@
 package entities;
 
-import static managers.PlayStateController.selected_plus_or_minus;
+//import static managers.PlayStateController.selected_plus_or_minus;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -22,17 +22,17 @@ public class Plus_Button {
     }
 
     public static void handleClick(){
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            float X = Gdx.input.getX();
-            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(x < X && X < x + 68 && y < Y && Y < y + 48){
-                if(selected_plus_or_minus == 0){
-                    selected_plus_or_minus = 99;
-                }else{
-                    selected_plus_or_minus = 0;
-                }
-            }
-        }
+//        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+//            float X = Gdx.input.getX();
+//            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
+//            if(x < X && X < x + 68 && y < Y && Y < y + 48){
+//                if(selected_plus_or_minus == 0){
+//                    selected_plus_or_minus = 99;
+//                }else{
+//                    selected_plus_or_minus = 0;
+//                }
+//            }
+//        }
     }
 
     public static void dispose(){
