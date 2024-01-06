@@ -3,6 +3,7 @@ package entities;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Elephant {
+    public int weight = 5;
     public static int location = 0;
     public static String path = "img/elephant.png";
 

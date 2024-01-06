@@ -54,7 +54,7 @@ public class PlayStateController {
     private static final Texture freeMove = new Texture("img/special_5.png");
     private static final Texture exchange = new Texture("img/special_6.png");
 
-    public static boolean[] useable_special = {true,true,true,true,true,true};
+    public static int[] useable_special = {0,0,0,0,0,0};
 
 
 
@@ -179,27 +179,27 @@ public class PlayStateController {
 
 
         //------------ Special ----------------------
-        if(useable_special[0]){
+        if(useable_special[0] == 0){
             Game.batch.draw(holdOn, Cords.special[0][0], Cords.special[0][1]);
         }
 
-        if(useable_special[1]){
+        if(useable_special[1] == 0){
             Game.batch.draw(breakTime, Cords.special[1][0], Cords.special[1][1]);
         }
 
-        if(useable_special[5]){
+        if(useable_special[5] == 0){
             Game.batch.draw(exchange, Cords.special[5][0], Cords.special[5][1]);
         }
 
-        if(useable_special[3]){
+        if(useable_special[3] == 0){
             Game.batch.draw(turboElephant, Cords.special[3][0], Cords.special[3][1]);
         }
 
-        if(useable_special[2]){
+        if(useable_special[2] == 0){
             Game.batch.draw(monkeySwap, Cords.special[2][0], Cords.special[2][1]);
         }
 
-        if(useable_special[4]){
+        if(useable_special[4] == 0){
             Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
         }
 

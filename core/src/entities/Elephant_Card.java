@@ -1,6 +1,7 @@
 package entities;
 
 import static managers.PlayStateController.selected;
+import static managers.PlayStateController.useable_special;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -50,33 +51,23 @@ public class Elephant_Card {
     }
 
     public void handleClick(){
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            float X = Gdx.input.getX();
-            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(this.x < X && X < this.x + 68 && this.y < Y && Y < this.y + 100){
+        if(useable_special[3] != 1){
+            if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+                float X = Gdx.input.getX();
+                float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
+                if(this.x < X && X < this.x + 68 && this.y < Y && Y < this.y + 100){
 
-                if(selected == this.id){
-                    selected = 99;
-                    deselect.play(0.1f);
-                }else{
-                    selected = this.id;
-                    select.play(0.1f);
+                    if(selected == this.id){
+                        selected = 99;
+                        deselect.play(0.1f);
+                    }else{
+                        selected = this.id;
+                        select.play(0.1f);
+                    }
                 }
-
-                /*
-                if(turn % 2 == 0){
-                    Elephant.move(Elephant.location+value1);
-                    turn = turn + 1;
-                }else{
-                    Elephant.move(Elephant.location+value2);
-                    turn = turn + 1;
-                }
-                */
-
-
-
             }
         }
+
     }
 
     public void dispose() {

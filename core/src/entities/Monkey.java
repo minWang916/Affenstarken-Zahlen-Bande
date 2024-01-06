@@ -10,6 +10,8 @@ public class Monkey {
 
     public Texture img;
 
+    public int weight = 3;
+
     public Monkey(String color){
         this.location = 0;
         this.color = color;
