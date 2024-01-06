@@ -25,8 +25,6 @@ public class PlayStateController {
 
     public static Texture frame = new Texture("img/frame_v.png");
 
-
-
     public static Texture special_frame = new Texture("img/frame_c.png");
     public static Texture elephant_frame = new Texture("img/frame_v.png");
 
@@ -40,7 +38,6 @@ public class PlayStateController {
     public static Player[] players = new Player[4];
 
     public static boolean selected = false;
-    public static int selected_plus_or_minus = 99;
 
     public static Monkey blue;
     public static Monkey orange;
@@ -55,8 +52,6 @@ public class PlayStateController {
     private static final Texture exchange = new Texture("img/special_6.png");
 
     public static boolean[] useable_special = {true,true,true,true,true,true};
-
-
 
     public static final int PHASE_SPECIAL = 0;
     public static final int PHASE_MONKEY = 1;
@@ -91,8 +86,6 @@ public class PlayStateController {
             GameInputHandler.special();
             Confirm_button.confirm_click();
         }else if(phase == PHASE_MONKEY){
-            Plus_Button.handleClick();
-            Minus_Button.handleClick();
             Confirm_button.confirm_click();
         }else if(phase == PHASE_ELEPHANT){
             elephant2.handleClick();
@@ -102,16 +95,13 @@ public class PlayStateController {
         }
 
 
-
-        GameInputHandler.bottom_card_1();
-
-
-
     }
 
     public static void update(){
 
-        handleInput();
+        for (int i = 0; i<4; i++){
+            players[i].update();
+        }
 
 
         //---------- Leaves -----------------------
@@ -168,13 +158,6 @@ public class PlayStateController {
         for (int i = 0; i < numOfPlayers; i++) {
             players[i].draw();
         }
-        Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
-        if(selected){
-            Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
-        }
-        if(selected){
-            Game.batch.draw(frame, Cords.bottom_card_1_x - 9, Cords.bottom_card_1_y - 9);
-        }
         //-------- Player and cards-------------------
 
 
@@ -213,32 +196,13 @@ public class PlayStateController {
         Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
         //-------- Confirm Button ----------------------
 
-
-        //-------- Plus and Minus Button ----------------------
-        if(phase == PHASE_MONKEY){
-            if(selected_plus_or_minus == 99){
-                Plus_Button.draw_dark();
-                Minus_Button.draw_dark();
-            }else if(selected_plus_or_minus == 0){
-                Plus_Button.draw_bright();
-                Minus_Button.draw_dark();
-            }else if(selected_plus_or_minus == 1){
-                Plus_Button.draw_dark();
-                Minus_Button.draw_bright();
-            }
+        //-------- Elephant Card ----------------------
+        elephant1.draw();
+        elephant2.draw();
+        if(Elephant_Card.selected != 99){
+            Game.batch.draw(elephant_frame, Elephant_cards[Elephant_Card.selected].x - 9, Elephant_cards[Elephant_Card.selected].y - 9);
         }
-        //-------- Plus and Minus Button ----------------------
-
-
         //-------- Elephant Card ----------------------
-            elephant1.draw();
-            elephant2.draw();
-            if(Elephant_Card.selected != 99){
-                Game.batch.draw(elephant_frame, Elephant_cards[Elephant_Card.selected].x - 9, Elephant_cards[Elephant_Card.selected].y - 9);
-            }
-        //-------- Elephant Card ----------------------
-
-
 
     }
 
@@ -255,7 +219,6 @@ public class PlayStateController {
         blue.dispose();
         green.dispose();
         orange.dispose();
-        Elephant.dispose();
 
         holdOn.dispose();
         breakTime.dispose();
@@ -263,13 +226,6 @@ public class PlayStateController {
         turboElephant.dispose();
         freeMove.dispose();
         exchange.dispose();
-
-        Plus_Button.dispose();
-        Minus_Button.dispose();
-        Confirm_button.dispose();
-
-        elephant1.dispose();
-        elephant2.dispose();
     }
 
 

@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import managers.PlayStateController.*;
 
 import entities.Cords;
+import entities.Card;
 
 public class Player {
     private BitmapFont font;
@@ -28,11 +29,13 @@ public class Player {
 
     private Texture avatar;
 
+    private Card[] cards = new Card[4];
+
     public Player (String name, int id, SpriteBatch batch) {
         this.name = name;
         this.id = id;
         this.batch = batch;
-        System.out.println("Player created with the name " + this.name);
+        System.out.println("Player created with the name " + this.name + " and id: " + this.id);
 
         init();
     }
@@ -45,13 +48,21 @@ public class Player {
         param_titleFont.size = 20;
         font = gen.generateFont(param_titleFont);
         avatar = new Texture("img/P1_avatar.png");
+
+        //Deal cards
+        for (int i = 0; i<4; i++) {
+            cards[i] = new Card(1, "red", batch, id, i);
+        }
     }
 
     public void update(){
-
+        for (int i = 0; i<4; i++){
+            cards[i].update();
+        }
     }
 
     public void draw(){
+        // Draw name of the player corresponding to the phase
         if (playing == true) {
             if(phase == PHASE_SPECIAL){
                 font.setColor(Color.GREEN);
@@ -66,7 +77,13 @@ public class Player {
         font.draw(batch, name, Cords.all_player_cord[id][0][0] - 10, Cords.all_player_cord[id][0][1] + 80);
         font.setColor(Color.WHITE);
 
+        // Draw avatar of the player
         batch.draw(avatar, Cords.all_player_cord[id][0][0], Cords.all_player_cord[id][0][1]);
+
+        // Draw cards of the player
+        for (int i = 0; i<4; i++) {
+            cards[i].draw();
+        }
     }
 
     public void startTurn(){
