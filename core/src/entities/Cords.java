@@ -111,7 +111,7 @@ public class Cords {
     public static final float right_card_3_x = 863;
     public static final float right_card_3_y = 314;
     public static final float right_card_4_x = 863;
-    public static final float right_card_4_y = 863;
+    public static final float right_card_4_y = 214;
 
     public static float[][] right_player = {
             {right_avatar_x, right_avatar_y},

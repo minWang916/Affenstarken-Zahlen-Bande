@@ -126,6 +126,10 @@ public class PlayStateController {
 
         //-------- Player and cards-------------------
 
+        for (int i = 0; i<4; i++){
+            players[i].update();
+        }
+
         //-------- Player and cards-------------------
 
 
