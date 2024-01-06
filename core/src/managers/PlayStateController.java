@@ -217,7 +217,7 @@ public class PlayStateController {
 
         //-------- Plus and Minus Button ----------------------
         if(phase == PHASE_MONKEY){
-            if(selected_plus_or_minus == 99){
+            if(selected_plus_or_minus == 99 || Card.totalSelected != 2){
                 Plus_Button.draw_dark();
                 Minus_Button.draw_dark();
             }else if(selected_plus_or_minus == 0){
