@@ -13,20 +13,8 @@ public class PlayStateController {
     public static Elephant_Card[] Elephant_cards = {elephant1, elephant2};
 
     public static Texture cordMap = new Texture("img/cordMap.png");
-    public static Texture card = new Texture("img/card.png");
-    public static Texture avatar_1 = new Texture("img/P1_avatar.png");
-    public static Texture avatar_2 = new Texture("img/P2_avatar.png");
-    public static Texture avatar_3 = new Texture("img/P3_avatar.png");
-    public static Texture avatar_4 = new Texture("img/P4_avatar.png");
-
-    public static Texture special = new Texture("img/special_1.png");
-
-    public static Texture leaf = new Texture("img/leaf_top_right_yellow.png");
 
     public static Texture frame = new Texture("img/frame_v.png");
-
-
-
     public static Texture special_frame = new Texture("img/frame_c.png");
     public static Texture elephant_frame = new Texture("img/frame_v.png");
 
@@ -123,7 +111,7 @@ public class PlayStateController {
 
 
         //---- Monkeys and elephant-----------------
-
+        checkWeight();
         //---- Monkeys and elephant-----------------
 
 
@@ -153,7 +141,6 @@ public class PlayStateController {
 
         //---------- Leaves ------------------------
 
-        Game.batch.draw(leaf,0,0);
 
         //---------- Leaves ------------------------
 
@@ -177,7 +164,6 @@ public class PlayStateController {
 
 
         //-------- Player and cards-------------------
-        Game.batch.draw(card,Cords.bottom_card_1_x,Cords.bottom_card_1_y);
         for (int i = 0; i < numOfPlayers; i++) {
             players[i].draw();
         }
@@ -248,20 +234,31 @@ public class PlayStateController {
 
     }
 
+    public static void checkWeight(){
+        elephant.scaleWeight();
+        double x_weight = elephant.x_weight;
+        double y_weight = elephant.y_weight;
+
+        for (int i=0; i<4; i++){
+            monkeys[i].scaleWeight();
+            x_weight += monkeys[i].x_weight;
+            y_weight += monkeys[i].y_weight;
+        }
+
+//        System.out.println("The current adjusted weight is:");
+//        System.out.println("X: " + x_weight);
+//        System.out.println("Y: " + y_weight);
+    }
+
     public static void dispose(){
 
         cordMap.dispose();
-
-        avatar_1.dispose();
-        avatar_2.dispose();
-        avatar_3.dispose();
-        avatar_4.dispose();
 
         pink.dispose();
         blue.dispose();
         green.dispose();
         orange.dispose();
-        elephant.dispose();
+        Elephant.dispose();
 
         holdOn.dispose();
         breakTime.dispose();
