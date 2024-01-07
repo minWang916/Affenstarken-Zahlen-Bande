@@ -60,6 +60,7 @@ public class PlayStateController {
     public static int selectedIcon = 0;
     public static int selectedCord = 0;
     public static Texture cord;
+    public static PlayerAssistant assistant;
 
     public static void init(){
         //-------------------- Entities------------------------------------------
@@ -69,6 +70,7 @@ public class PlayStateController {
         pink = new Monkey("pink");
         monkeys = new Monkey[]{orange, green, blue, pink};
         elephant = new Elephant();
+        assistant = new PlayerAssistant();
         //-------------------- Entities------------------------------------------
 
         //------------------- Turn based-----------------------------------------
@@ -129,6 +131,7 @@ public class PlayStateController {
     }
 
     public static void draw(){
+        assistant.draw();
         //---------- Players -----------------------
         for (int i = 0; i < numOfPlayers; i++) { players[i].draw(); }
         //---------- Players -----------------------
