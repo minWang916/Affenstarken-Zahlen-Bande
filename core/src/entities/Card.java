@@ -83,7 +83,7 @@ public class Card {
         numberSprite = new Sprite(numberTexture);
 
         // Rotation setting
-        if ((player_id == 1) || (player_id == 3)) {
+        if (player_id == 1) {
             topCorner[0] = bottomCorner[0] + 100;
             topCorner[1] = bottomCorner[1] + 68;
             frame = new Texture("img/frame_h.png");
@@ -92,7 +92,17 @@ public class Card {
             numberSprite.setRotation(rotation);
             offset[0] = 17;
             offset[1] = -15;
-        } else {
+        } else if (player_id == 3) {
+            topCorner[0] = bottomCorner[0] + 100;
+            topCorner[1] = bottomCorner[1] + 68;
+            frame = new Texture("img/frame_h.png");
+            rotation = -90;
+            colorSprite.setRotation(rotation);
+            numberSprite.setRotation(rotation);
+            offset[0] = 17;
+            offset[1] = -15;
+        }
+        else {
             topCorner[0] = bottomCorner[0] + 68;
             topCorner[1] = bottomCorner[1] + 100;
             frame = new Texture("img/frame_v.png");
