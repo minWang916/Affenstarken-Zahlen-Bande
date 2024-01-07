@@ -1,7 +1,7 @@
 package managers;
 
-
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 import entities.*;
@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 
 public class PlayStateController {
-    public static ArrayList<Card> Cards = new ArrayList<>();
+    public static ArrayList<Card> allMonkeyCards = new ArrayList<>();
+    public static ArrayList<Card> selectedMonkeyCards = new ArrayList<>();
     public static Elephant_Card elephant1 = new Elephant_Card(1,3,"img/ele1.png","img/ele3.png",Cords.elephant_1_x, Cords.elephant_1_y,0);
     public static Elephant_Card elephant2 = new Elephant_Card(2,4,"img/ele2.png","img/ele4.png",Cords.elephant_2_x, Cords.elephant_2_y,1);
     public static Elephant_Card[] Elephant_cards = {elephant1, elephant2};
@@ -46,16 +47,11 @@ public class PlayStateController {
     private static final Texture turboElephant = new Texture("img/special_4.png");
     private static final Texture freeMove = new Texture("img/special_5.png");
     private static final Texture exchange = new Texture("img/special_6.png");
-
     public static int[] useable_special = {0,0,0,0,0,0};
-
-
-
     public static final int PHASE_SPECIAL = 0;
     public static final int PHASE_MONKEY = 1;
     public static final int PHASE_ELEPHANT = 2;
     public static void init(){
-
         //-------------------- Entities------------------------------------------
         blue = new Monkey("blue");
         orange = new Monkey("orange");
@@ -64,7 +60,6 @@ public class PlayStateController {
         monkeys = new Monkey[]{blue, orange, green, pink};
         elephant = new Elephant();
         //-------------------- Entities------------------------------------------
-
 
         //------------------- Turn based-----------------------------------------
         String[] playerNames = {"Toby", "Thomas", "Kevin", "Michael"};
@@ -79,26 +74,18 @@ public class PlayStateController {
 
     public static void handleInput(){
 
-
-
-        
         if(phase == PHASE_SPECIAL){
             GameInputHandler.special();
-            Confirm_button.confirm_click();
+            Confirm_button.handleInput();
         }else if(phase == PHASE_MONKEY){
             Plus_Button.handleClick();
             Minus_Button.handleClick();
-            Confirm_button.confirm_click();
+            Confirm_button.handleInput();
         }else if(phase == PHASE_ELEPHANT){
             elephant2.handleClick();
             elephant1.handleClick();
-            Confirm_button.confirm_click();
-
+            Confirm_button.handleInput();
         }
-
-
-
-
 
     }
 
@@ -224,15 +211,7 @@ public class PlayStateController {
 
 
         //-------- Confirm Button ----------------------
-        if(phase != PHASE_MONKEY){
-            Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
-        }else{
-            if(0 < Card.totalSelected && Card.totalSelected <= 2){
-                Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
-            }else{
-                Game.batch.draw(Confirm_button.btnDark, Confirm_button.x, Confirm_button.y);
-            }
-        }
+        Confirm_button.draw();
         //-------- Confirm Button ----------------------
 
 
@@ -264,6 +243,107 @@ public class PlayStateController {
 
     }
 
+    public static void confirmSpecialPhase(){
+        if(selected_special != 99){
+            useable_special[selected_special] = 1;
+        }
+        selected_special = 99;
+
+        afterConfirm();
+    }
+
+    public static void confirmMonkeyPhase(){
+        if(Card.totalSelected > 2){
+
+        }
+        selected_plus_or_minus = 99;
+
+        for(int i = 0; i < selectedMonkeyCards.size(); i++){
+            selectedMonkeyCards.get(i).empty();
+        }
+
+        afterConfirm();
+    }
+
+    public static void confirmElephantPhase(){
+        if(useable_special[3] == 1){
+            int valueLeft = 0;
+            int valueRight = 0;
+            if(Elephant_cards[0].turn % 2 == 0){
+                valueLeft = Elephant_cards[0].value1;
+            }else{
+                valueLeft = Elephant_cards[0].value2;
+            }
+
+            if(Elephant_cards[1].turn % 2 == 0){
+                valueRight = Elephant_cards[1].value1;
+            }else{
+                valueRight = Elephant_cards[1].value2;
+            }
+
+            Elephant_cards[0].turn += 1;
+            Elephant_cards[1].turn += 1;
+
+            Elephant.move(Elephant.location + valueLeft + valueRight);
+            useable_special[3] = 2;
+        } else {
+
+            if (Elephant_Card.selected != 99) {
+                if (Elephant_cards[Elephant_Card.selected].turn % 2 == 0) {
+                    Elephant.move(Elephant.location + Elephant_cards[Elephant_Card.selected].value1);
+                    Elephant_cards[Elephant_Card.selected].turn = Elephant_cards[Elephant_Card.selected].turn + 1;
+                } else {
+                    Elephant.move(Elephant.location + Elephant_cards[Elephant_Card.selected].value2);
+                    Elephant_cards[Elephant_Card.selected].turn = Elephant_cards[Elephant_Card.selected].turn + 1;
+                }
+
+                Elephant_Card.selected = 99;
+            }
+        }
+
+        for(int i = 0; i < selectedMonkeyCards.size(); i++){
+            selectedMonkeyCards.get(i).pickFromDeck();
+        }
+        selectedMonkeyCards = new ArrayList<>();
+
+
+        currentPlayer.endTurn();
+        currentPlayerIndex += 1;
+        currentPlayerIndex = currentPlayerIndex % 4;
+        currentPlayer = players[currentPlayerIndex];
+        currentPlayer.startTurn();
+        phase = -1;
+
+        afterConfirm();
+    }
+
+    public static void afterConfirm(){
+        if(useable_special[1] == 1){
+            useable_special[1] = 2;
+            selected_special = 99;
+            currentPlayer.endTurn();
+            currentPlayerIndex += 1;
+            currentPlayerIndex = currentPlayerIndex % 4;
+            currentPlayer = players[currentPlayerIndex];
+            currentPlayer.startTurn();
+            phase = 0;
+            return;
+        }else{
+            if(phase != PHASE_MONKEY){
+                phase = (phase + 1) % 3;
+            }else{
+                if(0 < Card.totalSelected && Card.totalSelected <= 2){
+                    phase = (phase + 1) % 3;
+                    Card.totalSelected = 0;
+                    for(int i = 0; i < allMonkeyCards.size(); i++){
+                        allMonkeyCards.get(i).selected = false;
+                    }
+                }
+            }
+
+        }
+    }
+
     public static void checkWeight(){
         elephant.scaleWeight();
         double x_weight = elephant.x_weight;
@@ -281,29 +361,23 @@ public class PlayStateController {
     }
 
     public static void dispose(){
-
         cordMap.dispose();
-
         pink.dispose();
         blue.dispose();
         green.dispose();
         orange.dispose();
         Elephant.dispose();
-
         holdOn.dispose();
         breakTime.dispose();
         monkeySwap.dispose();
         turboElephant.dispose();
         freeMove.dispose();
         exchange.dispose();
-
         Plus_Button.dispose();
         Minus_Button.dispose();
         Confirm_button.dispose();
-
         elephant1.dispose();
         elephant2.dispose();
     }
-
 
 }

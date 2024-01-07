@@ -13,9 +13,6 @@ import com.mygdx.game.Game;
 public class Elephant_Card {
     public int id;
 
-    public Sound select = Gdx.audio.newSound(Gdx.files.internal("sound/se/select.mp3"));
-    public Sound deselect = Gdx.audio.newSound(Gdx.files.internal("sound/se/deselect.mp3"));
-
     public static int selected = 99;
 
     public int value1;
@@ -59,10 +56,10 @@ public class Elephant_Card {
 
                     if(selected == this.id){
                         selected = 99;
-                        deselect.play(0.1f);
+                        Cords.selectSound.play(0.1f);
                     }else{
                         selected = this.id;
-                        select.play(0.1f);
+                        Cords.unselectSound.play(0.1f);
                     }
                 }
             }
@@ -73,9 +70,6 @@ public class Elephant_Card {
     public void dispose() {
         face1.dispose();
         face2.dispose();
-
-        select.dispose();
-        deselect.dispose();
     }
 }
 

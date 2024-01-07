@@ -1,5 +1,7 @@
 package entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Cords {
@@ -142,7 +144,9 @@ public class Cords {
     public static Texture card_asset_blue = new Texture("img/card_asset/blue_card.png");
     public static Texture card_asset_orange = new Texture("img/card_asset/orange_card.png");
     public static Texture card_asset_pink = new Texture("img/card_asset/pink_card.png");
-    public static Texture[] card_asset_color = new Texture[]{card_asset_orange, card_asset_green, card_asset_blue, card_asset_pink};
+    public static Texture card_asset_transparent = new Texture("img/card_asset/transparent_card.png");
+    public static Texture[] card_asset_color = new Texture[]{card_asset_orange,
+            card_asset_green, card_asset_blue, card_asset_pink, card_asset_transparent};
     public static String[] colors = {"orange", "green", "blue", "pink"};
 
     public static Texture card_asset_5 = new Texture("img/card_asset/5_card.png");
@@ -212,7 +216,9 @@ public class Cords {
 
     //----------------------------------------------Confirm & Cancel buttons-------------------------------------------
 
-
+    public static Sound btnSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/confirm.mp3"));
+    public static Sound selectSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/select.mp3"));
+    public static Sound unselectSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/deselect.mp3"));
 
     //----------------------------------------------Confirm & Cancel buttons-------------------------------------------
 

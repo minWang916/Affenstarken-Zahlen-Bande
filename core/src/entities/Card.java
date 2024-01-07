@@ -1,8 +1,7 @@
 package entities;
 
-import static managers.PlayStateController.PHASE_MONKEY;
-import static managers.PlayStateController.currentPlayerIndex;
-import static managers.PlayStateController.selected;
+import static managers.PlayStateController.*;
+
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -44,7 +43,6 @@ public class Card {
     private Texture numberTexture;
     private Sprite numberSprite;
 
-    private ShapeRenderer shapeRenderer;
     private float rotation = 0;
     private float[] offset = new float[2];
 
@@ -54,15 +52,11 @@ public class Card {
         this.batch = batch;
         this.player_id = player_id;
         this.card_id = card_id;
-        System.out.println("Card created with player id: " + this.player_id + " and card id: " + card_id);
-
-        PlayStateController.Cards.add(this);
-        init();
+        PlayStateController.allMonkeyCards.add(this);
+        setCard();
     }
 
-    public void init(){
-        shapeRenderer = new ShapeRenderer();
-
+    public void setCard(){
         bottomCorner[0] = Cords.all_player_cord[player_id][card_id+1][0];
         bottomCorner[1] = Cords.all_player_cord[player_id][card_id+1][1];
 
@@ -73,45 +67,40 @@ public class Card {
             colorTexture = Cords.card_asset_green;
         } else if (color == "blue") {
             colorTexture = Cords.card_asset_blue;
-        } else {
+        } else if (color == "pink"){
             colorTexture = Cords.card_asset_pink;
+        } else {
+            colorTexture = Cords.card_asset_transparent;
         }
         colorSprite = new Sprite(colorTexture);
 
         // Number setting
-        numberTexture = Cords.card_asset_number[number-5];
+        if (!(number < 5 || number > 15)) {
+            numberTexture = Cords.card_asset_number[number - 5];
+        } else {
+            numberTexture = Cords.card_asset_transparent;
+        }
         numberSprite = new Sprite(numberTexture);
 
         // Rotation setting
-        if (player_id == 1) {
+        if ((player_id == 1) || (player_id == 3)) {
             topCorner[0] = bottomCorner[0] + 100;
             topCorner[1] = bottomCorner[1] + 68;
             frame = new Texture("img/frame_h.png");
-            rotation = 90;
-            colorSprite.setRotation(rotation);
-            numberSprite.setRotation(rotation);
+            if (player_id == 1) rotation = 90;
+            else rotation = -90;
             offset[0] = 17;
             offset[1] = -15;
-        } else if (player_id == 3) {
-            topCorner[0] = bottomCorner[0] + 100;
-            topCorner[1] = bottomCorner[1] + 68;
-            frame = new Texture("img/frame_h.png");
-            rotation = -90;
-            colorSprite.setRotation(rotation);
-            numberSprite.setRotation(rotation);
-            offset[0] = 17;
-            offset[1] = -15;
-        }
-        else {
+        } else {
             topCorner[0] = bottomCorner[0] + 68;
             topCorner[1] = bottomCorner[1] + 100;
             frame = new Texture("img/frame_v.png");
             rotation = 0;
-            colorSprite.setRotation(rotation);
-            numberSprite.setRotation(rotation);
             offset[0] = 0;
             offset[1] = 0;
         }
+        colorSprite.setRotation(rotation);
+        numberSprite.setRotation(rotation);
 
         // Sprite setting
         colorSprite.setPosition(bottomCorner[0] + offset[0], bottomCorner[1] + offset[1]);
@@ -120,6 +109,18 @@ public class Card {
 
     public void update(){
         handleInput();
+    }
+
+    public void empty(){
+        number = 0;
+        color = "transparent";
+        setCard();
+    }
+
+    public void pickFromDeck(){
+        number = (int)(Math.random()*11 + 5);
+        color = Cords.colors[(int)(Math.random()*4)];
+        setCard();
     }
 
     public void draw(){
@@ -135,16 +136,26 @@ public class Card {
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
             float X = Gdx.input.getX();
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            if(bottomCorner[0] < X && X < topCorner[0] && bottomCorner[1] < Y && Y < topCorner[1] && PlayStateController.phase == PHASE_MONKEY && currentPlayerIndex == this.player_id){
-                if(selected == false){
-                    selected = true;
-                    totalSelected = totalSelected + 1;
-                }else{
-                    selected = false;
-                    totalSelected = totalSelected - 1;
-                }
+            if(bottomCorner[0] < X && X < topCorner[0] && bottomCorner[1] < Y && Y < topCorner[1]
+                    && phase == PHASE_MONKEY && currentPlayerIndex == this.player_id){
+                toggleSelect();
             }
         }
     }
+
+    public void toggleSelect(){
+        if(selected == false){
+            Cords.selectSound.play(0.1f);
+            selected = true;
+            selectedMonkeyCards.add(this);
+            totalSelected = totalSelected + 1;
+        }else{
+            Cords.unselectSound.play(0.1f);
+            selected = false;
+            totalSelected = totalSelected - 1;
+            selectedMonkeyCards.remove(this);
+        }
+    }
+
 }
 
