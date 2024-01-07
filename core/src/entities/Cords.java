@@ -5,6 +5,26 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Cords {
+    //-----------------------------------------------Leaves------------------------------------------------------------
+    public static Texture bottom_left_green = new Texture("img/leaves/leaf_bottom_left_green.png");
+    public static Texture bottom_left_yellow = new Texture("img/leaves/leaf_bottom_left_yellow.png");
+    public static Texture bottom_left_red = new Texture("img/leaves/leaf_bottom_left_red.png");
+    public static Texture bottom_right_green = new Texture("img/leaves/leaf_bottom_right_green.png");
+    public static Texture bottom_right_yellow = new Texture("img/leaves/leaf_bottom_right_yellow.png");
+    public static Texture bottom_right_red = new Texture("img/leaves/leaf_bottom_right_red.png");
+    public static Texture top_right_green = new Texture("img/leaves/leaf_top_right_green.png");
+    public static Texture top_right_yellow = new Texture("img/leaves/leaf_top_right_yellow.png");
+    public static Texture top_right_red = new Texture("img/leaves/leaf_top_right_red.png");
+    public static Texture top_left_green = new Texture("img/leaves/leaf_top_left_green.png");
+    public static Texture top_left_yellow = new Texture("img/leaves/leaf_top_left_yellow.png");
+    public static Texture top_left_red = new Texture("img/leaves/leaf_top_left_red.png");
+    public static Texture[] leaf_top_right = new Texture[]{top_right_green, top_right_yellow, top_right_red};
+    public static Texture[] leaf_bottom_right = new Texture[]{bottom_right_green, bottom_right_yellow, bottom_right_red};
+    public static Texture[] leaf_bottom_left = new Texture[]{bottom_left_green, bottom_left_yellow, bottom_left_red};
+    public static Texture[] leaf_top_left = new Texture[]{top_left_green, top_left_yellow, top_left_red};
+    public static Texture[][][] leaf_asset = new Texture[][][] { {leaf_bottom_left, leaf_bottom_right}, {leaf_top_left, leaf_top_right} };
+    //-----------------------------------------------Leaves------------------------------------------------------------
+
     //-----------------------------------------------Board Coordinates-------------------------------------------------
     public static final float cordMap_x = 0;
     public static final float cordMap_y = 0;

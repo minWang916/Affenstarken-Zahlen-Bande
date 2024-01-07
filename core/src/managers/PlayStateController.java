@@ -48,6 +48,9 @@ public class PlayStateController {
     public static final int PHASE_SPECIAL = 0;
     public static final int PHASE_MONKEY = 1;
     public static final int PHASE_ELEPHANT = 2;
+    public static double x_weight, y_weight = 0;
+    public static double maxWeight = 200;
+    public static double currentWeight = 0;
     public static void init(){
         //-------------------- Entities------------------------------------------
         blue = new Monkey("blue");
@@ -97,7 +100,7 @@ public class PlayStateController {
 
 
         //---- Monkeys and elephant-----------------
-        checkWeight();
+
         //---- Monkeys and elephant-----------------
 
 
@@ -121,8 +124,18 @@ public class PlayStateController {
         //---------- Players -----------------------
 
         //---------- Leaves ------------------------
-
-
+        for (int i=0; i<2; i++){
+            for (int j=0; j<2; j++) Game.batch.draw(Cords.leaf_asset[i][j][0],0,0);
+        }
+        int b = (int) ( ((x_weight/Math.abs(x_weight)) + 1)/2 );
+        int a = (int) ( ((y_weight/Math.abs(y_weight)) + 1)/2 );
+        if (currentWeight > maxWeight*0.75) {
+            Game.batch.draw(Cords.leaf_asset[a][b][2],0,0);
+            Game.batch.draw(Cords.leaf_asset[(a+1)%2][b][1],0,0);
+            Game.batch.draw(Cords.leaf_asset[a][(b+1)%2][1], 0, 0);
+        } else if (currentWeight > maxWeight*0.5) {
+            Game.batch.draw(Cords.leaf_asset[a][b][1],0,0);
+        }
         //---------- Leaves ------------------------
 
 
@@ -322,14 +335,18 @@ public class PlayStateController {
                     phase = (phase + 1) % 3;
                 }
             }
+        }
 
+        currentWeight = checkWeight();
+        if (currentWeight > maxWeight) {
+            Game.endResult = "lose";
         }
     }
 
-    public static void checkWeight(){
+    public static double checkWeight(){
         elephant.scaleWeight();
-        double x_weight = elephant.x_weight;
-        double y_weight = elephant.y_weight;
+        x_weight = elephant.x_weight;
+        y_weight = elephant.y_weight;
 
         for (int i=0; i<4; i++){
             monkeys[i].scaleWeight();
@@ -337,9 +354,7 @@ public class PlayStateController {
             y_weight += monkeys[i].y_weight;
         }
 
-//        System.out.println("The current adjusted weight is:");
-//        System.out.println("X: " + x_weight);
-//        System.out.println("Y: " + y_weight);
+        return Math.sqrt(x_weight * x_weight + y_weight * y_weight);
     }
 
     public static void dispose(){

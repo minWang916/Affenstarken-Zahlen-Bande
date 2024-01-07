@@ -20,8 +20,6 @@ import org.w3c.dom.Text;
 
 public class MenuState extends GameState{
 
-
-
     private BitmapFont titleFont;
     private BitmapFont font;
 

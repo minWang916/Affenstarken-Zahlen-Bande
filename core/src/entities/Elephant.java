@@ -38,19 +38,16 @@ public class Elephant {
     }
 
     public void scaleWeight(){
-
+        double scaledWeight;
         if (location <= 4) {
-            x_weight = weight / Math.sqrt(2);
-            y_weight = weight / Math.sqrt(2);
+            scaledWeight = weight;
         } else if (location <= 12) {
-            x_weight = (weight*1.5) / Math.sqrt(2);
-            y_weight = (weight*1.5) / Math.sqrt(2);
+            scaledWeight = weight*1.5;
         } else {
-            x_weight = (weight*2) / Math.sqrt(2);
-            y_weight = (weight*2) / Math.sqrt(2);
+            scaledWeight = weight*2;
         }
-        x_weight *= Cords.xWeightSign[location];
-        y_weight *= Cords.yWeightSign[location];
+        x_weight = scaledWeight * Cords.xWeightSign[location];
+        y_weight = scaledWeight * Cords.yWeightSign[location];
     }
 
     public static void dispose() {
