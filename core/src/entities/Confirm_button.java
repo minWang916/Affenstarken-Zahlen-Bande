@@ -13,7 +13,7 @@ import entities.*;
 import managers.PlayStateController;
 
 public class Confirm_button {
-    public static float x = 831;
+    public static float x = 827;
     public static float y = 47;
     public static Texture btn = new Texture("img/button_confirm.png");
     public static Texture btnDark = new Texture("img/button_confirm_dark.png");

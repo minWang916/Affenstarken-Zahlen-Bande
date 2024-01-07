@@ -218,11 +218,11 @@ public class Cords {
 
     //------------------------------------------------------Elephant---------------------------------------------------
 
-    public static final float elephant_1_x = 24;
-    public static final float elephant_1_y = 29;
+    public static final float elephant_1_x = 40;
+    public static final float elephant_1_y = 10;
 
-    public static final float elephant_2_x = 113;
-    public static final float elephant_2_y = 29;
+    public static final float elephant_2_x = 40;
+    public static final float elephant_2_y = 85;
 
     //------------------------------------------------------Elephant---------------------------------------------------
 
