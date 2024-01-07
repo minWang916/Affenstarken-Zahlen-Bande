@@ -29,7 +29,6 @@ public class GameInputHandler {
 
             float X = Gdx.input.getX();
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            System.out.println("Mouse: "+X+" "+ Y);
 
             if(useable_special[0]  == 0){
 

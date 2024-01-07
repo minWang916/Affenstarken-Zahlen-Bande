@@ -21,8 +21,6 @@ public class Card {
 
     private int number;
 
-    public static int totalSelected = 0;
-
     private String color;
 
     private SpriteBatch batch;
@@ -39,10 +37,8 @@ public class Card {
 
     private Texture colorTexture;
     private Sprite colorSprite;
-
     private Texture numberTexture;
     private Sprite numberSprite;
-
     private float rotation = 0;
     private float[] offset = new float[2];
 
@@ -114,6 +110,7 @@ public class Card {
     public void empty(){
         number = 0;
         color = "transparent";
+        selected = false;
         setCard();
     }
 
@@ -148,13 +145,23 @@ public class Card {
             Cords.selectSound.play(0.1f);
             selected = true;
             selectedMonkeyCards.add(this);
-            totalSelected = totalSelected + 1;
         }else{
             Cords.unselectSound.play(0.1f);
             selected = false;
-            totalSelected = totalSelected - 1;
             selectedMonkeyCards.remove(this);
         }
+    }
+
+    public int getColorIndex(){
+        for (int i=0; i<4; i++){
+            if (color == Cords.colors[i])
+                return i;
+        }
+        return 4;
+    }
+
+    public int getNumber(){
+        return number;
     }
 
 }

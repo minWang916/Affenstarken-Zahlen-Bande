@@ -20,11 +20,8 @@ public class PlayStateController {
     public static Texture frame = new Texture("img/frame_v.png");
     public static Texture special_frame = new Texture("img/frame_c.png");
     public static Texture elephant_frame = new Texture("img/frame_v.png");
-
     public static int phase = 0;
-
     public static int selected_special = 99;
-
     public static int numOfPlayers = 4;
     public static Player currentPlayer;
     public static int currentPlayerIndex;
@@ -57,7 +54,7 @@ public class PlayStateController {
         orange = new Monkey("orange");
         green = new Monkey("green");
         pink = new Monkey("pink");
-        monkeys = new Monkey[]{blue, orange, green, pink};
+        monkeys = new Monkey[]{orange, green, blue, pink};
         elephant = new Elephant();
         //-------------------- Entities------------------------------------------
 
@@ -120,13 +117,8 @@ public class PlayStateController {
 
     public static void draw(){
         //---------- Players -----------------------
-
-        for (int i = 0; i < numOfPlayers; i++) {
-            players[i].draw();
-        }
-
+        for (int i = 0; i < numOfPlayers; i++) { players[i].draw(); }
         //---------- Players -----------------------
-
 
         //---------- Leaves ------------------------
 
@@ -135,27 +127,18 @@ public class PlayStateController {
 
 
         //---------- Cord map ----------------------
-
         Game.batch.draw(cordMap,Cords.cordMap_x,Cords.cordMap_y);
-
         //---------- Cord map ----------------------
 
 
         //---- Monkeys and elephant-----------------
-
-        for (int i=0; i<4; i++) {
-            monkeys[i].draw();
-        }
-
+        for (int i=0; i<4; i++) { monkeys[i].draw(); }
         elephant.draw();
-
         //---- Monkeys and elephant-----------------
 
 
         //-------- Player and cards-------------------
-        for (int i = 0; i < numOfPlayers; i++) {
-            players[i].draw();
-        }
+        for (int i = 0; i < numOfPlayers; i++) { players[i].draw(); }
         //-------- Player and cards-------------------
 
 
@@ -217,7 +200,7 @@ public class PlayStateController {
 
         //-------- Plus and Minus Button ----------------------
         if(phase == PHASE_MONKEY){
-            if(selected_plus_or_minus == 99 || Card.totalSelected != 2){
+            if(selected_plus_or_minus == 99 || selectedMonkeyCards.size() != 2){
                 Plus_Button.draw_dark();
                 Minus_Button.draw_dark();
             }else if(selected_plus_or_minus == 0){
@@ -239,8 +222,6 @@ public class PlayStateController {
             }
         //-------- Elephant Card ----------------------
 
-
-
     }
 
     public static void confirmSpecialPhase(){
@@ -253,11 +234,15 @@ public class PlayStateController {
     }
 
     public static void confirmMonkeyPhase(){
-        if(Card.totalSelected > 2){
-
-        }
         selected_plus_or_minus = 99;
 
+        if (selectedMonkeyCards.size() == 1) {
+            Card thisMonkeyCard = selectedMonkeyCards.get(0);
+            int colorIndex = thisMonkeyCard.getColorIndex();
+            monkeys[colorIndex].move(thisMonkeyCard.getNumber());
+        }
+
+        // Make the selected monkey cards disappear
         for(int i = 0; i < selectedMonkeyCards.size(); i++){
             selectedMonkeyCards.get(i).empty();
         }
@@ -301,6 +286,7 @@ public class PlayStateController {
             }
         }
 
+        // Pick new monkey cards from the deck
         for(int i = 0; i < selectedMonkeyCards.size(); i++){
             selectedMonkeyCards.get(i).pickFromDeck();
         }
@@ -332,12 +318,8 @@ public class PlayStateController {
             if(phase != PHASE_MONKEY){
                 phase = (phase + 1) % 3;
             }else{
-                if(0 < Card.totalSelected && Card.totalSelected <= 2){
+                if(0 < selectedMonkeyCards.size() && selectedMonkeyCards.size() <= 2){
                     phase = (phase + 1) % 3;
-                    Card.totalSelected = 0;
-                    for(int i = 0; i < allMonkeyCards.size(); i++){
-                        allMonkeyCards.get(i).selected = false;
-                    }
                 }
             }
 

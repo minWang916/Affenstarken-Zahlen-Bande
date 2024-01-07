@@ -47,7 +47,7 @@ public class Confirm_button {
         if(phase != PHASE_MONKEY){
             Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
         }else{
-            if(0 < Card.totalSelected && Card.totalSelected <= 2){
+            if(0 < selectedMonkeyCards.size() && selectedMonkeyCards.size() <= 2){
                 Game.batch.draw(Confirm_button.btn, Confirm_button.x, Confirm_button.y);
             }else{
                 Game.batch.draw(Confirm_button.btnDark, Confirm_button.x, Confirm_button.y);
