@@ -51,7 +51,7 @@ public class Player {
 
         //Deal cards
         for (int i = 0; i<4; i++) {
-            cards[i] = new Card(1, "red", batch, id, i);
+            cards[i] = new Card((int)(Math.random()*11 + 5), Cords.colors[(int)(Math.random()*4)], batch, id, i);
         }
     }
 

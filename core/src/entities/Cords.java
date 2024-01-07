@@ -1,5 +1,7 @@
 package entities;
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class Cords {
     //-----------------------------------------------Board Coordinates-------------------------------------------------
     public static final float cordMap_x = 0;
@@ -133,6 +135,32 @@ public class Cords {
     };
 
     //-------------------------------------------------------All cards-------------------------------------------------
+
+    //-------------------------------------------------------Card asset------------------------------------------------
+
+    public static Texture card_asset_green = new Texture("img/card_asset/green_card.png");
+    public static Texture card_asset_blue = new Texture("img/card_asset/blue_card.png");
+    public static Texture card_asset_orange = new Texture("img/card_asset/orange_card.png");
+    public static Texture card_asset_pink = new Texture("img/card_asset/pink_card.png");
+    public static Texture[] card_asset_color = new Texture[]{card_asset_orange, card_asset_green, card_asset_blue, card_asset_pink};
+    public static String[] colors = {"orange", "green", "blue", "pink"};
+
+    public static Texture card_asset_5 = new Texture("img/card_asset/5_card.png");
+    public static Texture card_asset_6 = new Texture("img/card_asset/6_card.png");
+    public static Texture card_asset_7 = new Texture("img/card_asset/7_card.png");
+    public static Texture card_asset_8 = new Texture("img/card_asset/8_card.png");
+    public static Texture card_asset_9 = new Texture("img/card_asset/9_card.png");
+    public static Texture card_asset_10 = new Texture("img/card_asset/10_card.png");
+    public static Texture card_asset_11 = new Texture("img/card_asset/11_card.png");
+    public static Texture card_asset_12 = new Texture("img/card_asset/12_card.png");
+    public static Texture card_asset_13 = new Texture("img/card_asset/13_card.png");
+    public static Texture card_asset_14 = new Texture("img/card_asset/14_card.png");
+    public static Texture card_asset_15 = new Texture("img/card_asset/15_card.png");
+    public static Texture[] card_asset_number = new Texture[]{card_asset_5, card_asset_6, card_asset_7,
+            card_asset_8, card_asset_9, card_asset_10, card_asset_11, card_asset_12, card_asset_13,
+            card_asset_14, card_asset_15};
+
+    //-------------------------------------------------------Card asset------------------------------------------------
 
     //------------------------------------------------------Special----------------------------------------------------
     public static final float special_1_x = 193;
