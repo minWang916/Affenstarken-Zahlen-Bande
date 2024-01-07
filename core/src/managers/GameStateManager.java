@@ -12,6 +12,8 @@ public class GameStateManager {
     public static final int MENU = 0;
     public static final int PLAY = 1;
 
+    public static final int END = 2;
+
     public GameStateManager(){
 
 
@@ -30,7 +32,9 @@ public class GameStateManager {
         if (state == 1) {
             this.gameState = new PlayState(this);
         }
-
+        if(state == 2){
+            this.gameState = new EndState(this);
+        }
 
 
     }

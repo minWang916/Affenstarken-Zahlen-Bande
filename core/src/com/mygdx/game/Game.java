@@ -18,6 +18,8 @@ import managers.GameStateManager;
 public class Game implements ApplicationListener {
 	public static SpriteBatch batch;
 
+	public static String endResult = "";
+
 	public static Music bgm;
 	public static int WIDTH;
 	public static int HEIGHT;

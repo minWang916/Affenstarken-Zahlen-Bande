@@ -19,16 +19,18 @@ public class Elephant {
     }
 
     public static void move(int new_location){
-        location = new_location;
+        if(new_location > 20){
+            location = 20;
+        }else {
+            location = new_location;
+        }
+        checkWin();
     }
 
-    public static boolean checkWin(){
+    public static void checkWin(){
         if(location == 20){
-            return true;
-        }else{
-            return false;
+            Game.endResult = "win";
         }
-
     }
 
     public static void draw() {
