@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 import entities.*;
 import java.util.ArrayList;
+import com.badlogic.gdx.Input;
 
 
 public class PlayStateController {
@@ -51,6 +52,15 @@ public class PlayStateController {
     public static double x_weight, y_weight = 0;
     public static double maxWeight = 200;
     public static double currentWeight = 0;
+
+    public static Texture iconBlue = new Texture("img/monkey_blue.png");
+    public static Texture iconOrange = new Texture("img/monkey_orange.png");
+    public static Texture iconGreen = new Texture("img/monkey_green.png");
+    public static Texture iconPink = new Texture("img/monkey_pink.png");
+    public static int selectedIcon = 0;
+    public static int selectedCord = 0;
+    public static Texture cord;
+
     public static void init(){
         //-------------------- Entities------------------------------------------
         blue = new Monkey("blue");
@@ -146,7 +156,7 @@ public class PlayStateController {
 
         //---- Monkeys and elephant-----------------
         for (int i=0; i<4; i++) { monkeys[i].draw(); }
-        elephant.draw();
+        Elephant.draw();
         //---- Monkeys and elephant-----------------
 
 
@@ -235,14 +245,63 @@ public class PlayStateController {
             }
         //-------- Elephant Card ----------------------
 
+
+        //-------- Choose monkey ----------------------
+        if(selected_special == 4){
+            if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
+                System.out.println(X + "and " + Y);
+                for(int i = 0; i <= 20;i++){
+                    if(Cords.cord[i][0] < X && X < Cords.cord[i][0] + 32 && Cords.cord[i][1] < Y && Y < Cords.cord[i][1] + 32){
+                        selectedCord = i;
+                    }
+                }
+            }
+
+            String path = "img/"+selectedCord+".png";
+            cord = new Texture(path);
+            Game.batch.draw(cord,905,110);
+
+
+            if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+                selectedIcon = 0;
+            }
+            if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
+                selectedIcon = 1;
+            }
+            if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+                selectedIcon = 2;
+            }
+            if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+                selectedIcon = 3;
+            }
+
+            if(selectedIcon == 2){
+                Game.batch.draw(iconBlue,833,100);
+            }
+            if(selectedIcon == 3){
+                Game.batch.draw(iconPink,833,100);
+            }
+            if(selectedIcon == 0){
+                Game.batch.draw(iconOrange,833,100);
+            }
+            if(selectedIcon == 1){
+                Game.batch.draw(iconGreen,833,100);
+            }
+        }
+        //-------- Choose monkey ----------------------
+
     }
 
     public static void confirmSpecialPhase(){
         if(selected_special != 99){
-            useable_special[selected_special] = 1;
-        }
-        selected_special = 99;
 
+            useable_special[selected_special] += 1;
+        }
+        if(selected_special == 4){
+            monkeys[selectedIcon].move(selectedCord);
+        }
+
+        selected_special = 99;
         afterConfirm();
     }
 
@@ -375,6 +434,10 @@ public class PlayStateController {
         Confirm_button.dispose();
         elephant1.dispose();
         elephant2.dispose();
+        iconBlue.dispose();
+        iconGreen.dispose();
+        iconOrange.dispose();
+        iconPink.dispose();
     }
 
 }
