@@ -60,6 +60,7 @@ public class PlayStateController {
     public static int selectedIcon = 0;
     public static int selectedCord = 0;
     public static Texture cord;
+    public static int countTurn = 0;
     public static PlayerAssistant assistant;
 
     public static void init(){
@@ -131,7 +132,7 @@ public class PlayStateController {
     }
 
     public static void draw(){
-        assistant.draw();
+        PlayerAssistant.draw();
         //---------- Players -----------------------
         for (int i = 0; i < numOfPlayers; i++) { players[i].draw(); }
         //---------- Players -----------------------
@@ -362,6 +363,8 @@ public class PlayStateController {
             monkeys[selectedIcon].move(selectedCord);
         }
 
+
+
         selected_special = 99;
         afterConfirm();
     }
@@ -457,7 +460,17 @@ public class PlayStateController {
             }
         }
 
-        currentWeight = checkWeight();
+        if(useable_special[0] == 1){
+            countTurn += 1;
+        }
+        if(0 < countTurn && countTurn < 6){
+            currentWeight = 0;
+            System.out.println(countTurn);
+        }else{
+            currentWeight = checkWeight();
+        }
+
+
         if (currentWeight > maxWeight) {
             Game.endResult = "lose";
         }

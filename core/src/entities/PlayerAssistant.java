@@ -10,6 +10,7 @@ import managers.PlayStateController;
 
 public class PlayerAssistant {
     private static BitmapFont font;
+    private static BitmapFont fontWeight;
     public PlayerAssistant(){
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
                 Gdx.files.internal("font/VCR_OSD_MONO_1.001.ttf")
@@ -19,12 +20,20 @@ public class PlayerAssistant {
         param_titleFont.size = 17;
         font = gen.generateFont(param_titleFont);
         font.setColor(Color.BLACK);
+
+        fontWeight = gen.generateFont(param_titleFont);
+        fontWeight.setColor(Color.BLACK);
     }
 
     public static void draw(){
         String title = "Phase " + Cords.phases[PlayStateController.phase];
         font.draw(Game.batch,title,(Game.WIDTH - 150),(Game.HEIGHT - 30));
         String weightMessage = "Weight: " + Math.ceil(PlayStateController.currentWeight) + "/" + Math.ceil(PlayStateController.maxWeight);
-        font.draw(Game.batch, weightMessage, 20, (Game.HEIGHT-30));
+        if(0 < PlayStateController.countTurn && PlayStateController.countTurn < 6){
+            fontWeight.setColor(Color.RED);
+        }else{
+            fontWeight.setColor(Color.BLACK);
+        }
+        fontWeight.draw(Game.batch, weightMessage, 20, (Game.HEIGHT-30));
     }
 }
