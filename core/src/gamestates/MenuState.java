@@ -1,10 +1,14 @@
 package gamestates;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -40,23 +44,50 @@ public class MenuState extends GameState{
     private final String title = "Affenstarke Zahlen-Bande";
 
     private TextField[] nameFields;
-    private Window namesWindow;
+    private Window namesWindow, helpWindow;
+
+
 
     private ImageButton updateButton,cancelButton;
 
-    private String textsInput;
     private int currentItem;
     private String[] menuItems;
+
+    private Texture backgroundTexture;
+    private Sprite backgroundSprite;
+
+    private SpriteBatch spriteBatch;
+
+    private String[] userNames;
+    private String[] defaultNames;
+    Texture bgTexture;
+    private TextureRegion bg;
+
     public MenuState (GameStateManager gsm){
         super(gsm);
         init();
+
     }
 
 
     public void init(){
 
+        //loadTextures();
+
+        //Background
+        bgTexture = new Texture("img/menuBackground.png");
+        bg = new TextureRegion(bgTexture,0,0,1920,1200);
+
         float buttonHeight = 100;
         float buttonWidth = 200;
+        int playerNum =4;
+        userNames = new String[playerNum];
+        defaultNames = new String[playerNum];
+        for (int i=0;i<playerNum;i++){
+            defaultNames[i]= "player "+ String.valueOf(i+1);
+            userNames[i] = defaultNames[i];
+        }
+
 
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
                 Gdx.files.internal("font/VCR_OSD_MONO_1.001.ttf")
@@ -88,9 +119,6 @@ public class MenuState extends GameState{
 
 
         textButtonStyle = new TextButton.TextButtonStyle();
-//        textButtonStyle.up = skinButton.getDrawable("up-button");
-//        textButtonStyle.over = skinButton.getDrawable("buttons/buttonpressed.png");
-//        textButtonStyle.down = skinButton.getDrawable("buttons/buttonpressed.png");
         textButtonStyle.pressedOffsetX = 1;
         textButtonStyle.pressedOffsetY = -1;
         textButtonStyle.font = font;
@@ -115,21 +143,23 @@ public class MenuState extends GameState{
         quitButton.setWidth(buttonWidth);
         quitButton.setPosition(400,300);
 
-        namesWindow = new Window("Input your name",skinButton);
+        namesWindow = new Window("",skinButton);
+
         Drawable confirmImg = new TextureRegionDrawable(new TextureRegion(new Texture("img/button_confirm.png")));
         Drawable closeImg = new TextureRegionDrawable(new TextureRegion(new Texture("img/button_cancle.png")));
         updateButton = new ImageButton(confirmImg);
         cancelButton = new ImageButton(closeImg);
 
-
+        Drawable woodenBoard = new TextureRegionDrawable(new TextureRegion(new Texture("img/woodenBoard.png")));
+        namesWindow.setBackground(woodenBoard);
         nameFields = new TextField[4];
         VerticalGroup vg = new VerticalGroup();
         HorizontalGroup hg = new HorizontalGroup();
         for (int i=0;i<nameFields.length;i++){
-            nameFields[i]= new TextField("name",skinButton);
+            nameFields[i]= new TextField(userNames[i],skinButton);
 
             vg.addActor(nameFields[i]);
-            vg.space(10);
+            vg.space(15);
 //            namesWindow.add(nameFields[i]).pad(10).fillY().align(Align.top);
         }
         hg.addActor(cancelButton);
@@ -141,18 +171,23 @@ public class MenuState extends GameState{
 
         namesWindow.setResizable(true);
 
-        namesWindow.setBounds(200,300,300,350);
+        namesWindow.setBounds(350,300,300,350);
         namesWindow.align(Align.top);
         namesWindow.center();
 
+
+        helpWindow = new Window("",skinButton);
+        helpWindow.setBounds(350-150,300,600,350);
+        helpWindow.setBackground(woodenBoard);
 
         stage.addActor(startButton);
         stage.addActor(helpButton);
         stage.addActor(quitButton);
 
-//        stage.addActor(nameFields[1]);
         stage.addActor(namesWindow);
+        stage.addActor(helpWindow);
         namesWindow.setVisible(false);
+        helpWindow.setVisible(false);
 
 
     };
@@ -169,16 +204,20 @@ public class MenuState extends GameState{
     public void draw(){
         //System.out.println("MENU STATE DRAWING");
         Game.batch.setProjectionMatrix(Game.cam.combined);
-
+        Gdx.gl.glClearColor(0,0,0,1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Game.batch.begin();
 
+        Game.batch.draw(bg,-1000,-400,1920,1200);
         float width = layout.width;
         float height = layout.height;
         titleFont.draw(Game.batch,title,(Game.WIDTH - width)/2,(Game.HEIGHT - height*2));
 
         if(stage != null){
-            stage.act(Gdx.graphics.getDeltaTime());
+
+           stage.act(Gdx.graphics.getDeltaTime());
            stage.draw();
+
         }
 
         Game.batch.end();
@@ -187,29 +226,70 @@ public class MenuState extends GameState{
     public void handleInput(){
 
         if(startButton.isPressed()){
-
-            gsm.setState(gsm.PLAY);
+            namesWindow.setVisible(true);
+            nameFields[1].setDisabled(false);
+//            gsm.setState(gsm.PLAY);
 
         }
         if(helpButton.isPressed()){
-            namesWindow.setVisible(true);
-            nameFields[1].setDisabled(false);
+            helpWindow.setVisible(true);
 
 
 
+        }
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+            float X = Gdx.input.getX();
+            float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
+            if (X<helpWindow.getX() || X> helpWindow.getX()+helpWindow.getWidth()
+                    || Y<helpWindow.getY() || Y>helpWindow.getY()+helpWindow.getHeight()){
+                System.out.println("Yo");
+                helpWindow.setVisible(false);
+            }else{
+                if (X>helpButton.getX() && X< helpButton.getX()+helpButton.getWidth()
+                        && Y>helpButton.getY() && Y<helpButton.getY()+helpButton.getHeight()) {
+                    helpWindow.setVisible(true);
+                }
+            }
         }
         if(quitButton.isPressed()){
 
             System.out.println("Quit pressed");
+            Gdx.app.exit();
 
         }
         if (updateButton.isPressed()){
             namesWindow.setVisible(false);
-            textsInput=nameFields[1].getText();
+            for(int i =9;i<nameFields.length;i++) {
+                userNames[i] = nameFields[i].getText();
+            }
             nameFields[1].setDisabled(true);
+            gsm.setState(gsm.PLAY);
 
         }
 
+        if (cancelButton.isPressed()){
+            namesWindow.setVisible(false);
+            for(int i =0;i<nameFields.length;i++) {
+                nameFields[i].setText(defaultNames[i]);
+            }
+
+        }
+
+
+
+
+
+    }
+
+    private void loadTextures() {
+        backgroundTexture = new Texture("img/button_confirm.png");
+        backgroundSprite =new Sprite(backgroundTexture);
+
+
+    }
+
+    public void renderBackground() {
+        backgroundSprite.draw(spriteBatch);
     }
 
     public void dispose(){
