@@ -1,6 +1,7 @@
 package gamestates;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -15,19 +16,21 @@ import managers.GameStateManager;
 import managers.PlayStateController;
 
 public class EndState extends GameState{
-    private Sound soundWin = Gdx.audio.newSound(Gdx.files.internal("sound/se/win.mp3"));
-    private Sound soundLose = Gdx.audio.newSound(Gdx.files.internal("sound/se/fail.mp3"));
-    private Texture btnExit = new Texture("img/btnExit.png");
-    private Texture btnAgain = new Texture("img/btnAgain.png");
-    private Texture btnExitbright = new Texture("img/btnExitbright.png");
-    private Texture btnAgainbright = new Texture("img/btnAgainbright.png");
-    private Texture sceneWin = new Texture("img/scene_win.png");
-    private Texture sceneLose = new Texture("img/scene_lose.png");
-    private Texture phraseWin = new Texture("img/youwin.png");
-    private Texture phraseLose = new Texture("img/youlose.png");
+    private final Sound soundWin = Gdx.audio.newSound(Gdx.files.internal("sound/se/win.mp3"));
+    private final Sound soundLose = Gdx.audio.newSound(Gdx.files.internal("sound/se/fail.mp3"));
+    private final Texture btnExit = new Texture("img/btnExit.png");
+    private final Texture btnAgain = new Texture("img/btnAgain.png");
+    private final Texture btnExitbright = new Texture("img/btnExitbright.png");
+    private final Texture btnAgainbright = new Texture("img/btnAgainbright.png");
+    private final Texture sceneWin = new Texture("img/scene_win.png");
+    private final Texture sceneLose = new Texture("img/scene_lose.png");
+    private final Texture phraseWin = new Texture("img/youwin.png");
+    private final Texture phraseLose = new Texture("img/youlose.png");
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private boolean ready = true;
+    private float X = 0;
+    private float Y = 0;
     private OrthogonalTiledMapRenderer renderer;
     public EndState (GameStateManager gsm){
         super(gsm);
@@ -71,8 +74,8 @@ public class EndState extends GameState{
             }
         }
 
-        float X = Gdx.input.getX();
-        float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
+        X = Gdx.input.getX();
+        Y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
         if(160 < X && X < 160 + 280 && 80 < Y && Y < 80 + 120){
             Game.batch.draw(btnAgainbright, 160,80);
@@ -87,11 +90,22 @@ public class EndState extends GameState{
         }
 
         Game.batch.end();
+
+
+        handleInput();
     }
 
     @Override
     public void handleInput() {
-
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            if(560 < X && X < 560 + 280 && 80 < Y && Y < 80 + 120){
+                System.exit(0);
+            }
+            if(160 < X && X < 160 + 280 && 80 < Y && Y < 80 + 120){
+                Game.endResult = "";
+                this.gsm.setState(gsm.PLAY);
+            }
+        }
     }
 
     @Override

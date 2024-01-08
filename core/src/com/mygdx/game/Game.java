@@ -20,6 +20,8 @@ public class Game implements ApplicationListener {
 
 	public static String endResult = "";
 
+	public static String language = "en";
+
 	public static Music bgm;
 	public static int WIDTH;
 	public static int HEIGHT;
@@ -29,6 +31,7 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void create () {
+
 
 		batch = new SpriteBatch();
 		WIDTH = Gdx.graphics.getWidth();

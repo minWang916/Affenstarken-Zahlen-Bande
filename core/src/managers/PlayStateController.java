@@ -23,14 +23,18 @@ public class PlayStateController {
     public static int selected_special = 99;
     public static int numOfPlayers = 4;
     public static Player currentPlayer;
-    public static int currentPlayerIndex;
+    public static int currentPlayerIndex = 0;
     public static Player[] players = new Player[4];
 
     public static boolean selected = false;
     public static int selectedSign = 1;
-    public static Monkey[] monkeys = new Monkey[4];
+    public static Monkey blue = new Monkey("blue");
+    public static Monkey orange = new Monkey("orange");
+    public static Monkey pink = new Monkey("pink");
+    public static Monkey green = new Monkey("green");
+    public static Monkey[] monkeys = new Monkey[]{orange, green, blue, pink};
 
-    public static Elephant elephant;
+    public static Elephant elephant = new Elephant();
 
     private static final Texture holdOn = new Texture("img/special_1.png");
     private static final Texture breakTime = new Texture("img/special_2.png");
@@ -57,14 +61,11 @@ public class PlayStateController {
     public static PlayerAssistant assistant;
     public static SignButton[] signButtons;
 
+
+
     public static void init(){
         //-------------------- Entities------------------------------------------
-        Monkey blue = new Monkey("blue");
-        Monkey orange = new Monkey("orange");
-        Monkey green = new Monkey("green");
-        Monkey pink = new Monkey("pink");
-        monkeys = new Monkey[]{orange, green, blue, pink};
-        elephant = new Elephant();
+
         assistant = new PlayerAssistant();
         SignButton minusBtn = new SignButton(-1);
         SignButton plusBtn = new SignButton(1);
@@ -76,8 +77,8 @@ public class PlayStateController {
         for(int i = 0; i< 4; i++){
             players[i] = new Player(playerNames[i], i, Game.batch);
         }
-        currentPlayerIndex = 0;
-        currentPlayer = players[0];
+
+        currentPlayer = players[currentPlayerIndex];
         currentPlayer.startTurn();
         //------------------- Turn based-----------------------------------------
     }
@@ -168,6 +169,11 @@ public class PlayStateController {
         if(useable_special[0] == 0){
             if(202 < X && X < 263 && 529 < Y && Y < 583){
                 Game.batch.draw(GameSpecialHandler.hint0,GameSpecialHandler.x,GameSpecialHandler.y);
+                if(Game.language == "en") {
+                    Game.batch.draw(GameSpecialHandler.hint0, GameSpecialHandler.x, GameSpecialHandler.y);
+                }else{
+                    Game.batch.draw(GameSpecialHandler.hint0de, GameSpecialHandler.x, GameSpecialHandler.y);
+                }
             }
             Game.batch.draw(holdOn, Cords.special[0][0], Cords.special[0][1]);
         }
@@ -175,6 +181,11 @@ public class PlayStateController {
         if(useable_special[1] == 0){
             if(202 < X && X < 263 && 367 < Y && Y < 426){
                 Game.batch.draw(GameSpecialHandler.hint1,GameSpecialHandler.x,GameSpecialHandler.y);
+                if(Game.language == "en") {
+                    Game.batch.draw(GameSpecialHandler.hint1, GameSpecialHandler.x, GameSpecialHandler.y);
+                }else{
+                    Game.batch.draw(GameSpecialHandler.hint1de, GameSpecialHandler.x, GameSpecialHandler.y);
+                }
             }
             Game.batch.draw(breakTime, Cords.special[1][0], Cords.special[1][1]);
         }
@@ -182,6 +193,11 @@ public class PlayStateController {
         if(useable_special[5] == 0){
             if(739 < X && X < 797 && 209 < Y && Y < 267){
                 Game.batch.draw(GameSpecialHandler.hint5,GameSpecialHandler.x,GameSpecialHandler.y);
+                if(Game.language == "en") {
+                    Game.batch.draw(GameSpecialHandler.hint5, GameSpecialHandler.x, GameSpecialHandler.y);
+                }else{
+                    Game.batch.draw(GameSpecialHandler.hint5de, GameSpecialHandler.x, GameSpecialHandler.y);
+                }
             }
             Game.batch.draw(exchange, Cords.special[5][0], Cords.special[5][1]);
         }
@@ -189,6 +205,11 @@ public class PlayStateController {
         if(useable_special[3] == 0){
             if(739 < X && X < 797 && 529 < Y && Y < 583){
                 Game.batch.draw(GameSpecialHandler.hint3,GameSpecialHandler.x,GameSpecialHandler.y);
+                if(Game.language == "en") {
+                    Game.batch.draw(GameSpecialHandler.hint3, GameSpecialHandler.x, GameSpecialHandler.y);
+                }else{
+                    Game.batch.draw(GameSpecialHandler.hint3de, GameSpecialHandler.x, GameSpecialHandler.y);
+                }
             }
             Game.batch.draw(turboElephant, Cords.special[3][0], Cords.special[3][1]);
         }
@@ -196,6 +217,11 @@ public class PlayStateController {
         if(useable_special[2] == 0){
             if(202 < X && X < 263 && 209 < Y && Y < 267){
                 Game.batch.draw(GameSpecialHandler.hint2,GameSpecialHandler.x,GameSpecialHandler.y);
+                if(Game.language == "en") {
+                    Game.batch.draw(GameSpecialHandler.hint2, GameSpecialHandler.x, GameSpecialHandler.y);
+                }else{
+                    Game.batch.draw(GameSpecialHandler.hint2de, GameSpecialHandler.x, GameSpecialHandler.y);
+                }
             }
             Game.batch.draw(monkeySwap, Cords.special[2][0], Cords.special[2][1]);
         }
@@ -203,6 +229,11 @@ public class PlayStateController {
         if(useable_special[4] == 0){
             if(739 < X && X < 797 && 367 < Y && Y < 426){
                 Game.batch.draw(GameSpecialHandler.hint4,GameSpecialHandler.x,GameSpecialHandler.y);
+                if(Game.language == "en") {
+                    Game.batch.draw(GameSpecialHandler.hint4, GameSpecialHandler.x, GameSpecialHandler.y);
+                }else{
+                    Game.batch.draw(GameSpecialHandler.hint4de, GameSpecialHandler.x, GameSpecialHandler.y);
+                }
             }
             Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
         }
@@ -421,22 +452,7 @@ public class PlayStateController {
     }
 
     public static void dispose(){
-        cordMap.dispose();
-        Elephant.dispose();
-        holdOn.dispose();
-        breakTime.dispose();
-        monkeySwap.dispose();
-        turboElephant.dispose();
-        freeMove.dispose();
-        exchange.dispose();
-        SignButton.dispose();
-        Confirm_button.dispose();
-        elephant1.dispose();
-        elephant2.dispose();
-        iconBlue.dispose();
-        iconGreen.dispose();
-        iconOrange.dispose();
-        iconPink.dispose();
+
     }
 
 }
