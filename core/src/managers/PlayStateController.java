@@ -87,7 +87,7 @@ public class PlayStateController {
     public static void handleInput(){
 
         if(phase == PHASE_SPECIAL){
-            GameInputHandler.special();
+            GameSpecialHandler.special();
             Confirm_button.handleInput();
         }else if(phase == PHASE_MONKEY){
             Plus_Button.handleClick();
@@ -173,42 +173,42 @@ public class PlayStateController {
         float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
         if(useable_special[0] == 0){
             if(202 < X && X < 263 && 529 < Y && Y < 583){
-                Game.batch.draw(GameInputHandler.hint0,GameInputHandler.x,GameInputHandler.y);
+                Game.batch.draw(GameSpecialHandler.hint0,GameSpecialHandler.x,GameSpecialHandler.y);
             }
             Game.batch.draw(holdOn, Cords.special[0][0], Cords.special[0][1]);
         }
 
         if(useable_special[1] == 0){
             if(202 < X && X < 263 && 367 < Y && Y < 426){
-                Game.batch.draw(GameInputHandler.hint1,GameInputHandler.x,GameInputHandler.y);
+                Game.batch.draw(GameSpecialHandler.hint1,GameSpecialHandler.x,GameSpecialHandler.y);
             }
             Game.batch.draw(breakTime, Cords.special[1][0], Cords.special[1][1]);
         }
 
         if(useable_special[5] == 0){
             if(739 < X && X < 797 && 209 < Y && Y < 267){
-                Game.batch.draw(GameInputHandler.hint5,GameInputHandler.x,GameInputHandler.y);
+                Game.batch.draw(GameSpecialHandler.hint5,GameSpecialHandler.x,GameSpecialHandler.y);
             }
             Game.batch.draw(exchange, Cords.special[5][0], Cords.special[5][1]);
         }
 
         if(useable_special[3] == 0){
             if(739 < X && X < 797 && 529 < Y && Y < 583){
-                Game.batch.draw(GameInputHandler.hint3,GameInputHandler.x,GameInputHandler.y);
+                Game.batch.draw(GameSpecialHandler.hint3,GameSpecialHandler.x,GameSpecialHandler.y);
             }
             Game.batch.draw(turboElephant, Cords.special[3][0], Cords.special[3][1]);
         }
 
         if(useable_special[2] == 0){
             if(202 < X && X < 263 && 209 < Y && Y < 267){
-                Game.batch.draw(GameInputHandler.hint2,GameInputHandler.x,GameInputHandler.y);
+                Game.batch.draw(GameSpecialHandler.hint2,GameSpecialHandler.x,GameSpecialHandler.y);
             }
             Game.batch.draw(monkeySwap, Cords.special[2][0], Cords.special[2][1]);
         }
 
         if(useable_special[4] == 0){
             if(739 < X && X < 797 && 367 < Y && Y < 426){
-                Game.batch.draw(GameInputHandler.hint4,GameInputHandler.x,GameInputHandler.y);
+                Game.batch.draw(GameSpecialHandler.hint4,GameSpecialHandler.x,GameSpecialHandler.y);
             }
             Game.batch.draw(freeMove, Cords.special[4][0], Cords.special[4][1]);
         }
@@ -252,11 +252,69 @@ public class PlayStateController {
         //-------- Choose monkey ----------------------
         if(selected_special == 4){
             if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-                System.out.println(X + "and " + Y);
-                for(int i = 0; i <= 20;i++){
-                    if(Cords.cord[i][0] < X && X < Cords.cord[i][0] + 32 && Cords.cord[i][1] < Y && Y < Cords.cord[i][1] + 32){
-                        selectedCord = i;
-                    }
+                if(Cords.cord[0][0] < X && X < Cords.cord[0][0] + 32 && Cords.cord[0][1] < Y && Y < Cords.cord[0][1] + 32){
+                    selectedCord = 0;
+                }
+                if(Cords.cord[1][0] < X && X < Cords.cord[1][0] + 32 && Cords.cord[1][1] < Y && Y < Cords.cord[1][1] + 32){
+                    selectedCord = 1;
+                }
+                if(Cords.cord[2][0] < X && X < Cords.cord[2][0] + 32 && Cords.cord[2][1] < Y && Y < Cords.cord[2][1] + 32){
+                    selectedCord = 2;
+                }
+                if(Cords.cord[3][0] < X && X < Cords.cord[3][0] + 32 && Cords.cord[3][1] < Y && Y < Cords.cord[3][1] + 32){
+                    selectedCord = 3;
+                }
+                if(Cords.cord[4][0] < X && X < Cords.cord[4][0] + 32 && Cords.cord[4][1] < Y && Y < Cords.cord[4][1] + 32){
+                    selectedCord = 4;
+                }
+                if(Cords.cord[5][0] < X && X < Cords.cord[5][0] + 32 && Cords.cord[5][1] < Y && Y < Cords.cord[5][1] + 32){
+                    selectedCord = 5;
+                }
+                if(Cords.cord[6][0] < X && X < Cords.cord[6][0] + 32 && Cords.cord[6][1] < Y && Y < Cords.cord[6][1] + 32){
+                    selectedCord = 6;
+                }
+                if(Cords.cord[7][0] < X && X < Cords.cord[7][0] + 32 && Cords.cord[7][1] < Y && Y < Cords.cord[7][1] + 32){
+                    selectedCord = 7;
+                }
+                if(Cords.cord[8][0] < X && X < Cords.cord[8][0] + 32 && Cords.cord[8][1] < Y && Y < Cords.cord[8][1] + 32){
+                    selectedCord = 8;
+                }
+                if(Cords.cord[9][0] < X && X < Cords.cord[9][0] + 32 && Cords.cord[9][1] < Y && Y < Cords.cord[9][1] + 32){
+                    selectedCord = 9;
+                }
+                if(Cords.cord[10][0] < X && X < Cords.cord[10][0] + 32 && Cords.cord[10][1] < Y && Y < Cords.cord[10][1] + 32){
+                    selectedCord = 10;
+                }
+
+                if(Cords.cord[11][0] < X && X < Cords.cord[11][0] + 32 && Cords.cord[11][1] < Y && Y < Cords.cord[11][1] + 32){
+                    selectedCord = 11;
+                }
+                if(Cords.cord[12][0] < X && X < Cords.cord[12][0] + 32 && Cords.cord[12][1] < Y && Y < Cords.cord[12][1] + 32){
+                    selectedCord = 12;
+                }
+                if(Cords.cord[13][0] < X && X < Cords.cord[13][0] + 32 && Cords.cord[13][1] < Y && Y < Cords.cord[13][1] + 32){
+                    selectedCord = 13;
+                }
+                if(Cords.cord[14][0] < X && X < Cords.cord[14][0] + 32 && Cords.cord[14][1] < Y && Y < Cords.cord[14][1] + 32){
+                    selectedCord = 14;
+                }
+                if(Cords.cord[15][0] < X && X < Cords.cord[15][0] + 32 && Cords.cord[15][1] < Y && Y < Cords.cord[15][1] + 32){
+                    selectedCord = 15;
+                }
+                if(Cords.cord[16][0] < X && X < Cords.cord[16][0] + 32 && Cords.cord[16][1] < Y && Y < Cords.cord[16][1] + 32){
+                    selectedCord = 16;
+                }
+                if(Cords.cord[17][0] < X && X < Cords.cord[17][0] + 32 && Cords.cord[17][1] < Y && Y < Cords.cord[17][1] + 32){
+                    selectedCord = 17;
+                }
+                if(Cords.cord[18][0] < X && X < Cords.cord[18][0] + 32 && Cords.cord[18][1] < Y && Y < Cords.cord[18][1] + 32){
+                    selectedCord = 18;
+                }
+                if(Cords.cord[19][0] < X && X < Cords.cord[19][0] + 32 && Cords.cord[19][1] < Y && Y < Cords.cord[19][1] + 32){
+                    selectedCord = 19;
+                }
+                if(Cords.cord[20][0] < X && X < Cords.cord[20][0] + 32 && Cords.cord[20][1] < Y && Y < Cords.cord[20][1] + 32){
+                    selectedCord = 20;
                 }
             }
 

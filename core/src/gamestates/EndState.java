@@ -17,6 +17,7 @@ import managers.PlayStateController;
 public class EndState extends GameState{
     private Sound soundWin = Gdx.audio.newSound(Gdx.files.internal("sound/se/win.mp3"));
     private Sound soundLose = Gdx.audio.newSound(Gdx.files.internal("sound/se/fail.mp3"));
+    private Texture btnExit = new Texture("img/btnExit.png");
     private Texture sceneWin = new Texture("img/scene_win.png");
     private Texture sceneLose = new Texture("img/scene_lose.png");
     private Texture phraseWin = new Texture("img/youwin.png");

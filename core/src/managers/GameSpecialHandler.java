@@ -9,7 +9,7 @@ import com.mygdx.game.Game;
 
 import managers.PlayStateController.*;
 
-public class GameInputHandler {
+public class GameSpecialHandler {
 
     static Sound select = Gdx.audio.newSound(Gdx.files.internal("sound/se/select.mp3"));
     static Sound deselect = Gdx.audio.newSound(Gdx.files.internal("sound/se/deselect.mp3"));
