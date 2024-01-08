@@ -18,6 +18,9 @@ public class EndState extends GameState{
     private Sound soundWin = Gdx.audio.newSound(Gdx.files.internal("sound/se/win.mp3"));
     private Sound soundLose = Gdx.audio.newSound(Gdx.files.internal("sound/se/fail.mp3"));
     private Texture btnExit = new Texture("img/btnExit.png");
+    private Texture btnAgain = new Texture("img/btnAgain.png");
+    private Texture btnExitbright = new Texture("img/btnExitbright.png");
+    private Texture btnAgainbright = new Texture("img/btnAgainbright.png");
     private Texture sceneWin = new Texture("img/scene_win.png");
     private Texture sceneLose = new Texture("img/scene_lose.png");
     private Texture phraseWin = new Texture("img/youwin.png");
@@ -67,6 +70,22 @@ public class EndState extends GameState{
                 ready = false;
             }
         }
+
+        float X = Gdx.input.getX();
+        float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+        if(160 < X && X < 160 + 280 && 80 < Y && Y < 80 + 120){
+            Game.batch.draw(btnAgainbright, 160,80);
+        }else{
+            Game.batch.draw(btnAgain, 160,80);
+        }
+
+        if(560 < X && X < 560 + 280 && 80 < Y && Y < 80 + 120){
+            Game.batch.draw(btnExitbright, 560,80);
+        }else{
+            Game.batch.draw(btnExit, 560,80);
+        }
+
         Game.batch.end();
     }
 
