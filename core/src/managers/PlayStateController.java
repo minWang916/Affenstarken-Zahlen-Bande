@@ -20,7 +20,7 @@ public class PlayStateController {
 
     public static Texture frame = new Texture("img/frame_v.png");
     public static Texture special_frame = new Texture("img/frame_c.png");
-    public static Texture elephant_frame = new Texture("img/frame_v.png");
+    public static Texture elephant_frame = new Texture("img/frame_h.png");
     public static int phase = 0;
     public static int selected_special = 99;
     public static int numOfPlayers = 4;
