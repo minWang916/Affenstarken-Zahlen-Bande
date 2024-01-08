@@ -23,9 +23,11 @@ public class Monkey {
 
     }
 
-    public void move(int location){
-        this.location = location;
+    public void move(int newLocation){
+        location = newLocation;
     }
+
+    public void moveForward(int step) { location = location + step; }
 
     public void draw(){
         Game.batch.draw(img, Cords.cord[location][0],Cords.cord[location][1]);

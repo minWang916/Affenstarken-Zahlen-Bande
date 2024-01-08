@@ -20,7 +20,6 @@ public class PlayStateController {
 
     public static Texture frame = new Texture("img/frame_v.png");
     public static Texture special_frame = new Texture("img/frame_c.png");
-    public static Texture elephant_frame = new Texture("img/frame_h.png");
     public static int phase = 0;
     public static int selected_special = 99;
     public static int numOfPlayers = 4;
@@ -106,7 +105,6 @@ public class PlayStateController {
 
         handleInput();
 
-
         //---------- Leaves -----------------------
 
         //---------- Leaves ------------------------
@@ -132,24 +130,21 @@ public class PlayStateController {
     }
 
     public static void draw(){
-        PlayerAssistant.draw();
+        //---------Player Assistant-----------------
+        assistant.draw();
+        //---------Player Assistant-----------------
+
         //---------- Players -----------------------
         for (int i = 0; i < numOfPlayers; i++) { players[i].draw(); }
         //---------- Players -----------------------
 
         //---------- Leaves ------------------------
         for (int i=0; i<2; i++){
-            for (int j=0; j<2; j++) Game.batch.draw(Cords.leaf_asset[i][j][0],0,0);
+            for (int j=0; j<2; j++) {
+                Game.batch.draw(Cords.leaf_asset[i][j][0], 0, 0);
+            }
         }
-        int b = (int) ( ((x_weight/Math.abs(x_weight)) + 1)/2 );
-        int a = (int) ( ((y_weight/Math.abs(y_weight)) + 1)/2 );
-        if (currentWeight > maxWeight*0.75) {
-            Game.batch.draw(Cords.leaf_asset[a][b][2],0,0);
-            Game.batch.draw(Cords.leaf_asset[(a+1)%2][b][1],0,0);
-            Game.batch.draw(Cords.leaf_asset[a][(b+1)%2][1], 0, 0);
-        } else if (currentWeight > maxWeight*0.5) {
-            Game.batch.draw(Cords.leaf_asset[a][b][1],0,0);
-        }
+        drawIndicatorLeaf();
         //---------- Leaves ------------------------
 
 
@@ -242,80 +237,18 @@ public class PlayStateController {
 
 
         //-------- Elephant Card ----------------------
-            elephant1.draw();
-            elephant2.draw();
-            if(Elephant_Card.selected != 99){
-                Game.batch.draw(elephant_frame, Elephant_cards[Elephant_Card.selected].x - 9, Elephant_cards[Elephant_Card.selected].y - 9);
-            }
+        elephant1.draw();
+        elephant2.draw();
         //-------- Elephant Card ----------------------
 
 
         //-------- Choose monkey ----------------------
         if(selected_special == 4){
             if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-                if(Cords.cord[0][0] < X && X < Cords.cord[0][0] + 32 && Cords.cord[0][1] < Y && Y < Cords.cord[0][1] + 32){
-                    selectedCord = 0;
-                }
-                if(Cords.cord[1][0] < X && X < Cords.cord[1][0] + 32 && Cords.cord[1][1] < Y && Y < Cords.cord[1][1] + 32){
-                    selectedCord = 1;
-                }
-                if(Cords.cord[2][0] < X && X < Cords.cord[2][0] + 32 && Cords.cord[2][1] < Y && Y < Cords.cord[2][1] + 32){
-                    selectedCord = 2;
-                }
-                if(Cords.cord[3][0] < X && X < Cords.cord[3][0] + 32 && Cords.cord[3][1] < Y && Y < Cords.cord[3][1] + 32){
-                    selectedCord = 3;
-                }
-                if(Cords.cord[4][0] < X && X < Cords.cord[4][0] + 32 && Cords.cord[4][1] < Y && Y < Cords.cord[4][1] + 32){
-                    selectedCord = 4;
-                }
-                if(Cords.cord[5][0] < X && X < Cords.cord[5][0] + 32 && Cords.cord[5][1] < Y && Y < Cords.cord[5][1] + 32){
-                    selectedCord = 5;
-                }
-                if(Cords.cord[6][0] < X && X < Cords.cord[6][0] + 32 && Cords.cord[6][1] < Y && Y < Cords.cord[6][1] + 32){
-                    selectedCord = 6;
-                }
-                if(Cords.cord[7][0] < X && X < Cords.cord[7][0] + 32 && Cords.cord[7][1] < Y && Y < Cords.cord[7][1] + 32){
-                    selectedCord = 7;
-                }
-                if(Cords.cord[8][0] < X && X < Cords.cord[8][0] + 32 && Cords.cord[8][1] < Y && Y < Cords.cord[8][1] + 32){
-                    selectedCord = 8;
-                }
-                if(Cords.cord[9][0] < X && X < Cords.cord[9][0] + 32 && Cords.cord[9][1] < Y && Y < Cords.cord[9][1] + 32){
-                    selectedCord = 9;
-                }
-                if(Cords.cord[10][0] < X && X < Cords.cord[10][0] + 32 && Cords.cord[10][1] < Y && Y < Cords.cord[10][1] + 32){
-                    selectedCord = 10;
-                }
-
-                if(Cords.cord[11][0] < X && X < Cords.cord[11][0] + 32 && Cords.cord[11][1] < Y && Y < Cords.cord[11][1] + 32){
-                    selectedCord = 11;
-                }
-                if(Cords.cord[12][0] < X && X < Cords.cord[12][0] + 32 && Cords.cord[12][1] < Y && Y < Cords.cord[12][1] + 32){
-                    selectedCord = 12;
-                }
-                if(Cords.cord[13][0] < X && X < Cords.cord[13][0] + 32 && Cords.cord[13][1] < Y && Y < Cords.cord[13][1] + 32){
-                    selectedCord = 13;
-                }
-                if(Cords.cord[14][0] < X && X < Cords.cord[14][0] + 32 && Cords.cord[14][1] < Y && Y < Cords.cord[14][1] + 32){
-                    selectedCord = 14;
-                }
-                if(Cords.cord[15][0] < X && X < Cords.cord[15][0] + 32 && Cords.cord[15][1] < Y && Y < Cords.cord[15][1] + 32){
-                    selectedCord = 15;
-                }
-                if(Cords.cord[16][0] < X && X < Cords.cord[16][0] + 32 && Cords.cord[16][1] < Y && Y < Cords.cord[16][1] + 32){
-                    selectedCord = 16;
-                }
-                if(Cords.cord[17][0] < X && X < Cords.cord[17][0] + 32 && Cords.cord[17][1] < Y && Y < Cords.cord[17][1] + 32){
-                    selectedCord = 17;
-                }
-                if(Cords.cord[18][0] < X && X < Cords.cord[18][0] + 32 && Cords.cord[18][1] < Y && Y < Cords.cord[18][1] + 32){
-                    selectedCord = 18;
-                }
-                if(Cords.cord[19][0] < X && X < Cords.cord[19][0] + 32 && Cords.cord[19][1] < Y && Y < Cords.cord[19][1] + 32){
-                    selectedCord = 19;
-                }
-                if(Cords.cord[20][0] < X && X < Cords.cord[20][0] + 32 && Cords.cord[20][1] < Y && Y < Cords.cord[20][1] + 32){
-                    selectedCord = 20;
+                for (int i =0; i<=20; i++){
+                    if(Cords.cord[i][0] < X && X < Cords.cord[i][0] + 32 && Cords.cord[i][1] < Y && Y < Cords.cord[i][1] + 32){
+                        selectedCord = i;
+                    }
                 }
             }
 
@@ -364,11 +297,9 @@ public class PlayStateController {
 
         if(useable_special[5] == 1){
 
-            //
             for(int i = 0; i < 4; i++){
                 currentPlayer.cards[i].pickFromDeck();
             }
-            //
 
             useable_special[5] += 1;
         }
@@ -396,37 +327,17 @@ public class PlayStateController {
 
     public static void confirmElephantPhase(){
         if(useable_special[3] == 1){
-            int valueLeft = 0;
-            int valueRight = 0;
-            if(Elephant_cards[0].turn % 2 == 0){
-                valueLeft = Elephant_cards[0].value1;
-            }else{
-                valueLeft = Elephant_cards[0].value2;
-            }
-
-            if(Elephant_cards[1].turn % 2 == 0){
-                valueRight = Elephant_cards[1].value1;
-            }else{
-                valueRight = Elephant_cards[1].value2;
-            }
+            Elephant.moveForward(elephant1.currentValue + elephant2.currentValue);
 
             Elephant_cards[0].turn += 1;
             Elephant_cards[1].turn += 1;
 
-            Elephant.move(Elephant.location + valueLeft + valueRight);
             useable_special[3] = 2;
         } else {
-
-            if (Elephant_Card.selected != 99) {
-                if (Elephant_cards[Elephant_Card.selected].turn % 2 == 0) {
-                    Elephant.move(Elephant.location + Elephant_cards[Elephant_Card.selected].value1);
-                    Elephant_cards[Elephant_Card.selected].turn = Elephant_cards[Elephant_Card.selected].turn + 1;
-                } else {
-                    Elephant.move(Elephant.location + Elephant_cards[Elephant_Card.selected].value2);
-                    Elephant_cards[Elephant_Card.selected].turn = Elephant_cards[Elephant_Card.selected].turn + 1;
-                }
-
-                Elephant_Card.selected = 99;
+            if (Elephant_Card.selectedCard != null) {
+                Elephant.moveForward(Elephant_Card.selectedCard.currentValue);
+                Elephant_Card.selectedCard.flip();
+                Elephant_Card.selectedCard = null;
             }
         }
 
@@ -496,6 +407,18 @@ public class PlayStateController {
         }
 
         return Math.sqrt(x_weight * x_weight + y_weight * y_weight);
+    }
+
+    public static void drawIndicatorLeaf(){
+        int b = (int) ( ((x_weight/Math.abs(x_weight)) + 1)/2 );
+        int a = (int) ( ((y_weight/Math.abs(y_weight)) + 1)/2 );
+        if (currentWeight > maxWeight*0.75) {
+            Game.batch.draw(Cords.leaf_asset[a][b][2],0,0);
+            Game.batch.draw(Cords.leaf_asset[(a+1)%2][b][1],0,0);
+            Game.batch.draw(Cords.leaf_asset[a][(b+1)%2][1], 0, 0);
+        } else if (currentWeight > maxWeight*0.5) {
+            Game.batch.draw(Cords.leaf_asset[a][b][1],0,0);
+        }
     }
 
     public static void dispose(){

@@ -18,13 +18,17 @@ public class Elephant {
 
     }
 
-    public static void move(int new_location){
-        if(new_location > 20){
+    public static void move(int newLocation){
+        if(newLocation > 20){
             location = 20;
         }else {
-            location = new_location;
+            location = newLocation;
         }
         checkWin();
+    }
+
+    public static void moveForward(int step){
+        location = location + step;
     }
 
     public static void checkWin(){
