@@ -63,6 +63,10 @@ public class PlayState extends GameState{
         PlayStateController.draw();
         Game.batch.end();
 
+        if(Game.endResult != ""){
+            gsm.setState(gsm.END);
+        }
+
     }
 
     public void handleInput(){

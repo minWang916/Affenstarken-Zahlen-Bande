@@ -1,6 +1,30 @@
 package entities;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Texture;
+
 public class Cords {
+    //-----------------------------------------------Leaves------------------------------------------------------------
+    public static Texture bottom_left_green = new Texture("img/leaves/leaf_bottom_left_green.png");
+    public static Texture bottom_left_yellow = new Texture("img/leaves/leaf_bottom_left_yellow.png");
+    public static Texture bottom_left_red = new Texture("img/leaves/leaf_bottom_left_red.png");
+    public static Texture bottom_right_green = new Texture("img/leaves/leaf_bottom_right_green.png");
+    public static Texture bottom_right_yellow = new Texture("img/leaves/leaf_bottom_right_yellow.png");
+    public static Texture bottom_right_red = new Texture("img/leaves/leaf_bottom_right_red.png");
+    public static Texture top_right_green = new Texture("img/leaves/leaf_top_right_green.png");
+    public static Texture top_right_yellow = new Texture("img/leaves/leaf_top_right_yellow.png");
+    public static Texture top_right_red = new Texture("img/leaves/leaf_top_right_red.png");
+    public static Texture top_left_green = new Texture("img/leaves/leaf_top_left_green.png");
+    public static Texture top_left_yellow = new Texture("img/leaves/leaf_top_left_yellow.png");
+    public static Texture top_left_red = new Texture("img/leaves/leaf_top_left_red.png");
+    public static Texture[] leaf_top_right = new Texture[]{top_right_green, top_right_yellow, top_right_red};
+    public static Texture[] leaf_bottom_right = new Texture[]{bottom_right_green, bottom_right_yellow, bottom_right_red};
+    public static Texture[] leaf_bottom_left = new Texture[]{bottom_left_green, bottom_left_yellow, bottom_left_red};
+    public static Texture[] leaf_top_left = new Texture[]{top_left_green, top_left_yellow, top_left_red};
+    public static Texture[][][] leaf_asset = new Texture[][][] { {leaf_bottom_left, leaf_bottom_right}, {leaf_top_left, leaf_top_right} };
+    //-----------------------------------------------Leaves------------------------------------------------------------
+
     //-----------------------------------------------Board Coordinates-------------------------------------------------
     public static final float cordMap_x = 0;
     public static final float cordMap_y = 0;
@@ -111,7 +135,7 @@ public class Cords {
     public static final float right_card_3_x = 863;
     public static final float right_card_3_y = 314;
     public static final float right_card_4_x = 863;
-    public static final float right_card_4_y = 863;
+    public static final float right_card_4_y = 214;
 
     public static float[][] right_player = {
             {right_avatar_x, right_avatar_y},
@@ -133,6 +157,34 @@ public class Cords {
     };
 
     //-------------------------------------------------------All cards-------------------------------------------------
+
+    //-------------------------------------------------------Card asset------------------------------------------------
+
+    public static Texture card_asset_green = new Texture("img/card_asset/green_card.png");
+    public static Texture card_asset_blue = new Texture("img/card_asset/blue_card.png");
+    public static Texture card_asset_orange = new Texture("img/card_asset/orange_card.png");
+    public static Texture card_asset_pink = new Texture("img/card_asset/pink_card.png");
+    public static Texture card_asset_transparent = new Texture("img/card_asset/transparent_card.png");
+    public static Texture[] card_asset_color = new Texture[]{card_asset_orange,
+            card_asset_green, card_asset_blue, card_asset_pink, card_asset_transparent};
+    public static String[] colors = {"orange", "green", "blue", "pink"};
+
+    public static Texture card_asset_5 = new Texture("img/card_asset/5_card.png");
+    public static Texture card_asset_6 = new Texture("img/card_asset/6_card.png");
+    public static Texture card_asset_7 = new Texture("img/card_asset/7_card.png");
+    public static Texture card_asset_8 = new Texture("img/card_asset/8_card.png");
+    public static Texture card_asset_9 = new Texture("img/card_asset/9_card.png");
+    public static Texture card_asset_10 = new Texture("img/card_asset/10_card.png");
+    public static Texture card_asset_11 = new Texture("img/card_asset/11_card.png");
+    public static Texture card_asset_12 = new Texture("img/card_asset/12_card.png");
+    public static Texture card_asset_13 = new Texture("img/card_asset/13_card.png");
+    public static Texture card_asset_14 = new Texture("img/card_asset/14_card.png");
+    public static Texture card_asset_15 = new Texture("img/card_asset/15_card.png");
+    public static Texture[] card_asset_number = new Texture[]{card_asset_5, card_asset_6, card_asset_7,
+            card_asset_8, card_asset_9, card_asset_10, card_asset_11, card_asset_12, card_asset_13,
+            card_asset_14, card_asset_15};
+
+    //-------------------------------------------------------Card asset------------------------------------------------
 
     //------------------------------------------------------Special----------------------------------------------------
     public static final float special_1_x = 193;
@@ -166,23 +218,41 @@ public class Cords {
 
     //------------------------------------------------------Elephant---------------------------------------------------
 
-    public static final float elephant_1_x = 24;
-    public static final float elephant_1_y = 29;
+    public static final float elephant_1_x = 40;
+    public static final float elephant_1_y = 10;
 
-    public static final float elephant_2_x = 113;
-    public static final float elephant_2_y = 29;
-
-
+    public static final float elephant_2_x = 40;
+    public static final float elephant_2_y = 85;
 
     //------------------------------------------------------Elephant---------------------------------------------------
 
+    //------------------------------------------------------  Weight ---------------------------------------------------
+
+    public static double[] xWeightSign = {0, 1, 1, -1, -1, 1,1,1,1,-1,-1,-1,-1,-1,1,1,1,1,-1,-1,-1,-1};
+    public static double[] yWeightSign = {0,1,-1,-1,1,1,1,-1,-1,-1,-1,1,1,1,1,-1,-1,-1,-1,1,1};
+
+    //------------------------------------------------------  Weight ---------------------------------------------------
+
 
     //----------------------------------------------Confirm & Cancel buttons-------------------------------------------
 
+    public static Sound btnSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/confirm.mp3"));
+    public static Sound selectSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/select.mp3"));
+    public static Sound unselectSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/deselect.mp3"));
 
+    public static float[] minusBtnCord = {895, 95};
+    public static float[] plusBtnCord = {820, 95};
+    public static float[][] signBtnCord = {minusBtnCord, plusBtnCord};
+    public static Texture minus_img = new Texture("img/minus_bright.png");
+    public static Texture minus_img_dark = new Texture("img/minus_dark.png");
+    public static Texture plus_img = new Texture("img/plus_bright.png");
+    public static Texture plus_img_dark = new Texture("img/plus_dark.png");
+    public static Texture[][] signBtnTexture = new Texture[][]{{minus_img, minus_img_dark}, {plus_img, plus_img_dark}};
 
     //----------------------------------------------Confirm & Cancel buttons-------------------------------------------
 
-
+    //----------------------------------------------Phase--------------------------------------------------------------
+    public static String[] phases = {"Special", "Monkey", "Elephant"};
+    //----------------------------------------------Phase--------------------------------------------------------------
 
 }

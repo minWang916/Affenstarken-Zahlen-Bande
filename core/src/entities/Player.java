@@ -14,12 +14,13 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import managers.PlayStateController.*;
 
 import entities.Cords;
+import entities.Card;
 
 public class Player {
     private BitmapFont font;
     private static SpriteBatch batch;
 
-    private String name;
+    public String name;
     private int id;
 
     private String state = "";
@@ -28,11 +29,13 @@ public class Player {
 
     private Texture avatar;
 
+    public Card[] cards = new Card[4];
+
     public Player (String name, int id, SpriteBatch batch) {
         this.name = name;
         this.id = id;
         this.batch = batch;
-        System.out.println("Player created with the name " + this.name);
+        System.out.println("Player created with the name " + this.name + " and id: " + this.id);
 
         init();
     }
@@ -45,13 +48,21 @@ public class Player {
         param_titleFont.size = 20;
         font = gen.generateFont(param_titleFont);
         avatar = new Texture("img/P1_avatar.png");
+
+        //Deal cards
+        for (int i = 0; i<4; i++) {
+            cards[i] = new Card((int)(Math.random()*11 + 5), Cords.colors[(int)(Math.random()*4)], batch, id, i);
+        }
     }
 
     public void update(){
-
+        for (int i = 0; i<4; i++){
+            cards[i].update();
+        }
     }
 
     public void draw(){
+        // Draw name of the player corresponding to the phase
         if (playing == true) {
             if(phase == PHASE_SPECIAL){
                 font.setColor(Color.GREEN);
@@ -62,12 +73,17 @@ public class Player {
             if(phase == PHASE_ELEPHANT){
                 font.setColor(Color.ORANGE);
             }
-
         }
         font.draw(batch, name, Cords.all_player_cord[id][0][0] - 10, Cords.all_player_cord[id][0][1] + 80);
         font.setColor(Color.WHITE);
 
+        // Draw avatar of the player
         batch.draw(avatar, Cords.all_player_cord[id][0][0], Cords.all_player_cord[id][0][1]);
+
+        // Draw cards of the player
+        for (int i = 0; i<4; i++) {
+            cards[i].draw();
+        }
     }
 
     public void startTurn(){
@@ -80,3 +96,4 @@ public class Player {
         playing = false;
     }
 }
+
