@@ -1,7 +1,6 @@
 package managers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 import entities.*;
@@ -28,12 +27,7 @@ public class PlayStateController {
     public static Player[] players = new Player[4];
 
     public static boolean selected = false;
-    public static int selected_plus_or_minus = 99;
-
-    public static Monkey blue;
-    public static Monkey orange;
-    public static Monkey pink;
-    public static Monkey green;
+    public static int selectedSign = 1;
     public static Monkey[] monkeys = new Monkey[4];
 
     public static Elephant elephant;
@@ -61,16 +55,20 @@ public class PlayStateController {
     public static Texture cord;
     public static int countTurn = 0;
     public static PlayerAssistant assistant;
+    public static SignButton[] signButtons;
 
     public static void init(){
         //-------------------- Entities------------------------------------------
-        blue = new Monkey("blue");
-        orange = new Monkey("orange");
-        green = new Monkey("green");
-        pink = new Monkey("pink");
+        Monkey blue = new Monkey("blue");
+        Monkey orange = new Monkey("orange");
+        Monkey green = new Monkey("green");
+        Monkey pink = new Monkey("pink");
         monkeys = new Monkey[]{orange, green, blue, pink};
         elephant = new Elephant();
         assistant = new PlayerAssistant();
+        SignButton minusBtn = new SignButton(-1);
+        SignButton plusBtn = new SignButton(1);
+        signButtons = new SignButton[]{minusBtn, plusBtn};
         //-------------------- Entities------------------------------------------
 
         //------------------- Turn based-----------------------------------------
@@ -88,15 +86,11 @@ public class PlayStateController {
 
         if(phase == PHASE_SPECIAL){
             GameSpecialHandler.special();
-            Confirm_button.handleInput();
         }else if(phase == PHASE_MONKEY){
-            Plus_Button.handleClick();
-            Minus_Button.handleClick();
-            Confirm_button.handleInput();
+
         }else if(phase == PHASE_ELEPHANT){
             elephant2.handleClick();
             elephant1.handleClick();
-            Confirm_button.handleInput();
         }
 
     }
@@ -116,12 +110,16 @@ public class PlayStateController {
 
 
         //--- Player (and cards - inside players)----
-
         for (int i = 0; i<4; i++){
             players[i].update();
         }
-
         //--- Player (and cards - inside players)----
+
+        //------ Game buttons------------------------
+        Confirm_button.update();
+        signButtons[0].update();
+        signButtons[1].update();
+        //------ Game buttons------------------------
 
 
         //------------ Special ----------------------
@@ -215,25 +213,11 @@ public class PlayStateController {
         //------------ Special ----------------------
 
 
-        //-------- Confirm Button ----------------------
+        //------ Game buttons------------------------
         Confirm_button.draw();
-        //-------- Confirm Button ----------------------
-
-
-        //-------- Plus and Minus Button ----------------------
-        if(phase == PHASE_MONKEY){
-            if(selected_plus_or_minus == 99 || selectedMonkeyCards.size() != 2){
-                Plus_Button.draw_dark();
-                Minus_Button.draw_dark();
-            }else if(selected_plus_or_minus == 0){
-                Plus_Button.draw_bright();
-                Minus_Button.draw_dark();
-            }else if(selected_plus_or_minus == 1){
-                Plus_Button.draw_dark();
-                Minus_Button.draw_bright();
-            }
-        }
-        //-------- Plus and Minus Button ----------------------
+        signButtons[0].draw();
+        signButtons[1].draw();
+        //------ Game buttons------------------------
 
 
         //-------- Elephant Card ----------------------
@@ -246,7 +230,7 @@ public class PlayStateController {
         if(selected_special == 4){
             if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
                 for (int i =0; i<=20; i++){
-                    if(Cords.cord[i][0] < X && X < Cords.cord[i][0] + 32 && Cords.cord[i][1] < Y && Y < Cords.cord[i][1] + 32){
+                    if(Cords.cord[i][0] < X && X < Cords.cord[i][0] + 40 && Cords.cord[i][1] < Y && Y < Cords.cord[i][1] + 40){
                         selectedCord = i;
                     }
                 }
@@ -309,12 +293,27 @@ public class PlayStateController {
     }
 
     public static void confirmMonkeyPhase(){
-        selected_plus_or_minus = 99;
 
         if (selectedMonkeyCards.size() == 1) {
-            Card thisMonkeyCard = selectedMonkeyCards.get(0);
-            int colorIndex = thisMonkeyCard.getColorIndex();
-            monkeys[colorIndex].move(thisMonkeyCard.getNumber());
+            Card selectedCard = selectedMonkeyCards.get(0);
+            int colorIndex = selectedCard.getColorIndex();
+            monkeys[colorIndex].move(selectedCard.getNumber());
+        } else if (selectedMonkeyCards.size() == 2) {
+            System.out.println("Selected 2 monkey cards");
+            Card selectedCard1 = selectedMonkeyCards.get(0);
+            Card selectedCard2 = selectedMonkeyCards.get(1);
+            int colorIndex = selectedCard1.getColorIndex();
+            if (selectedSign == 1) {
+                int location = selectedCard1.getNumber() + selectedCard2.getNumber();
+                monkeys[colorIndex].move(location);
+                System.out.println("The new location is the sum: " + location);
+            } else {
+                int location = Math.abs(selectedCard1.getNumber() - selectedCard2.getNumber());
+                monkeys[colorIndex].move(location);
+                System.out.println("The new location is the subtraction: " + location);
+            }
+        } else {
+            System.out.println("Error: the number of cards is not 1 or 2");
         }
 
         // Make the selected monkey cards disappear
@@ -341,7 +340,7 @@ public class PlayStateController {
             }
         }
 
-        // Pick new monkey cards from the deck
+        // Pick new monkey cards from the deck replacing the selected ones
         for(int i = 0; i < selectedMonkeyCards.size(); i++){
             selectedMonkeyCards.get(i).pickFromDeck();
         }
@@ -423,10 +422,6 @@ public class PlayStateController {
 
     public static void dispose(){
         cordMap.dispose();
-        pink.dispose();
-        blue.dispose();
-        green.dispose();
-        orange.dispose();
         Elephant.dispose();
         holdOn.dispose();
         breakTime.dispose();
@@ -434,8 +429,7 @@ public class PlayStateController {
         turboElephant.dispose();
         freeMove.dispose();
         exchange.dispose();
-        Plus_Button.dispose();
-        Minus_Button.dispose();
+        SignButton.dispose();
         Confirm_button.dispose();
         elephant1.dispose();
         elephant2.dispose();

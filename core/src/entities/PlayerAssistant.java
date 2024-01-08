@@ -26,8 +26,13 @@ public class PlayerAssistant {
     }
 
     public static void draw(){
-        String title = "Phase " + Cords.phases[PlayStateController.phase];
-        font.draw(Game.batch,title,(Game.WIDTH - 150),(Game.HEIGHT - 30));
+        //Phase message
+        String phaseMessage = "Phase " + Cords.phases[PlayStateController.phase];
+        String playerMessage = "Player: " + PlayStateController.currentPlayer.name;
+        font.draw(Game.batch, playerMessage, (Game.WIDTH - 150),(Game.HEIGHT - 15));
+        font.draw(Game.batch,phaseMessage,(Game.WIDTH - 150),(Game.HEIGHT - 35));
+
+        //Weight message
         String weightMessage = "Weight: " + Math.ceil(PlayStateController.currentWeight) + "/" + Math.ceil(PlayStateController.maxWeight);
         if(0 < PlayStateController.countTurn && PlayStateController.countTurn < 6){
             fontWeight.setColor(Color.RED);

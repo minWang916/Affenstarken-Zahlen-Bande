@@ -39,6 +39,8 @@ public class Card {
     private Sprite colorSprite;
     private Texture numberTexture;
     private Sprite numberSprite;
+    private static Texture monkeyTexture = new Texture("img/card_asset/monkey.png");
+    private Sprite monkeySprite;
     private float rotation = 0;
     private float[] offset = new float[2];
 
@@ -49,6 +51,7 @@ public class Card {
         this.player_id = player_id;
         this.card_id = card_id;
         PlayStateController.allMonkeyCards.add(this);
+        monkeySprite = new Sprite(monkeyTexture);
         setCard();
     }
 
@@ -57,17 +60,7 @@ public class Card {
         bottomCorner[1] = Cords.all_player_cord[player_id][card_id+1][1];
 
         // Color setting
-        if (color == "orange") {
-            colorTexture = Cords.card_asset_orange;
-        } else if (color == "green") {
-            colorTexture = Cords.card_asset_green;
-        } else if (color == "blue") {
-            colorTexture = Cords.card_asset_blue;
-        } else if (color == "pink"){
-            colorTexture = Cords.card_asset_pink;
-        } else {
-            colorTexture = Cords.card_asset_transparent;
-        }
+        colorTexture = Cords.card_asset_color[getColorIndex()];
         colorSprite = new Sprite(colorTexture);
 
         // Number setting
@@ -97,10 +90,12 @@ public class Card {
         }
         colorSprite.setRotation(rotation);
         numberSprite.setRotation(rotation);
+        monkeySprite.setRotation(rotation);
 
         // Sprite setting
         colorSprite.setPosition(bottomCorner[0] + offset[0], bottomCorner[1] + offset[1]);
         numberSprite.setPosition(bottomCorner[0] + offset[0], bottomCorner[1] + offset[1]);
+        monkeySprite.setPosition(bottomCorner[0] + offset[0], bottomCorner[1] + offset[1]);
     }
 
     public void update(){
@@ -122,6 +117,7 @@ public class Card {
 
     public void draw(){
         colorSprite.draw(batch);
+        monkeySprite.draw(batch);
         numberSprite.draw(batch);
 
         if (selected) {

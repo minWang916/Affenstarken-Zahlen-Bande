@@ -240,6 +240,15 @@ public class Cords {
     public static Sound selectSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/select.mp3"));
     public static Sound unselectSound = Gdx.audio.newSound(Gdx.files.internal("sound/se/deselect.mp3"));
 
+    public static float[] minusBtnCord = {895, 95};
+    public static float[] plusBtnCord = {820, 95};
+    public static float[][] signBtnCord = {minusBtnCord, plusBtnCord};
+    public static Texture minus_img = new Texture("img/minus_bright.png");
+    public static Texture minus_img_dark = new Texture("img/minus_dark.png");
+    public static Texture plus_img = new Texture("img/plus_bright.png");
+    public static Texture plus_img_dark = new Texture("img/plus_dark.png");
+    public static Texture[][] signBtnTexture = new Texture[][]{{minus_img, minus_img_dark}, {plus_img, plus_img_dark}};
+
     //----------------------------------------------Confirm & Cancel buttons-------------------------------------------
 
     //----------------------------------------------Phase--------------------------------------------------------------

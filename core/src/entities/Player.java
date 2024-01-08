@@ -20,7 +20,7 @@ public class Player {
     private BitmapFont font;
     private static SpriteBatch batch;
 
-    private String name;
+    public String name;
     private int id;
 
     private String state = "";
