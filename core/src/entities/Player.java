@@ -29,7 +29,7 @@ public class Player {
 
     private Texture avatar;
 
-    private Card[] cards = new Card[4];
+    public Card[] cards = new Card[4];
 
     public Player (String name, int id, SpriteBatch batch) {
         this.name = name;

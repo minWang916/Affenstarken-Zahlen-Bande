@@ -356,14 +356,22 @@ public class PlayStateController {
 
     public static void confirmSpecialPhase(){
         if(selected_special != 99){
-
             useable_special[selected_special] += 1;
         }
         if(selected_special == 4){
             monkeys[selectedIcon].move(selectedCord);
         }
 
+        if(useable_special[5] == 1){
 
+            //
+            for(int i = 0; i < 4; i++){
+                currentPlayer.cards[i].pickFromDeck();
+            }
+            //
+
+            useable_special[5] += 1;
+        }
 
         selected_special = 99;
         afterConfirm();
