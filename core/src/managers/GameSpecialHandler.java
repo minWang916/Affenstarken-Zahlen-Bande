@@ -19,7 +19,12 @@ public class GameSpecialHandler {
     static Texture hint3 = new Texture("img/hint3.png");
     static Texture hint4 = new Texture("img/hint4.png");
     static Texture hint5 = new Texture("img/hint5.png");
-
+    static Texture hint0de = new Texture("img/hint0de.png");
+    static Texture hint1de = new Texture("img/hint1de.png");
+    static Texture hint2de = new Texture("img/hint2de.png");
+    static Texture hint3de = new Texture("img/hint3de.png");
+    static Texture hint4de = new Texture("img/hint4de.png");
+    static Texture hint5de = new Texture("img/hint5de.png");
 
     static float x = 340;
     static float y = 275;
@@ -126,6 +131,7 @@ public class GameSpecialHandler {
     public static void dispose(){
         select.dispose();
         deselect.dispose();
+
     }
 
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -21,6 +22,8 @@ public class PlayState extends GameState{
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
+    private Texture iconSetting;
+
 
     public PlayState (GameStateManager gsm){
         super(gsm);
@@ -28,6 +31,8 @@ public class PlayState extends GameState{
     }
 
     public void init() {
+
+        iconSetting = new Texture("img/setting.png");
 
         PlayStateController.init();
 
@@ -61,6 +66,7 @@ public class PlayState extends GameState{
         Game.batch.begin();
         renderer.render();
         PlayStateController.draw();
+        Game.batch.draw(iconSetting,930,740);
         Game.batch.end();
 
         if(Game.endResult != ""){
@@ -71,15 +77,12 @@ public class PlayState extends GameState{
 
     public void handleInput(){
 
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)){
+        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
             float X = Gdx.input.getX();
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY(); // Invert Y-axis
-
-            // Handle the click event or perform any other actions
-            System.out.println("Mouse Clicked at: (" + X + ", " + Y + ")");
-
-
-
+            if(930 < X && X < 930 + 50 && 740 < Y && Y < 740 + 50){
+                gsm.setState(gsm.SETTING);
+            }
         }
 
     }
