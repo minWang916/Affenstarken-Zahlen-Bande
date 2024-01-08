@@ -50,7 +50,7 @@ public class MenuState extends GameState{
 
     private ImageButton updateButton,cancelButton;
 
-    private int currentItem;
+//    private int currentItem;
     private String[] menuItems;
 
     private Texture backgroundTexture;
@@ -58,7 +58,7 @@ public class MenuState extends GameState{
 
     private SpriteBatch spriteBatch;
 
-    private String[] userNames;
+    private String[] usernames;
     private String[] defaultNames;
     Texture bgTexture;
     private TextureRegion bg;
@@ -81,11 +81,11 @@ public class MenuState extends GameState{
         float buttonHeight = 100;
         float buttonWidth = 200;
         int playerNum =4;
-        userNames = new String[playerNum];
+        usernames = new String[playerNum];
         defaultNames = new String[playerNum];
         for (int i=0;i<playerNum;i++){
             defaultNames[i]= "player "+ String.valueOf(i+1);
-            userNames[i] = defaultNames[i];
+            usernames[i] = defaultNames[i];
         }
 
 
@@ -156,7 +156,7 @@ public class MenuState extends GameState{
         VerticalGroup vg = new VerticalGroup();
         HorizontalGroup hg = new HorizontalGroup();
         for (int i=0;i<nameFields.length;i++){
-            nameFields[i]= new TextField(userNames[i],skinButton);
+            nameFields[i]= new TextField(usernames[i],skinButton);
 
             vg.addActor(nameFields[i]);
             vg.space(15);
@@ -242,11 +242,11 @@ public class MenuState extends GameState{
             float Y = Gdx.graphics.getHeight() - Gdx.input.getY();
             if (X<helpWindow.getX() || X> helpWindow.getX()+helpWindow.getWidth()
                     || Y<helpWindow.getY() || Y>helpWindow.getY()+helpWindow.getHeight()){
-                System.out.println("Yo");
+
                 helpWindow.setVisible(false);
             }else{
                 if (X>helpButton.getX() && X< helpButton.getX()+helpButton.getWidth()
-                        && Y>helpButton.getY() && Y<helpButton.getY()+helpButton.getHeight()) {
+                        && Y>helpButton.getY() && Y<helpButton.getY()+helpButton.getHeight()&&!namesWindow.isVisible()) {
                     helpWindow.setVisible(true);
                 }
             }
@@ -260,7 +260,7 @@ public class MenuState extends GameState{
         if (updateButton.isPressed()){
             namesWindow.setVisible(false);
             for(int i =9;i<nameFields.length;i++) {
-                userNames[i] = nameFields[i].getText();
+                usernames[i] = nameFields[i].getText();
             }
             nameFields[1].setDisabled(true);
             gsm.setState(gsm.PLAY);
@@ -288,8 +288,8 @@ public class MenuState extends GameState{
 
     }
 
-    public void renderBackground() {
-        backgroundSprite.draw(spriteBatch);
+    public String[] getNames(){
+        return usernames;
     }
 
     public void dispose(){
