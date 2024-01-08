@@ -29,8 +29,8 @@ public class PlayerAssistant {
         //Phase message
         String phaseMessage = "Phase " + Cords.phases[PlayStateController.phase];
         String playerMessage = "Player: " + PlayStateController.currentPlayer.name;
-        font.draw(Game.batch, playerMessage, (Game.WIDTH - 150),(Game.HEIGHT - 15));
-        font.draw(Game.batch,phaseMessage,(Game.WIDTH - 150),(Game.HEIGHT - 35));
+        //font.draw(Game.batch, playerMessage, (Game.WIDTH - 150),(Game.HEIGHT - 15));
+        //font.draw(Game.batch,phaseMessage,(Game.WIDTH - 150),(Game.HEIGHT - 35));
 
         //Weight message
         String weightMessage = "Weight: " + Math.ceil(PlayStateController.currentWeight) + "/" + Math.ceil(PlayStateController.maxWeight);

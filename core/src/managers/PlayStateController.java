@@ -23,14 +23,18 @@ public class PlayStateController {
     public static int selected_special = 99;
     public static int numOfPlayers = 4;
     public static Player currentPlayer;
-    public static int currentPlayerIndex;
+    public static int currentPlayerIndex = 0;
     public static Player[] players = new Player[4];
 
     public static boolean selected = false;
     public static int selectedSign = 1;
-    public static Monkey[] monkeys = new Monkey[4];
+    public static Monkey blue = new Monkey("blue");
+    public static Monkey orange = new Monkey("orange");
+    public static Monkey pink = new Monkey("pink");
+    public static Monkey green = new Monkey("green");
+    public static Monkey[] monkeys = new Monkey[]{orange, green, blue, pink};
 
-    public static Elephant elephant;
+    public static Elephant elephant = new Elephant();
 
     private static final Texture holdOn = new Texture("img/special_1.png");
     private static final Texture breakTime = new Texture("img/special_2.png");
@@ -61,12 +65,7 @@ public class PlayStateController {
 
     public static void init(){
         //-------------------- Entities------------------------------------------
-        Monkey blue = new Monkey("blue");
-        Monkey orange = new Monkey("orange");
-        Monkey green = new Monkey("green");
-        Monkey pink = new Monkey("pink");
-        monkeys = new Monkey[]{orange, green, blue, pink};
-        elephant = new Elephant();
+
         assistant = new PlayerAssistant();
         SignButton minusBtn = new SignButton(-1);
         SignButton plusBtn = new SignButton(1);
@@ -78,8 +77,8 @@ public class PlayStateController {
         for(int i = 0; i< 4; i++){
             players[i] = new Player(playerNames[i], i, Game.batch);
         }
-        currentPlayerIndex = 0;
-        currentPlayer = players[0];
+
+        currentPlayer = players[currentPlayerIndex];
         currentPlayer.startTurn();
         //------------------- Turn based-----------------------------------------
     }
