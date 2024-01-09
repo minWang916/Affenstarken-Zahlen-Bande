@@ -38,7 +38,9 @@ public class MenuState extends GameState{
     GlyphLayout layout;
 
     private Skin skinButton;
-    private TextButton.TextButtonStyle textButtonStyle;
+    private TextButton.TextButtonStyle textButtonStyleStart;
+    private TextButton.TextButtonStyle textButtonStyleHelp;
+    private TextButton.TextButtonStyle textButtonStyleQuit;
     private TextButton startButton, helpButton, quitButton;
 
     private final String title = "Affenstarke Zahlen-Bande";
@@ -118,13 +120,23 @@ public class MenuState extends GameState{
 
 
 
-        textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.pressedOffsetX = 1;
-        textButtonStyle.pressedOffsetY = -1;
-        textButtonStyle.font = font;
+        textButtonStyleStart = new TextButton.TextButtonStyle();
+        textButtonStyleStart.pressedOffsetX = 1;
+        textButtonStyleStart.pressedOffsetY = -1;
+        textButtonStyleStart.font = font;
+
+        textButtonStyleHelp = new TextButton.TextButtonStyle();
+        textButtonStyleHelp.pressedOffsetX = 1;
+        textButtonStyleHelp.pressedOffsetY = -1;
+        textButtonStyleHelp.font = font;
+
+        textButtonStyleQuit = new TextButton.TextButtonStyle();
+        textButtonStyleQuit.pressedOffsetX = 1;
+        textButtonStyleQuit.pressedOffsetY = -1;
+        textButtonStyleQuit.font = font;
 
 
-        startButton=new TextButton("Start",textButtonStyle);
+        startButton=new TextButton("Start",textButtonStyleStart);
         startButton.setText("Start");
         startButton.setHeight(buttonHeight);
         startButton.setWidth(buttonWidth);
@@ -133,13 +145,15 @@ public class MenuState extends GameState{
         //button
 
 
-        helpButton = new TextButton("Help",textButtonStyle);
+        helpButton = new TextButton("Help",textButtonStyleHelp);
         helpButton.setHeight(buttonHeight);
+
         helpButton.setWidth(buttonWidth);
         helpButton.setPosition(400,400);
 
-        quitButton = new TextButton("Quit",textButtonStyle);
+        quitButton = new TextButton("Quit",textButtonStyleQuit);
         quitButton.setHeight(buttonHeight);
+
         quitButton.setWidth(buttonWidth);
         quitButton.setPosition(400,300);
 
@@ -194,10 +208,26 @@ public class MenuState extends GameState{
     public void update(float var1){
 
         //System.out.println("MENU STATE UPDATING");
+        if(startButton.isOver()){
+
+            textButtonStyleStart.fontColor = Color.RED;
+        }else{
+            textButtonStyleStart.fontColor = Color.BLACK;
+        }
+
+        if(helpButton.isOver()){
+            textButtonStyleHelp.fontColor = Color.RED;
+        }else{
+            textButtonStyleHelp.fontColor = Color.BLACK;
+        }
 
         handleInput();
 
-
+        if(quitButton.isOver()){
+            textButtonStyleQuit.fontColor = Color.RED;
+        }else{
+            textButtonStyleQuit.fontColor = Color.BLACK;
+        }
 
     }
 
@@ -220,10 +250,12 @@ public class MenuState extends GameState{
 
         }
 
+
         Game.batch.end();
     }
 
     public void handleInput(){
+
 
         if(startButton.isPressed()){
             namesWindow.setVisible(true);
