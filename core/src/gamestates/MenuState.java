@@ -61,6 +61,7 @@ public class MenuState extends GameState{
     private Sprite backgroundSprite;
 
     private SpriteBatch spriteBatch;
+    private boolean drawTitle = true;
 
     private static String[] usernames;
     private String[] defaultNames;
@@ -249,8 +250,9 @@ public class MenuState extends GameState{
         float width = layout.width;
         float height = layout.height;
         titleFont.draw(Game.batch,title,(Game.WIDTH - width)/2,(Game.HEIGHT - height*2));
-        Game.batch.draw(imageTitle, Game.WIDTH/2 - 500 , Game.HEIGHT - 300, 1000, 250);
-
+        if(drawTitle) {
+            Game.batch.draw(imageTitle, Game.WIDTH / 2 - 500, Game.HEIGHT - 300, 1000, 250);
+        }
 
         if(stage != null){
 
@@ -274,7 +276,7 @@ public class MenuState extends GameState{
             startButton.setVisible(false);
             helpButton.setVisible(false);
             quitButton.setVisible(false);
-
+            drawTitle = false;
         }
         if(helpButton.isPressed()){
             helpWindow.setVisible(true);
@@ -320,7 +322,7 @@ public class MenuState extends GameState{
             startButton.setVisible(true);
             helpButton.setVisible(true);
             quitButton.setVisible(true);
-
+            drawTitle = true;
         }
 
     }
