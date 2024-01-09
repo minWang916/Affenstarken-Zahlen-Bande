@@ -37,7 +37,7 @@ public class Game implements ApplicationListener {
 	public static OrthographicCamera cam;
 	public GameStateManager gsm;
 	public static Viewport gamePort;
-	
+
 
 	@Override
 	public void create () {

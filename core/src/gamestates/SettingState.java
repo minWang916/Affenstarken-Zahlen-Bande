@@ -80,10 +80,10 @@ public class SettingState extends GameState{
 
         if(Game.language == "en"){
             Game.batch.draw(masterVolume,140,550);
-            Game.batch.draw(languageEN, 600,600);
+            Game.batch.draw(languageEN, 630,600);
             Game.batch.draw(flagEN, 560,400);
             Game.batch.draw(flagDEdark, 740, 400);
-            Game.batch.draw(musicNsoundEN, 156, 608);
+            Game.batch.draw(musicNsoundEN, 167, 608);
             Game.batch.draw(sfxEN, 138, 320);
             Game.batch.draw(bgmEN, 140, 400);
             if(360 < X && X < 360 + 280 && 80 < Y && Y < 80 + 120){
@@ -93,10 +93,10 @@ public class SettingState extends GameState{
             }
         }else{
             Game.batch.draw(masterVolumeDE,140,545);
-            Game.batch.draw(languageDE, 600,600);
+            Game.batch.draw(languageDE, 630,600);
             Game.batch.draw(flagENdark, 560,400);
             Game.batch.draw(flagDE, 740, 400);
-            Game.batch.draw(musicNsoundDE, 160, 601);
+            Game.batch.draw(musicNsoundDE, 170, 601);
             Game.batch.draw(sfxDE, 140, 322);
             Game.batch.draw(bgmDE, 140, 400);
             if(360 < X && X < 360 + 280 && 80 < Y && Y < 80 + 120){
