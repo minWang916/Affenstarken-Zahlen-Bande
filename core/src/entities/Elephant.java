@@ -3,6 +3,8 @@ package entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.Game;
 
+import managers.PlayStateController;
+
 public class Elephant {
     public double weight = 50;
 
@@ -33,6 +35,9 @@ public class Elephant {
 
     public static void checkWin(){
         if(location == 20){
+            for(int i = 0; i < 4; i++){
+                PlayStateController.players[i].endTurn();
+            }
             Game.endResult = "win";
         }
     }

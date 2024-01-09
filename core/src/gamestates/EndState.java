@@ -53,6 +53,7 @@ public class EndState extends GameState{
     public void update(float var1) {
         Game.cam.update();
         renderer.setView(Game.cam);
+        Game.bgm.setVolume(0F);
     }
 
     @Override
@@ -124,6 +125,11 @@ public class EndState extends GameState{
                 this.gsm.setState(gsm.PLAY);
 
                 //Game ultilities
+
+                for(int i = 0; i < 4; i++){
+                    PlayStateController.players[i].endTurn();
+                }
+
                 PlayStateController.phase = 0;
                 PlayStateController.currentPlayerIndex = 0;
                 PlayStateController.currentPlayer = PlayStateController.players[PlayStateController.currentPlayerIndex];

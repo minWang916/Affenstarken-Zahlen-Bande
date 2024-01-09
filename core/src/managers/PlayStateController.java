@@ -107,7 +107,7 @@ public class PlayStateController {
 
 
         //---- Monkeys and elephant-----------------
-
+        Elephant.checkWin();
         //---- Monkeys and elephant-----------------
 
 
@@ -329,7 +329,7 @@ public class PlayStateController {
         if (selectedMonkeyCards.size() == 1) {
             Card selectedCard = selectedMonkeyCards.get(0);
             int colorIndex = selectedCard.getColorIndex();
-            monkeys[colorIndex].move(selectedCard.getNumber());
+            monkeys[colorIndex%4].move(selectedCard.getNumber());
         } else if (selectedMonkeyCards.size() == 2) {
             System.out.println("Selected 2 monkey cards");
             Card selectedCard1 = selectedMonkeyCards.get(0);
@@ -422,6 +422,9 @@ public class PlayStateController {
 
 
         if (currentWeight > maxWeight) {
+            for(int i = 0; i < 4; i++){
+                players[i].endTurn();
+            }
             Game.endResult = "lose";
         }
     }
