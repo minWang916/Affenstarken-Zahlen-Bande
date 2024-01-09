@@ -138,11 +138,11 @@ public class Card {
 
     public void toggleSelect(){
         if(selected == false){
-            Cords.selectSound.play(0.3f*Game.sfxVolume);
+            Cords.selectSound.play(0.3f*Game.sfxVolume*Game.masterVolume/10);
             selected = true;
             selectedMonkeyCards.add(this);
         }else{
-            Cords.unselectSound.play(0.3f*Game.sfxVolume);
+            Cords.unselectSound.play(0.3f*Game.sfxVolume*Game.masterVolume/10);
             selected = false;
             selectedMonkeyCards.remove(this);
         }

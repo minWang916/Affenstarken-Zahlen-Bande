@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -38,6 +40,8 @@ public class Game implements ApplicationListener {
 	public GameStateManager gsm;
 	public static Viewport gamePort;
 
+	public static float masterVolume = 10;
+
 
 	@Override
 	public void create () {
@@ -49,7 +53,9 @@ public class Game implements ApplicationListener {
 		gsm = new GameStateManager();
 
 		cam = new OrthographicCamera((float)WIDTH, (float)HEIGHT);
+
 		gamePort = new StretchViewport(WIDTH, HEIGHT, cam);
+		//gamePort = new ScreenViewport();
 		//cam.translate((float)(WIDTH / 2), (float)(HEIGHT / 2));
 		//cam.update();
 
@@ -61,7 +67,7 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void render () {
-		bgm.setVolume(0.1F*bgmVolume);
+		bgm.setVolume(0.1F*bgmVolume*masterVolume/10);
 		ScreenUtils.clear(1, 0, 0, 1);
 
 		gsm.update(Gdx.graphics.getDeltaTime());

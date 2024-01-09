@@ -13,6 +13,9 @@ import org.w3c.dom.Text;
 import managers.GameStateManager;
 
 public class SettingState extends GameState{
+    private final Texture right = new Texture("img/setting/right.PNG");
+    private final Texture left = new Texture("img/setting/left.PNG");
+    private final Texture volumeUnit = new Texture("img/setting/volumeUnit.png");
 
     private final Texture tick = new Texture("img/setting/tick.png");
     private final Texture btnBackENdark = new Texture("img/setting/btnBackENdark.png");
@@ -70,6 +73,9 @@ public class SettingState extends GameState{
 
         renderer.render();
 
+        Game.batch.draw(right,464, 480);
+        Game.batch.draw(left,140, 480);
+
         if(Game.bgmVolume == 1.0F){
             Game.batch.draw(tick, 445 + 24,400);
         }
@@ -77,6 +83,9 @@ public class SettingState extends GameState{
             Game.batch.draw(tick, 445 + 24, 320);
         }
 
+        for(int i = 0; i < (int)Game.masterVolume;i++){
+            Game.batch.draw(volumeUnit, 180 + (i+1)*10 + i*17,480);
+        }
 
         if(Game.language == "en"){
             Game.batch.draw(masterVolume,140,550);
@@ -115,7 +124,36 @@ public class SettingState extends GameState{
 
     @Override
     public void handleInput() {
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
+            if(Game.masterVolume > 0){
+                Game.masterVolume -= 1;
+            }
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT)){
+            if(Game.masterVolume < 10){
+                Game.masterVolume += 1;
+            }
+        }
+
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
+
+
+
+            if(140 < X && X < 140 + 40 && 480 < Y && Y < 480 + 40){
+                if(Game.masterVolume > 0){
+                    Game.masterVolume -= 1;
+                }
+            }
+
+            if(464 < X && X < 464 + 40 && 480 < Y && Y < 480 + 40){
+                if(Game.masterVolume < 10){
+                    Game.masterVolume += 1;
+                }
+            }
+
+            System.out.println(Game.masterVolume);
 
             if(360 < X && X < 360 + 280 && 80 < Y && Y < 80 + 120){
                 this.gsm.setState(gsm.PLAY);
@@ -165,5 +203,8 @@ public class SettingState extends GameState{
         btnBackENdark.dispose();
         btnBackDEdark.dispose();
         sfxDE.dispose();
+        right.dispose();
+        left.dispose();
+        volumeUnit.dispose();
     }
 }
