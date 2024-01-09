@@ -160,5 +160,9 @@ public class Card {
         return number;
     }
 
+    public void dispose(){
+        monkeyTexture.dispose();
+    }
+
 }
 

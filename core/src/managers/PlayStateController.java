@@ -36,12 +36,12 @@ public class PlayStateController {
 
     public static Elephant elephant = new Elephant();
 
-    private static final Texture holdOn = new Texture("img/special_1.png");
-    private static final Texture breakTime = new Texture("img/special_2.png");
-    private static final Texture monkeySwap = new Texture("img/special_3.png");
-    private static final Texture turboElephant = new Texture("img/special_4.png");
-    private static final Texture freeMove = new Texture("img/special_5.png");
-    private static final Texture exchange = new Texture("img/special_6.png");
+    public static final Texture holdOn = new Texture("img/special_1.png");
+    public static final Texture breakTime = new Texture("img/special_2.png");
+    public static final Texture monkeySwap = new Texture("img/special_3.png");
+    public static final Texture turboElephant = new Texture("img/special_4.png");
+    public static final Texture freeMove = new Texture("img/special_5.png");
+    public static final Texture exchange = new Texture("img/special_6.png");
     public static int[] useable_special = {0,0,0,0,0,0};
     public static final int PHASE_SPECIAL = 0;
     public static final int PHASE_MONKEY = 1;

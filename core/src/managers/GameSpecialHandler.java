@@ -131,7 +131,18 @@ public class GameSpecialHandler {
     public static void dispose(){
         select.dispose();
         deselect.dispose();
-
+        hint0.dispose();
+        hint1.dispose();
+        hint2.dispose();
+        hint3.dispose();
+        hint4.dispose();
+        hint5.dispose();
+        hint0de.dispose();
+        hint1de.dispose();
+        hint2de.dispose();
+        hint3de.dispose();
+        hint4de.dispose();
+        hint5de.dispose();
     }
 
 }

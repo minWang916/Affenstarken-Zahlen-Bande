@@ -13,8 +13,13 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import entities.Elephant;
+import entities.Elephant_Card;
+import gamestates.EndState;
 import gamestates.GameState;
+import managers.GameSpecialHandler;
 import managers.GameStateManager;
+import managers.PlayStateController;
 
 public class Game implements ApplicationListener {
 	public static SpriteBatch batch;
@@ -32,6 +37,7 @@ public class Game implements ApplicationListener {
 	public static OrthographicCamera cam;
 	public GameStateManager gsm;
 	public static Viewport gamePort;
+	
 
 	@Override
 	public void create () {
@@ -76,7 +82,39 @@ public class Game implements ApplicationListener {
 
 	@Override
 	public void dispose () {
+		GameSpecialHandler.dispose();
 
-		//img.dispose();
+		for(int i = 0; i < 4; i++){
+			PlayStateController.monkeys[i].dispose();
+		}
+
+		PlayStateController.elephant1.dispose();
+		PlayStateController.elephant2.dispose();
+		Elephant.dispose();
+
+		for(int i = 0; i < PlayStateController.allMonkeyCards.size(); i++){
+			PlayStateController.allMonkeyCards.get(i).dispose();
+		}
+
+		for(int i = 0; i < PlayStateController.selectedMonkeyCards.size(); i++){
+			PlayStateController.selectedMonkeyCards.get(i).dispose();
+		}
+
+		PlayStateController.cordMap.dispose();
+		PlayStateController.frame.dispose();
+		PlayStateController.special_frame.dispose();
+
+		PlayStateController.holdOn.dispose();
+		PlayStateController.breakTime.dispose();
+		PlayStateController.monkeySwap.dispose();
+		PlayStateController.turboElephant.dispose();
+		PlayStateController.freeMove.dispose();
+		PlayStateController.exchange.dispose();
+
+		PlayStateController.iconPink.dispose();
+		PlayStateController.iconGreen.dispose();
+		PlayStateController.iconBlue.dispose();
+		PlayStateController.iconOrange.dispose();
+
 	}
 }

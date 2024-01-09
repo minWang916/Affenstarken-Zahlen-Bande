@@ -72,6 +72,9 @@ public class Elephant_Card {
     }
 
     public void dispose() {
+        background.dispose();
+        elephant_frame.dispose();
+        elephant_pic.dispose();
         faces[0].dispose();
         faces[1].dispose();
     }
