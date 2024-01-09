@@ -45,10 +45,10 @@ public class GameSpecialHandler {
 
                         if (selected_special == 0) {
                             selected_special = 99;
-                            deselect.play(0.1f);
+                            deselect.play(0.1f*Game.sfxVolume);
                         } else {
                             selected_special = 0;
-                            select.play(0.1f);
+                            select.play(0.1f*Game.sfxVolume);
                         }
 
                     }
@@ -61,11 +61,11 @@ public class GameSpecialHandler {
                 if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
                 if(selected_special == 1){
                     selected_special = 99;
-                    deselect.play(0.1f);
+                    deselect.play(0.1f*Game.sfxVolume);
                 }
                 else{
                     selected_special = 1;
-                    select.play(0.1f);
+                    select.play(0.1f*Game.sfxVolume);
                 }
 
             }}}
@@ -75,11 +75,11 @@ public class GameSpecialHandler {
                 if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
                 if(selected_special == 2){
                     selected_special = 99;
-                    deselect.play(0.1f);
+                    deselect.play(0.1f*Game.sfxVolume);
                 }
                 else{
                     selected_special = 2;
-                    select.play(0.1f);
+                    select.play(0.1f*Game.sfxVolume);
                 }
 
             }}}
@@ -89,11 +89,11 @@ public class GameSpecialHandler {
                 if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
                 if(selected_special == 3){
                     selected_special = 99;
-                    deselect.play(0.1f);
+                    deselect.play(0.1f*Game.sfxVolume);
                 }
                 else{
                     selected_special = 3;
-                    select.play(0.1f);
+                    select.play(0.1f*Game.sfxVolume);
                 }
 
             }}}
@@ -103,11 +103,11 @@ public class GameSpecialHandler {
                 if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
                 if(selected_special == 4){
                     selected_special = 99;
-                    deselect.play(0.1f);
+                    deselect.play(0.1f*Game.sfxVolume);
                 }
                 else{
                     selected_special = 4;
-                    select.play(0.1f);
+                    select.play(0.1f*Game.sfxVolume);
                 }
 
             }}}
@@ -117,11 +117,11 @@ public class GameSpecialHandler {
                 if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
                 if(selected_special == 5){
                     selected_special = 99;
-                    deselect.play(0.1f);
+                    deselect.play(0.1f*Game.sfxVolume);
                 }
                 else{
                     selected_special = 5;
-                    select.play(0.1f);
+                    select.play(0.1f*Game.sfxVolume);
                 }
 
             }}}

@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -46,29 +47,19 @@ public class Game implements ApplicationListener {
 		//cam.translate((float)(WIDTH / 2), (float)(HEIGHT / 2));
 		//cam.update();
 
-		//bgm = Gdx.audio.newMusic(Gdx.files.internal("sound/bgm/safe.mp3"));
-		//bgm.setLooping(true);
-		//bgm.play();
+		bgm = Gdx.audio.newMusic(Gdx.files.internal("sound/bgm/safe.mp3"));
+		bgm.setLooping(true);
+		bgm.setVolume(0.1F*bgmVolume);
+		bgm.play();
 	}
 
 	@Override
 	public void render () {
+		bgm.setVolume(0.1F*bgmVolume);
 		ScreenUtils.clear(1, 0, 0, 1);
 
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.draw();
-
-		/*
-		if(Gdx.input.isKeyJustPressed(Input.Keys.A)){
-			float mouseX = Gdx.input.getX();
-			float mouseY = Gdx.graphics.getHeight() - Gdx.input.getY(); // Invert Y-axis
-
-			// Handle the click event or perform any other actions
-			System.out.println("Mouse Clicked at: (" + mouseX + ", " + mouseY + ")");
-
-		}
-		*/
-
 	}
 
 
