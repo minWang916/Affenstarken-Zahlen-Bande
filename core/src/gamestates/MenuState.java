@@ -103,7 +103,7 @@ public class MenuState extends GameState{
 
 
         FreeTypeFontGenerator.FreeTypeFontParameter param_font = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        param_font.size = 20;
+        param_font.size = 60;
         font = gen.generateFont(param_font);
 
         menuItems = new String[]{
@@ -140,7 +140,7 @@ public class MenuState extends GameState{
         startButton.setText("Start");
         startButton.setHeight(buttonHeight);
         startButton.setWidth(buttonWidth);
-        startButton.setPosition(400,500);
+        startButton.setPosition(400,300);
         
         //button
 
@@ -149,13 +149,13 @@ public class MenuState extends GameState{
         helpButton.setHeight(buttonHeight);
 
         helpButton.setWidth(buttonWidth);
-        helpButton.setPosition(400,400);
+        helpButton.setPosition(400,200);
 
         quitButton = new TextButton("Quit",textButtonStyleQuit);
         quitButton.setHeight(buttonHeight);
 
         quitButton.setWidth(buttonWidth);
-        quitButton.setPosition(400,300);
+        quitButton.setPosition(400,100);
 
         namesWindow = new Window("",skinButton);
 
@@ -212,13 +212,13 @@ public class MenuState extends GameState{
 
             textButtonStyleStart.fontColor = Color.RED;
         }else{
-            textButtonStyleStart.fontColor = Color.BLACK;
+            textButtonStyleStart.fontColor = Color.WHITE;
         }
 
         if(helpButton.isOver()){
             textButtonStyleHelp.fontColor = Color.RED;
         }else{
-            textButtonStyleHelp.fontColor = Color.BLACK;
+            textButtonStyleHelp.fontColor = Color.WHITE;
         }
 
         handleInput();
@@ -226,7 +226,7 @@ public class MenuState extends GameState{
         if(quitButton.isOver()){
             textButtonStyleQuit.fontColor = Color.RED;
         }else{
-            textButtonStyleQuit.fontColor = Color.BLACK;
+            textButtonStyleQuit.fontColor = Color.WHITE;
         }
 
     }
