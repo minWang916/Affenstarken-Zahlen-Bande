@@ -10,8 +10,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Game;
 
+
 import org.w3c.dom.Text;
 
+import entities.Elephant;
+import entities.Monkey;
+import entities.Player;
 import managers.GameStateManager;
 import managers.PlayStateController;
 
@@ -99,11 +103,33 @@ public class EndState extends GameState{
     public void handleInput() {
         if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             if(560 < X && X < 560 + 280 && 80 < Y && Y < 80 + 120){
-                System.exit(0);
+                Gdx.app.exit();
             }
             if(160 < X && X < 160 + 280 && 80 < Y && Y < 80 + 120){
+                //Reset game result
                 Game.endResult = "";
+
+                //Reset special cards
+                for(int i = 0; i < 6; i++){
+                    PlayStateController.useable_special[i] = 0;
+                }
+
+                //Reset location of monkeys and elephant
+                PlayStateController.blue.move(0);
+                PlayStateController.orange.move(0);
+                PlayStateController.green.move(0);
+                PlayStateController.pink.move(0);
+                PlayStateController.currentWeight = 0;
+                Elephant.move(0);
                 this.gsm.setState(gsm.PLAY);
+
+                //Game ultilities
+                PlayStateController.phase = 0;
+                PlayStateController.currentPlayerIndex = 0;
+                PlayStateController.currentPlayer = PlayStateController.players[PlayStateController.currentPlayerIndex];
+                PlayStateController.currentPlayer.startTurn();
+                PlayStateController.selected_special = 99;
+                PlayStateController.countTurn = 0;
             }
         }
     }
