@@ -63,9 +63,10 @@ public class PlayStateController {
 
 
 
-    public static void init(){
+    public static void init(String[] usernames){
         //-------------------- Entities------------------------------------------
-
+        System.out.println(Cords.xWeightSign.length);
+        System.out.println(Cords.yWeightSign.length);
         assistant = new PlayerAssistant();
         SignButton minusBtn = new SignButton(-1);
         SignButton plusBtn = new SignButton(1);
@@ -73,7 +74,7 @@ public class PlayStateController {
         //-------------------- Entities------------------------------------------
 
         //------------------- Turn based-----------------------------------------
-        String[] playerNames = {"Toby", "Thomas", "Kevin", "Michael"};
+        String[] playerNames = usernames;
         for(int i = 0; i< 4; i++){
             players[i] = new Player(playerNames[i], i, Game.batch);
         }
@@ -359,8 +360,8 @@ public class PlayStateController {
         if(useable_special[3] == 1){
             Elephant.moveForward(elephant1.currentValue + elephant2.currentValue);
 
-            Elephant_cards[0].turn += 1;
-            Elephant_cards[1].turn += 1;
+            Elephant_cards[0].flip();
+            Elephant_cards[1].flip();
 
             useable_special[3] = 2;
         } else {

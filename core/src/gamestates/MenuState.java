@@ -58,7 +58,7 @@ public class MenuState extends GameState{
 
     private SpriteBatch spriteBatch;
 
-    private String[] usernames;
+    private static String[] usernames;
     private String[] defaultNames;
     Texture bgTexture;
     private TextureRegion bg;
@@ -275,10 +275,6 @@ public class MenuState extends GameState{
 
         }
 
-
-
-
-
     }
 
     private void loadTextures() {
@@ -288,7 +284,7 @@ public class MenuState extends GameState{
 
     }
 
-    public String[] getNames(){
+    public static String[] getNames(){
         return usernames;
     }
 

@@ -12,16 +12,19 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Game;
+
+import java.awt.Menu;
+
 import managers.PlayStateController;
 import entities.*;
-
+import gamestates.MenuState;
 import managers.GameStateManager;
 
 public class PlayState extends GameState{
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-
+    public String[] usernames;
     private Texture iconSetting;
 
 
@@ -33,16 +36,13 @@ public class PlayState extends GameState{
     public void init() {
 
         iconSetting = new Texture("img/setting.png");
-
-        PlayStateController.init();
+        usernames = MenuState.getNames();
+        PlayStateController.init(usernames);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("real/map.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         Game.cam.position.set(Game.gamePort.getWorldWidth()/2, Game.gamePort.getWorldHeight()/2,0);
-
-
-
 
     }
 

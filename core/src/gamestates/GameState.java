@@ -3,7 +3,6 @@ package gamestates;
 import managers.GameStateManager;
 
 public abstract class GameState {
-
     protected GameStateManager gsm;
 
     protected GameState(GameStateManager gsm){

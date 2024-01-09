@@ -28,7 +28,7 @@ public class Elephant {
     }
 
     public static void moveForward(int step){
-        location = location + step;
+        location = Math.min(location + step, 20);
     }
 
     public static void checkWin(){
@@ -50,8 +50,8 @@ public class Elephant {
         } else {
             scaledWeight = weight*2;
         }
-        x_weight = scaledWeight * Cords.xWeightSign[location];
-        y_weight = scaledWeight * Cords.yWeightSign[location];
+        x_weight = scaledWeight * Cords.xWeightSign[location % 21];
+        y_weight = scaledWeight * Cords.yWeightSign[location % 21];
     }
 
     public static void dispose() {
