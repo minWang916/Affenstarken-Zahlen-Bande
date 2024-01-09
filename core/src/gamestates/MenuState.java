@@ -45,6 +45,8 @@ public class MenuState extends GameState{
 
     private final String title = "Affenstarke Zahlen-Bande";
 
+    private Texture imageTitle;
+
     private TextField[] nameFields;
     private Window namesWindow, helpWindow;
 
@@ -110,6 +112,8 @@ public class MenuState extends GameState{
                 "Play",
                 "Highscores", "Quit"
         };
+
+        imageTitle = new Texture("img/title.png");
 
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Gdx.input.setInputProcessor(stage);
@@ -235,6 +239,7 @@ public class MenuState extends GameState{
 
     public void draw(){
         //System.out.println("MENU STATE DRAWING");
+
         Game.batch.setProjectionMatrix(Game.cam.combined);
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -244,6 +249,8 @@ public class MenuState extends GameState{
         float width = layout.width;
         float height = layout.height;
         titleFont.draw(Game.batch,title,(Game.WIDTH - width)/2,(Game.HEIGHT - height*2));
+        Game.batch.draw(imageTitle, Game.WIDTH/2 - 500 , Game.HEIGHT - 300, 1000, 250);
+
 
         if(stage != null){
 
