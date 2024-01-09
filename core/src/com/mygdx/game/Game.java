@@ -20,6 +20,9 @@ public class Game implements ApplicationListener {
 
 	public static String endResult = "";
 
+	public static float sfxVolume = 1.0F;
+	public static float bgmVolume = 1.0F;
+
 	public static String language = "en";
 
 	public static Music bgm;

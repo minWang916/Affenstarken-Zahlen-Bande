@@ -34,8 +34,7 @@ public class SettingState extends GameState{
     private final Texture sfxDE = new Texture("img/setting/sfxDE.png");
     private final Texture bgmDE = new Texture("img/setting/bgmDE.png");
     private TmxMapLoader mapLoader;
-    public static boolean sfx = true;
-    public static boolean bgm = true;
+
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
 
@@ -71,10 +70,10 @@ public class SettingState extends GameState{
 
         renderer.render();
 
-        if(bgm){
+        if(Game.bgmVolume == 1.0F){
             Game.batch.draw(tick, 445, 400);
         }
-        if(sfx){
+        if(Game.sfxVolume == 1.0F){
             Game.batch.draw(tick, 445, 320);
         }
 
@@ -129,17 +128,17 @@ public class SettingState extends GameState{
                 Game.language = "de";
             }
             if(440 < X && X < 440 + 40 && 400 < Y && Y < 400 + 40){
-                if(bgm){
-                    bgm = false;
+                if(Game.bgmVolume == 1.0F){
+                    Game.bgmVolume = 0.0F;
                 }else{
-                    bgm = true;
+                    Game.bgmVolume = 1.0F;
                 }
             }
             if(440 < X && X < 440 + 40 && 320 < Y && Y < 320 + 40){
-                if(sfx){
-                    sfx = false;
+                if(Game.sfxVolume == 1.0F){
+                    Game.sfxVolume = 0.0F;
                 }else{
-                    sfx = true;
+                    Game.sfxVolume = 1.0F;
                 }
             }
         }

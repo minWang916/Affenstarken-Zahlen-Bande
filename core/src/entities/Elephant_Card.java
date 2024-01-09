@@ -55,10 +55,10 @@ public class Elephant_Card {
                 if(this.x < X && X < this.x + background.getWidth() && this.y < Y && Y < this.y + background.getHeight()){
                     if(selectedCard == this){
                         selectedCard = null;
-                        Cords.selectSound.play(0.1f);
+                        Cords.selectSound.play(0.3f*Game.sfxVolume);
                     }else{
                         selectedCard = this;
-                        Cords.unselectSound.play(0.1f);
+                        Cords.unselectSound.play(0.3f*Game.sfxVolume);
                     }
                 }
             }

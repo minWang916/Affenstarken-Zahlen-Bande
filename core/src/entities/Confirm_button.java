@@ -66,7 +66,7 @@ public class Confirm_button {
     }
 
     public static void handleConfirm(){
-        Cords.btnSound.play(0.2f);
+        Cords.btnSound.play(0.3f*Game.sfxVolume);
         if(phase == PHASE_SPECIAL){
             PlayStateController.confirmSpecialPhase();
         } else if (phase == PHASE_MONKEY){
