@@ -229,6 +229,8 @@ public class MenuState extends GameState{
             textButtonStyleQuit.fontColor = Color.WHITE;
         }
 
+
+
     }
 
     public void draw(){
@@ -261,6 +263,10 @@ public class MenuState extends GameState{
             namesWindow.setVisible(true);
             nameFields[1].setDisabled(false);
 //            gsm.setState(gsm.PLAY);
+
+            startButton.setVisible(false);
+            helpButton.setVisible(false);
+            quitButton.setVisible(false);
 
         }
         if(helpButton.isPressed()){
@@ -304,6 +310,9 @@ public class MenuState extends GameState{
             for(int i =0;i<nameFields.length;i++) {
                 nameFields[i].setText(defaultNames[i]);
             }
+            startButton.setVisible(true);
+            helpButton.setVisible(true);
+            quitButton.setVisible(true);
 
         }
 

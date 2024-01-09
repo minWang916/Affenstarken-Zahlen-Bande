@@ -71,10 +71,10 @@ public class SettingState extends GameState{
         renderer.render();
 
         if(Game.bgmVolume == 1.0F){
-            Game.batch.draw(tick, 445, 400);
+            Game.batch.draw(tick, 445 + 24,400);
         }
         if(Game.sfxVolume == 1.0F){
-            Game.batch.draw(tick, 445, 320);
+            Game.batch.draw(tick, 445 + 24, 320);
         }
 
 
@@ -83,7 +83,7 @@ public class SettingState extends GameState{
             Game.batch.draw(languageEN, 630,600);
             Game.batch.draw(flagEN, 560,400);
             Game.batch.draw(flagDEdark, 740, 400);
-            Game.batch.draw(musicNsoundEN, 167, 608);
+            Game.batch.draw(musicNsoundEN, 167, 610);
             Game.batch.draw(sfxEN, 138, 320);
             Game.batch.draw(bgmEN, 140, 400);
             if(360 < X && X < 360 + 280 && 80 < Y && Y < 80 + 120){
@@ -96,8 +96,8 @@ public class SettingState extends GameState{
             Game.batch.draw(languageDE, 630,600);
             Game.batch.draw(flagENdark, 560,400);
             Game.batch.draw(flagDE, 740, 400);
-            Game.batch.draw(musicNsoundDE, 170, 601);
-            Game.batch.draw(sfxDE, 140, 322);
+            Game.batch.draw(musicNsoundDE, 168, 601);
+            Game.batch.draw(sfxDE, 138, 320);
             Game.batch.draw(bgmDE, 140, 400);
             if(360 < X && X < 360 + 280 && 80 < Y && Y < 80 + 120){
                 Game.batch.draw(btnBackDE, 360, 80);
@@ -127,14 +127,14 @@ public class SettingState extends GameState{
             if(740 < X && X < 740 + 140 && 400 < Y && Y < 400 + 100){
                 Game.language = "de";
             }
-            if(440 < X && X < 440 + 40 && 400 < Y && Y < 400 + 40){
+            if(440  + 24< X && X < 440 + 40  + 24&& 400 < Y && Y < 400 + 40){
                 if(Game.bgmVolume == 1.0F){
                     Game.bgmVolume = 0.0F;
                 }else{
                     Game.bgmVolume = 1.0F;
                 }
             }
-            if(440 < X && X < 440 + 40 && 320 < Y && Y < 320 + 40){
+            if(440  + 24< X && X < 440 + 40  + 24&& 320 < Y && Y < 320 + 40){
                 if(Game.sfxVolume == 1.0F){
                     Game.sfxVolume = 0.0F;
                 }else{
