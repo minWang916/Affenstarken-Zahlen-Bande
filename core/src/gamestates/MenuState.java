@@ -190,7 +190,7 @@ public class MenuState extends GameState{
 
         namesWindow.setResizable(true);
 
-        namesWindow.setBounds(350,300,300,350);
+        namesWindow.setBounds(Game.WIDTH/2 - 150,100,300,350);
         namesWindow.align(Align.top);
         namesWindow.center();
 
@@ -306,7 +306,7 @@ public class MenuState extends GameState{
         }
         if (updateButton.isPressed()){
             namesWindow.setVisible(false);
-            for(int i =9;i<nameFields.length;i++) {
+            for(int i=0; i<nameFields.length; i++) {
                 usernames[i] = nameFields[i].getText();
             }
             nameFields[1].setDisabled(true);

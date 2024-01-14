@@ -42,7 +42,7 @@ public class Player {
 
     public void init(){
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
-                Gdx.files.internal("font/VCR_OSD_MONO_1.001.ttf")
+                Gdx.files.internal("font/04B_03__.ttf")
         );
         FreeTypeFontGenerator.FreeTypeFontParameter param_titleFont = new FreeTypeFontGenerator.FreeTypeFontParameter();
         param_titleFont.size = 20;
