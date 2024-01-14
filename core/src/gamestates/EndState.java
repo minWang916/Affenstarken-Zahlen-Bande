@@ -30,6 +30,11 @@ public class EndState extends GameState{
     private final Texture sceneLose = new Texture("img/scene_lose.png");
     private final Texture phraseWin = new Texture("img/youwin.png");
     private final Texture phraseLose = new Texture("img/youlose.png");
+    private final Texture btnAgainDE = new Texture("img/weider_button.png");
+    private final Texture btnAgainDEbright = new Texture("img/weider_button - bright.png");
+    private final Texture btnExitDE = new Texture("img/enden_button.png");
+    private final Texture btnExitDEbright = new Texture("img/enden_button - bright.png");
+
     private TmxMapLoader mapLoader;
     private TiledMap map;
     private boolean ready = true;
@@ -82,17 +87,33 @@ public class EndState extends GameState{
         X = Gdx.input.getX();
         Y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-        if(160 < X && X < 160 + 280 && 80 < Y && Y < 80 + 120){
-            Game.batch.draw(btnAgainbright, 160,80);
+        if(Game.language == "en"){
+            if(160 < X && X < 160 + 280 && 80 < Y && Y < 80 + 120){
+                Game.batch.draw(btnAgainbright, 160,80);
+            }else{
+                Game.batch.draw(btnAgain, 160,80);
+            }
+
+            if(560 < X && X < 560 + 280 && 80 < Y && Y < 80 + 120){
+                Game.batch.draw(btnExitbright, 560,80);
+            }else{
+                Game.batch.draw(btnExit, 560,80);
+            }
         }else{
-            Game.batch.draw(btnAgain, 160,80);
+            if(160 < X && X < 160 + 280 && 80 < Y && Y < 80 + 120){
+                Game.batch.draw(btnAgainDEbright, 160,80);
+            }else{
+                Game.batch.draw(btnAgainDE, 160,80);
+            }
+
+            if(560 < X && X < 560 + 280 && 80 < Y && Y < 80 + 120){
+                Game.batch.draw(btnExitDEbright, 560,80);
+            }else{
+                Game.batch.draw(btnExitDE, 560,80);
+            }
         }
 
-        if(560 < X && X < 560 + 280 && 80 < Y && Y < 80 + 120){
-            Game.batch.draw(btnExitbright, 560,80);
-        }else{
-            Game.batch.draw(btnExit, 560,80);
-        }
+
 
         Game.batch.end();
 
@@ -146,5 +167,9 @@ public class EndState extends GameState{
         sceneLose.dispose();
         phraseWin.dispose();
         phraseLose.dispose();
+        btnAgainDE.dispose();
+        btnAgainDEbright.dispose();
+        btnExitDE.dispose();
+        btnExitDEbright.dispose();
     }
 }

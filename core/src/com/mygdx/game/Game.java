@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import entities.Confirm_button;
 import entities.Elephant;
 import entities.Elephant_Card;
 import gamestates.EndState;
@@ -121,6 +122,8 @@ public class Game implements ApplicationListener {
 		PlayStateController.iconGreen.dispose();
 		PlayStateController.iconBlue.dispose();
 		PlayStateController.iconOrange.dispose();
+
+		Confirm_button.dispose();
 
 	}
 }

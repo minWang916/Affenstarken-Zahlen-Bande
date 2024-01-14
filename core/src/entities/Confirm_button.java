@@ -15,6 +15,9 @@ public class Confirm_button {
     public static float y = 47;
     public static Texture btnTexture = new Texture("img/button_confirm.png");
     public static Texture darkBtnTexture = new Texture("img/button_confirm_dark.png");
+
+    public static Texture btnConfirmDE = new Texture("img/weiter_button.png");
+    public static Texture btnConfirmDEdark = new Texture("img/weiter_button_dark.png");
     public static boolean active = true;
 
     public static void update(){
@@ -80,14 +83,24 @@ public class Confirm_button {
 
     public static void draw(){
         if (active == true) {
-            Game.batch.draw(btnTexture, x, y);
+            if(Game.language == "en"){
+                Game.batch.draw(btnTexture, x, y);
+            } else{
+                Game.batch.draw(btnConfirmDE, x, y);
+            }
         } else {
-            Game.batch.draw(darkBtnTexture, x, y);
+            if(Game.language == "en"){
+                Game.batch.draw(darkBtnTexture, x, y);
+            } else{
+                Game.batch.draw(btnConfirmDEdark, x, y);
+            }
         }
     }
 
     public static void dispose(){
         btnTexture.dispose();
         darkBtnTexture.dispose();
+        btnConfirmDE.dispose();
+        btnConfirmDEdark.dispose();
     }
 }

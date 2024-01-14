@@ -13,8 +13,8 @@ import org.w3c.dom.Text;
 import managers.GameStateManager;
 
 public class SettingState extends GameState{
-    private final Texture right = new Texture("img/setting/right.PNG");
-    private final Texture left = new Texture("img/setting/left.PNG");
+    private final Texture right = new Texture("img/setting/right.png");
+    private final Texture left = new Texture("img/setting/left.png");
     private final Texture volumeUnit = new Texture("img/setting/volumeUnit.png");
 
     private final Texture tick = new Texture("img/setting/tick.png");
