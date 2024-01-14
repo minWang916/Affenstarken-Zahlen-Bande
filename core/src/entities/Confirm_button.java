@@ -41,7 +41,7 @@ public class Confirm_button {
             //Exactly 2 monkey cards are selected
             Card selectedCard1 = selectedMonkeyCards.get(0);
             Card selectedCard2 = selectedMonkeyCards.get(1);
-            if (selectedCard1.getColorIndex() == selectedCard2.getColorIndex()){
+            if (selectedCard1.getColorIndex() == selectedCard2.getColorIndex() || activeSpecial == 2){
                 if (selectedSign == 1 && selectedCard1.getNumber() + selectedCard2.getNumber() > 20) {
                     active = false;
                 } else {

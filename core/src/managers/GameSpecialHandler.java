@@ -50,7 +50,7 @@ public class GameSpecialHandler {
                             selected_special = 0;
                             select.play(0.1f*Game.sfxVolume*Game.masterVolume/10);
                         }
-
+                        System.out.println("0");
                     }
                 }
             }
@@ -67,6 +67,7 @@ public class GameSpecialHandler {
                     selected_special = 1;
                     select.play(0.1f*Game.sfxVolume*Game.masterVolume/10);
                 }
+                    System.out.println("1");
 
             }}}
 
@@ -81,7 +82,7 @@ public class GameSpecialHandler {
                     selected_special = 2;
                     select.play(0.1f*Game.sfxVolume*Game.masterVolume/10);
                 }
-
+                    System.out.println("2");
             }}}
 
             if(useable_special[3] == 0){
@@ -95,6 +96,7 @@ public class GameSpecialHandler {
                     selected_special = 3;
                     select.play(0.1f*Game.sfxVolume*Game.masterVolume/10);
                 }
+                    System.out.println("3");
 
             }}}
 
@@ -109,6 +111,7 @@ public class GameSpecialHandler {
                     selected_special = 4;
                     select.play(0.1f*Game.sfxVolume*Game.masterVolume/10);
                 }
+                    System.out.println("4");
 
             }}}
 
@@ -123,6 +126,7 @@ public class GameSpecialHandler {
                     selected_special = 5;
                     select.play(0.1f*Game.sfxVolume*Game.masterVolume/10);
                 }
+                    System.out.println("5");
 
             }}}
         }

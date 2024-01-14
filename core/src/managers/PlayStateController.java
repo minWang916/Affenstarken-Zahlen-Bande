@@ -21,11 +21,11 @@ public class PlayStateController {
     public static Texture special_frame = new Texture("img/frame_c.png");
     public static int phase = 0;
     public static int selected_special = 99;
+    public static int activeSpecial = -1;
     public static int numOfPlayers = 4;
     public static Player currentPlayer;
     public static int currentPlayerIndex = 0;
     public static Player[] players = new Player[4];
-
     public static boolean selected = false;
     public static int selectedSign = 1;
     public static Monkey blue = new Monkey("blue");
@@ -259,7 +259,7 @@ public class PlayStateController {
 
 
         //-------- Choose monkey ----------------------
-        if(selected_special == 4){
+        if(selected_special == 4 || selected_special == 2){
             if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
                 for (int i =0; i<=20; i++){
                     if(Cords.cord[i][0] < X && X < Cords.cord[i][0] + 40 && Cords.cord[i][1] < Y && Y < Cords.cord[i][1] + 40){
@@ -270,7 +270,8 @@ public class PlayStateController {
 
             String path = "img/"+selectedCord+".png";
             cord = new Texture(path);
-            Game.batch.draw(cord,905,110);
+            if (selected_special == 4)
+            { Game.batch.draw(cord,905,110); }
 
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
@@ -311,6 +312,11 @@ public class PlayStateController {
             monkeys[selectedIcon].move(selectedCord);
         }
 
+        if (selected_special == 2) {
+            activeSpecial = 2;
+            System.out.println("Active special 2");
+        }
+
         if(useable_special[5] == 1){
 
             for(int i = 0; i < 4; i++){
@@ -335,6 +341,10 @@ public class PlayStateController {
             Card selectedCard1 = selectedMonkeyCards.get(0);
             Card selectedCard2 = selectedMonkeyCards.get(1);
             int colorIndex = selectedCard1.getColorIndex();
+            if (activeSpecial == 2) {
+                colorIndex = selectedIcon;
+                System.out.println("The effective color is " + Cords.colors[colorIndex]);
+            }
             if (selectedSign == 1) {
                 int location = selectedCard1.getNumber() + selectedCard2.getNumber();
                 monkeys[colorIndex].move(location);
@@ -385,8 +395,10 @@ public class PlayStateController {
         currentPlayer = players[currentPlayerIndex];
         currentPlayer.startTurn();
         phase = -1;
+        activeSpecial = -1;
 
         afterConfirm();
+        activeSpecial = -1;
     }
 
     public static void afterConfirm(){
