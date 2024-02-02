@@ -42,8 +42,10 @@ public class MenuState extends GameState{
     private TextButton.TextButtonStyle textButtonStyleHelp;
     private TextButton.TextButtonStyle textButtonStyleQuit;
     private TextButton startButton, helpButton, quitButton;
-
+    private Texture changeIcon = new Texture("img/change.png");
     private final String title = "Affenstarke Zahlen-Bande";
+    private static Texture[] avatars = new Texture[6];
+    private static int[] avatarIndex = {0, 0, 0, 0};
 
     private Texture imageTitle;
 
@@ -92,7 +94,9 @@ public class MenuState extends GameState{
             defaultNames[i]= "player "+ String.valueOf(i+1);
             usernames[i] = defaultNames[i];
         }
-
+        for (int i=0;i<6;i++){
+            avatars[i] = new Texture("img/P" + String.valueOf(i+1) + "_avatar.png");
+        }
 
         FreeTypeFontGenerator gen = new FreeTypeFontGenerator(
                 Gdx.files.internal("font/VCR_OSD_MONO_1.001.ttf")
@@ -173,12 +177,13 @@ public class MenuState extends GameState{
         namesWindow.setBackground(woodenBoard);
         nameFields = new TextField[4];
         VerticalGroup vg = new VerticalGroup();
+        vg.space(25);
         HorizontalGroup hg = new HorizontalGroup();
         for (int i=0;i<nameFields.length;i++){
             nameFields[i]= new TextField(usernames[i],skinButton);
 
             vg.addActor(nameFields[i]);
-            vg.space(15);
+            vg.space(35);
 //            namesWindow.add(nameFields[i]).pad(10).fillY().align(Align.top);
         }
         hg.addActor(cancelButton);
@@ -190,7 +195,7 @@ public class MenuState extends GameState{
 
         namesWindow.setResizable(true);
 
-        namesWindow.setBounds(Game.WIDTH/2 - 150,100,300,350);
+        namesWindow.setBounds(Game.WIDTH/2 - 125,125,330,470);
         namesWindow.align(Align.top);
         namesWindow.center();
 
@@ -214,7 +219,6 @@ public class MenuState extends GameState{
 
         //System.out.println("MENU STATE UPDATING");
         if(startButton.isOver()){
-
             textButtonStyleStart.fontColor = Color.RED;
         }else{
             textButtonStyleStart.fontColor = Color.WHITE;
@@ -258,7 +262,13 @@ public class MenuState extends GameState{
 
            stage.act(Gdx.graphics.getDeltaTime());
            stage.draw();
+        }
 
+        if (namesWindow.isVisible() == true) {
+            for (int i=0; i<4; i++) {
+                Game.batch.draw(avatars[avatarIndex[i]], 400, nameFields[i].getY() + 190);
+                Game.batch.draw(changeIcon, 400 + avatars[0].getWidth() - 15, nameFields[i].getY() + 190 + avatars[0].getHeight() - 15);
+            }
         }
 
 
@@ -280,8 +290,6 @@ public class MenuState extends GameState{
         }
         if(helpButton.isPressed()){
             helpWindow.setVisible(true);
-
-
 
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
@@ -311,7 +319,6 @@ public class MenuState extends GameState{
             }
             nameFields[1].setDisabled(true);
             gsm.setState(gsm.PLAY);
-
         }
 
         if (cancelButton.isPressed()){
@@ -324,18 +331,28 @@ public class MenuState extends GameState{
             quitButton.setVisible(true);
             drawTitle = true;
         }
-
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            float x = Gdx.input.getX();
+            float y = Gdx.graphics.getHeight() - Gdx.input.getY();
+            for (int i = 0; i < 4; i++) {
+                if (x > 400 - 3 && x < 400 + avatars[0].getWidth() + 3 && y < nameFields[i].getY() + 190 + avatars[0].getHeight() + 3 && nameFields[i].getY() + 190 -3 < y && namesWindow.isVisible() == true)
+                avatarIndex[i] = (avatarIndex[i] + 1) % 6;
+            }
+        }
     }
 
     private void loadTextures() {
         backgroundTexture = new Texture("img/button_confirm.png");
         backgroundSprite =new Sprite(backgroundTexture);
 
-
     }
 
     public static String[] getNames(){
         return usernames;
+    }
+
+    public static int[] getAvatars(){
+        return avatarIndex;
     }
 
     public void dispose(){

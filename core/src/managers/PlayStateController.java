@@ -63,7 +63,7 @@ public class PlayStateController {
 
 
 
-    public static void init(String[] usernames){
+    public static void init(String[] usernames, int[] avatars){
         //-------------------- Entities------------------------------------------
         System.out.println(Cords.xWeightSign.length);
         System.out.println(Cords.yWeightSign.length);
@@ -76,7 +76,7 @@ public class PlayStateController {
         //------------------- Turn based-----------------------------------------
         String[] playerNames = usernames;
         for(int i = 0; i< 4; i++){
-            players[i] = new Player(playerNames[i], i, Game.batch);
+            players[i] = new Player(playerNames[i], avatars[i], i, Game.batch);
         }
 
         currentPlayer = players[currentPlayerIndex];

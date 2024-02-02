@@ -31,10 +31,11 @@ public class Player {
 
     public Card[] cards = new Card[4];
 
-    public Player (String name, int id, SpriteBatch batch) {
+    public Player (String name, int avatarIndex, int id, SpriteBatch batch) {
         this.name = name;
         this.id = id;
         this.batch = batch;
+        avatar = new Texture("img/P"+String.valueOf(avatarIndex+1) +"_avatar.png");
         System.out.println("Player created with the name " + this.name + " and id: " + this.id);
 
         init();
@@ -47,7 +48,6 @@ public class Player {
         FreeTypeFontGenerator.FreeTypeFontParameter param_titleFont = new FreeTypeFontGenerator.FreeTypeFontParameter();
         param_titleFont.size = 20;
         font = gen.generateFont(param_titleFont);
-        avatar = new Texture("img/P1_avatar.png");
 
         //Deal cards
         for (int i = 0; i<4; i++) {
@@ -74,7 +74,8 @@ public class Player {
                 font.setColor(Color.ORANGE);
             }
         }
-        font.draw(batch, name, Cords.all_player_cord[id][0][0] - 10, Cords.all_player_cord[id][0][1] + 80);
+        int offset = (int)(name.length() * 4);
+        font.draw(batch, name, Cords.all_player_cord[id][0][0] + 20 - offset, Cords.all_player_cord[id][0][1] + 80);
         font.setColor(Color.WHITE);
 
         // Draw avatar of the player

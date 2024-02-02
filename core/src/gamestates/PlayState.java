@@ -37,7 +37,8 @@ public class PlayState extends GameState{
 
         iconSetting = new Texture("img/setting.png");
         usernames = MenuState.getNames();
-        PlayStateController.init(usernames);
+        int[] avatars = MenuState.getAvatars();
+        PlayStateController.init(usernames, avatars);
 
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("real/map.tmx");
