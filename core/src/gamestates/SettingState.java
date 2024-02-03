@@ -2,7 +2,11 @@ package gamestates;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
@@ -13,6 +17,9 @@ import org.w3c.dom.Text;
 import managers.GameStateManager;
 
 public class SettingState extends GameState{
+    public BitmapFont bigFont;
+    public BitmapFont smallFont;
+    public GlyphLayout layout = new GlyphLayout();
     private final Texture right = new Texture("img/setting/right.png");
     private final Texture left = new Texture("img/setting/left.png");
     private final Texture volumeUnit = new Texture("img/setting/volumeUnit.png");
@@ -20,22 +27,15 @@ public class SettingState extends GameState{
     private final Texture tick = new Texture("img/setting/tick.png");
     private final Texture btnBackENdark = new Texture("img/setting/btnBackENdark.png");
     private final Texture btnBackDEdark = new Texture("img/setting/btnBackDEdark.png");
-    private final Texture musicNsoundDE = new Texture("img/setting/MusicNSoundDE.png");
-    private final Texture languageDE = new Texture("img/setting/languageDE.png");
-    private final Texture languageEN = new Texture("img/setting/languageEN.png");
-    private final Texture musicNsoundEN = new Texture("img/setting/MusicNSoundEN.png");
+
     private final Texture flagEN = new Texture("img/setting/flagEN.png");
     private final Texture flagDE = new Texture("img/setting/flagDE.png");
     private final Texture flagENdark = new Texture("img/setting/flagENdark.png");
     private final Texture flagDEdark = new Texture("img/setting/flagDEdark.png");
-    private final Texture masterVolume = new Texture("img/setting/masterVolume.png");
-    private final Texture masterVolumeDE = new Texture("img/setting/masterVolumeDE.png");
-    private final Texture bgmEN = new Texture("img/setting/bgmEN.png");
-    private final Texture sfxEN = new Texture("img/setting/sfxEN.png");
+
     private final Texture btnBackEN = new Texture("img/setting/btnBackEN.png");
     private final Texture btnBackDE = new Texture("img/setting/btnBackDE.png");
-    private final Texture sfxDE = new Texture("img/setting/sfxDE.png");
-    private final Texture bgmDE = new Texture("img/setting/bgmDE.png");
+
     private TmxMapLoader mapLoader;
 
     private TiledMap map;
@@ -50,6 +50,30 @@ public class SettingState extends GameState{
 
     @Override
     public void init() {
+
+        bigFont = new BitmapFont();
+        smallFont = new BitmapFont();
+
+        FreeTypeFontGenerator generator1 = new FreeTypeFontGenerator(
+                Gdx.files.internal("font/big.ttf")
+        );
+
+        FreeTypeFontGenerator.FreeTypeFontParameter param_notiFont = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        param_notiFont.size = 80;
+        param_notiFont.borderWidth = 5;
+        param_notiFont.borderColor = Color.BLACK;
+
+        FreeTypeFontGenerator.FreeTypeFontParameter param_notiFont2 = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        param_notiFont2.size = 50;
+        param_notiFont2.borderWidth = 2;
+        param_notiFont2.borderColor = Color.BLACK;
+
+        bigFont = generator1.generateFont(param_notiFont);
+        bigFont.setColor(Color.BROWN);
+
+        smallFont = generator1.generateFont(param_notiFont2);
+        smallFont.setColor(Color.BROWN);
+
         mapLoader = new TmxMapLoader();
         map = mapLoader.load("setting/setting.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
@@ -88,26 +112,55 @@ public class SettingState extends GameState{
         }
 
         if(Game.language == "en"){
-            Game.batch.draw(masterVolume,140,550);
-            Game.batch.draw(languageEN, 630,600);
+
+            layout.setText(smallFont, "Master Volume");
+            smallFont.draw(Game.batch, "Master Volume", 140,570);
+
+            layout.setText(bigFont, "Language");
+            bigFont.draw(Game.batch, "Language", 520,650);
+
+            layout.setText(bigFont, "Music");
+            bigFont.draw(Game.batch, "Music", 200,650);
+
             Game.batch.draw(flagEN, 560,400);
             Game.batch.draw(flagDEdark, 740, 400);
-            Game.batch.draw(musicNsoundEN, 167, 610);
-            Game.batch.draw(sfxEN, 138, 320);
-            Game.batch.draw(bgmEN, 140, 400);
+
+
+
+            layout.setText(smallFont, "Sound effect");
+            smallFont.draw(Game.batch, "Sound effect", 140,350);
+
+            layout.setText(smallFont, "BG Music");
+            smallFont.draw(Game.batch, "BG Music", 140,430);
+
+
+
+
             if(360 < X && X < 360 + 280 && 80 < Y && Y < 80 + 120){
                 Game.batch.draw(btnBackEN, 360, 80);
             }else {
                 Game.batch.draw(btnBackENdark, 360, 80);
             }
         }else{
-            Game.batch.draw(masterVolumeDE,140,545);
-            Game.batch.draw(languageDE, 630,600);
+
+            layout.setText(smallFont, "Master-Volume");
+            smallFont.draw(Game.batch, "Master-Volume", 140,570);
+
+            layout.setText(bigFont, "Sprache");
+            bigFont.draw(Game.batch, "Sprache", 520,650);
+
+            layout.setText(bigFont, "Musik");
+            bigFont.draw(Game.batch, "Musik", 200,650);
             Game.batch.draw(flagENdark, 560,400);
             Game.batch.draw(flagDE, 740, 400);
-            Game.batch.draw(musicNsoundDE, 168, 601);
-            Game.batch.draw(sfxDE, 138, 320);
-            Game.batch.draw(bgmDE, 140, 400);
+
+
+
+            layout.setText(smallFont, "Soundeffekt");
+            smallFont.draw(Game.batch, "Soundeffekt", 140,350);
+
+            layout.setText(smallFont, "HG Musik");
+            smallFont.draw(Game.batch, "HG Musik", 140,430);
             if(360 < X && X < 360 + 280 && 80 < Y && Y < 80 + 120){
                 Game.batch.draw(btnBackDE, 360, 80);
             }else {
@@ -184,25 +237,20 @@ public class SettingState extends GameState{
 
     @Override
     public void dispose() {
-        masterVolumeDE.dispose();
-        bgmDE.dispose();
+
         btnBackDE.dispose();
         btnBackEN.dispose();
-        languageDE.dispose();
-        languageEN.dispose();
-        musicNsoundEN.dispose();
+
         flagDE.dispose();
         flagEN.dispose();
-        masterVolume.dispose();
-        bgmEN.dispose();
-        sfxEN.dispose();
+
         tick.dispose();
         flagDEdark.dispose();
         flagEN.dispose();
-        musicNsoundDE.dispose();
+
         btnBackENdark.dispose();
         btnBackDEdark.dispose();
-        sfxDE.dispose();
+
         right.dispose();
         left.dispose();
         volumeUnit.dispose();

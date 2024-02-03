@@ -154,7 +154,7 @@ public class MenuState extends GameState{
         //button
 
 
-        helpButton = new TextButton("Help",textButtonStyleHelp);
+        helpButton = new TextButton("Guide",textButtonStyleHelp);
         helpButton.setHeight(buttonHeight);
 
         helpButton.setWidth(buttonWidth);
@@ -289,7 +289,7 @@ public class MenuState extends GameState{
             drawTitle = false;
         }
         if(helpButton.isPressed()){
-            helpWindow.setVisible(true);
+            gsm.setState(gsm.GUIDE);
 
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){

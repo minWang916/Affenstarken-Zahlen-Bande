@@ -55,7 +55,7 @@ public class Game implements ApplicationListener {
 
 		cam = new OrthographicCamera((float)WIDTH, (float)HEIGHT);
 
-		gamePort = new StretchViewport(WIDTH, HEIGHT, cam);
+		gamePort = new FitViewport(WIDTH, HEIGHT, cam);
 		//gamePort = new ScreenViewport();
 		//cam.translate((float)(WIDTH / 2), (float)(HEIGHT / 2));
 		//cam.update();

@@ -13,6 +13,7 @@ public class GameStateManager {
     public static final int PLAY = 1;
     public static final int END = 2;
     public static final int SETTING = 3;
+    public static final int GUIDE = 4;
 
     public GameStateManager(){
 
@@ -38,7 +39,9 @@ public class GameStateManager {
         if(state == 3){
             this.gameState = new SettingState(this);
         }
-
+        if(state == 4){
+            this.gameState = new GuideState(this);
+        }
     }
 
     public void update(float dt) {
