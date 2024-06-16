@@ -22,7 +22,9 @@ If the field is already occupied by a monkey, the elephant can't move.
 
 To win the game, the elephant must move to the final numbers and reach the jumping mat. If the elephant or one of the monkeys fall out of the palm tree, your team lose the game!
 ### Game snapshot
+#### Menu
 ![Game menu](https://github.com/minWang916/Affenstarken-Zahlen-Bande/assets/116493016/a68bde43-2833-4086-8f40-cd91c6baf394)
+#### Instruction
 ![Instruction](https://github.com/minWang916/Affenstarken-Zahlen-Bande/assets/116493016/1a559083-f0f4-439c-b5f2-b0d940f946a0)
-
+#### Gameplay
 ![In game play](https://github.com/minWang916/Affenstarken-Zahlen-Bande/assets/116493016/f3ace96d-62e7-41bd-a859-243386a23441)
